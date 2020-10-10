@@ -74,3 +74,10 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+  fonts:
+    - family: SF Pro
+      fonts:
+        - asset: lib/assets/fonts/SF-Pro.ttf
+        - asset: lib/assets/fonts/SF-Pro-Italic.ttf
+          style: italic
