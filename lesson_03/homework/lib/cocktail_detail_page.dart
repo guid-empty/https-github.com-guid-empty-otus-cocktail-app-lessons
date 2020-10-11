@@ -39,6 +39,12 @@ class CocktailDetailPage extends StatelessWidget {
             Container(
               color: Color(0xff0E0D13),
               child: Image.network(cocktail.drinkThumbUrl),
+              foregroundDecoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin : Alignment.topCenter,
+                      end:Alignment.bottomCenter,
+                      colors: [Colors.transparent, Color(0xff0E0D13)])
+              ) ,
             ),
             this._buildDescription(),
             this._buildIngredients(),
