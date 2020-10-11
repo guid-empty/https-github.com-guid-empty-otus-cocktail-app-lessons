@@ -43,7 +43,7 @@ class CocktailDetailPage extends StatelessWidget {
                   gradient: LinearGradient(
                       begin : Alignment.topCenter,
                       end:Alignment.bottomCenter,
-                      colors: [Colors.transparent, Color(0xff0E0D13)])
+                      colors: [Color.fromARGB(0,14, 13, 19), Color(0xff0E0D13)])
               ) ,
             ),
             this._buildDescription(),
