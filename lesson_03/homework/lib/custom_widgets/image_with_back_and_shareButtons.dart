@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:homework/custom_widgets/colors/custom_colors.dart';
 
 class ImageWithBackAndShareButtons extends StatelessWidget {
   final String imageUrl;
@@ -8,26 +9,23 @@ class ImageWithBackAndShareButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width;
     return Stack(
       children: [
-        Image.network(imageUrl,
-        fit: BoxFit.fill,
-        width: width,
-        height: 343,),
+        AspectRatio(
+          aspectRatio: 375 / 343,
+          child: Image.network(imageUrl, fit: BoxFit.fill),
+        ),
         Positioned(
           bottom: 0,
-          child: Container(
-            color: Colors.transparent,
-            width: width,
-            height: 172,
-            foregroundDecoration: BoxDecoration(
-                gradient: LinearGradient(colors: [
-                  Color.fromRGBO(14, 13, 19, 0),
-                  Color(0xff0e0d13)
-                ],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter)
+          child: AspectRatio(
+            aspectRatio: 375 / 172,
+            child: Container(
+              color: Colors.transparent,
+              foregroundDecoration: BoxDecoration(
+                  gradient: const LinearGradient(colors: [
+                CustomColors.gradient_first,
+                CustomColors.gradient_second
+              ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
             ),
           ),
         ),
@@ -39,16 +37,20 @@ class ImageWithBackAndShareButtons extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconButton(
-                  icon: Icon(Icons.arrow_back,
-                  color: Colors.white,),
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: Colors.white,
+                  ),
                   onPressed: () {
-                    print("back pressed");
+                    print('back pressed');
                   },
                 ),
                 IconButton(
                   onPressed: () {},
-                  icon: Icon(Icons.share,
-                  color: Colors.white,),
+                  icon: Icon(
+                    Icons.share,
+                    color: Colors.white,
+                  ),
                 )
               ],
             ),

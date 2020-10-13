@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:homework/custom_widgets/colors/custom_colors.dart';
 
-import 'CocktailRatingStar.dart';
+import 'cocktail_rating_star.dart';
 
 class CocktailRatingBar extends StatelessWidget {
   final int rating;
@@ -10,27 +11,16 @@ class CocktailRatingBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(0xff1a1927),
+      color: CustomColors.ingredients,
       child: Padding(
         padding: const EdgeInsets.all(32.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: getRatedStars(),
+          children: List.generate(
+              5, (index) => CocktailRatingStar(isFilled: index < 3)),
         ),
       ),
     );
-  }
-
-  List<Widget> getRatedStars() {
-    var stars = List<Widget>();
-
-    stars.add(CocktailRatingStar(isFilled: true));
-    stars.add(CocktailRatingStar(isFilled: true));
-    stars.add(CocktailRatingStar(isFilled: true));
-    stars.add(CocktailRatingStar(isFilled: false));
-    stars.add(CocktailRatingStar(isFilled: false));
-
-    return stars;
   }
 }

@@ -14,25 +14,25 @@ class CocktailTitle extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          cocktailTitle ?? "",
-          style: TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.normal
-          ),
+          cocktailTitle ?? '',
+          style: Theme.of(context).textTheme.headline3,
         ),
-        getIsFavoriteIcon()
+        _getIsFavoriteIcon()
       ],
     );
   }
 
-  Widget getIsFavoriteIcon() {
+  Widget _getIsFavoriteIcon() {
     if (isFavorite) {
-      return IconButton(icon: Icon(Icons.favorite, color: Colors.white),
-        onPressed: () {},);
+      return IconButton(
+        icon: Icon(Icons.favorite, color: Colors.white),
+        onPressed: () {},
+      );
     } else {
-      return IconButton(icon: Icon(Icons.favorite_border, color: Colors.white),
-        onPressed: () {},);
+      return IconButton(
+        icon: Icon(Icons.favorite_border, color: Colors.white),
+        onPressed: () {},
+      );
     }
   }
 }

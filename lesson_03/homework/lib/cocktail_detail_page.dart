@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:homework/custom_widgets/cocktail_description/CocktailDescriptionWidget.dart';
-import 'package:homework/custom_widgets/ImageWithBackAndShareButtons.dart';
-import 'package:homework/custom_widgets/cocktail_ingredients/IngredientsWidget.dart';
-import 'package:homework/custom_widgets/cocktail_instruction/CocktailInstruction.dart';
+import 'package:homework/custom_widgets/cocktail_description/cocktail_description_widget.dart';
+import 'package:homework/custom_widgets/image_with_back_and_shareButtons.dart';
+import 'package:homework/custom_widgets/cocktail_ingredients/ingredients_widget.dart';
+import 'package:homework/custom_widgets/cocktail_instruction/cocktail_instruction.dart';
 import 'package:homework/models/models.dart';
 
-import 'custom_widgets/cocktail_rating_bar/CocktailRatingBar.dart';
+import 'custom_widgets/cocktail_rating_bar/cocktail_rating_bar.dart';
 
 class CocktailDetailPage extends StatelessWidget {
   const CocktailDetailPage(

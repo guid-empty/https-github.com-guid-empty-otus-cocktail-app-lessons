@@ -1,12 +1,14 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
-import 'CocktailValueText.dart';
+import 'cocktail_value_text.dart';
 
 class CocktailCharacteristicText extends StatelessWidget {
   final String characteristicName;
   final String characteristicValue;
 
-  CocktailCharacteristicText({this.characteristicName, this.characteristicValue});
+  CocktailCharacteristicText(
+      {this.characteristicName, this.characteristicValue});
 
   @override
   Widget build(BuildContext context) {
@@ -17,11 +19,7 @@ class CocktailCharacteristicText extends StatelessWidget {
         children: [
           Text(
             characteristicName,
-            style: TextStyle(
-              color: Color(0xffeaeaea),
-              fontSize: 14,
-              fontWeight: FontWeight.normal
-            ),
+            style: Theme.of(context).textTheme.headline1,
           ),
           Padding(
             padding: const EdgeInsets.only(top: 8.0),

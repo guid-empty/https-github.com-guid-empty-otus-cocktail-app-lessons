@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:homework/custom_widgets/colors/custom_colors.dart';
 
 class CocktailRatingStar extends StatelessWidget {
   final bool isFilled;
@@ -12,9 +13,7 @@ class CocktailRatingStar extends StatelessWidget {
       width: 48,
       height: 48,
       decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: Color(0xff2a293a)
-      ),
+          shape: BoxShape.circle, color: CustomColors.rating_container),
       child: Padding(
         padding: const EdgeInsets.all(8),
         child: getIcon(),
@@ -23,10 +22,10 @@ class CocktailRatingStar extends StatelessWidget {
   }
 
   Widget getIcon() {
-    if(isFilled) {
+    if (isFilled) {
       return Icon(Icons.star, color: Colors.white);
     } else {
-      return Icon(Icons.star, color: Color(0xff1a1927));
+      return Icon(Icons.star, color: CustomColors.ingredients);
     }
   }
 }

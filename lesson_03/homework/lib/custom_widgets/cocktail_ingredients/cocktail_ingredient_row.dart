@@ -5,7 +5,8 @@ class CocktailIngredientRow extends StatelessWidget {
   final String cocktailIngredientName;
   final String cocktailIngredientMeasure;
 
-  CocktailIngredientRow({this.cocktailIngredientName, this.cocktailIngredientMeasure});
+  CocktailIngredientRow(
+      {this.cocktailIngredientName, this.cocktailIngredientMeasure});
 
   @override
   Widget build(BuildContext context) {
@@ -16,21 +17,10 @@ class CocktailIngredientRow extends StatelessWidget {
         children: [
           Text(
             cocktailIngredientName,
-            style: TextStyle(
-              decoration: TextDecoration.underline,
-              color: Colors.white,
-              fontSize: 14,
-              fontWeight: FontWeight.normal
-            ),
+            style: Theme.of(context).textTheme.headline5,
           ),
-          Text(
-            cocktailIngredientMeasure,
-            style: TextStyle(
-                color: Colors.white,
-                fontSize: 14,
-                fontWeight: FontWeight.normal
-            )
-          )
+          Text(cocktailIngredientMeasure,
+              style: Theme.of(context).textTheme.headline5)
         ],
       ),
     );
