@@ -16,6 +16,12 @@ class AppCustomThemeProvider extends InheritedWidget {
 
 class AppCustomTheme {
   final Color color1;
-  final EdgeInsets sectionPaddings;
-  AppCustomTheme({@required this.color1, @required this.sectionPaddings});
+  final Color color2;
+
+  final EdgeInsets sectionPadding;
+
+  AppCustomTheme(
+      {@required this.color1,
+      @required this.color2,
+      @required this.sectionPadding});
 }

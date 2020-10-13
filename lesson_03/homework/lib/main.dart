@@ -17,8 +17,11 @@ void main() {
           child: CocktailDetailPage(cocktail),
           appCustomTheme: AppCustomTheme(
               color1: Colors.white,
-              sectionPaddings:
-                  EdgeInsets.symmetric(vertical: 24, horizontal: 32)),
+              color2: const Color(0xff1A1927),
+              sectionPadding: const EdgeInsets.symmetric(
+                vertical: 24,
+                horizontal: 32,
+              )),
         ),
       ),
       color: Colors.black,

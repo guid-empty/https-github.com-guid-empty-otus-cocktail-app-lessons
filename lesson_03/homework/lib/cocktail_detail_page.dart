@@ -20,22 +20,22 @@ class CocktailDetailPage extends StatelessWidget {
             fit: BoxFit.cover,
           ),
           Positioned(
+            top: 26,
+            left: 26,
             child: SvgPicture.asset(
               'assets/images/left-arrow.svg',
               width: 20,
               height: 20,
             ),
-            top: 26,
-            left: 26,
           ),
           Positioned(
+            top: 26,
+            right: 26,
             child: SvgPicture.asset(
               'assets/images/2.svg',
               width: 20,
               height: 20,
             ),
-            top: 26,
-            right: 26,
           ),
         ],
       );
@@ -44,12 +44,13 @@ class CocktailDetailPage extends StatelessWidget {
     final appCustomTheme =
         AppCustomThemeProvider.of(buildContext).appCustomTheme;
 
-    Widget buildParam({paramName: String, paramValue: String}) {
+    Widget buildParam(
+        {@required String paramName, @required String paramValue}) {
       return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Text(
           paramName,
-          style: TextStyle(
-            color: Color(0xFFEAEAEA),
+          style: const TextStyle(
+            color: const Color(0xFFEAEAEA),
             fontSize: 14,
           ),
         ),
@@ -57,11 +58,11 @@ class CocktailDetailPage extends StatelessWidget {
           height: 8,
         ),
         Container(
-          padding: EdgeInsets.symmetric(vertical: 6, horizontal: 16),
-          decoration: BoxDecoration(
-            color: Color(0xFF15151C),
-            borderRadius: BorderRadius.all(
-              Radius.circular(30),
+          padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 16),
+          decoration: const BoxDecoration(
+            color: const Color(0xFF15151C),
+            borderRadius: const BorderRadius.all(
+              const Radius.circular(30),
             ),
           ),
           child: Text(
@@ -73,8 +74,8 @@ class CocktailDetailPage extends StatelessWidget {
     }
 
     return Container(
-      padding: appCustomTheme.sectionPaddings,
-      color: Color(0xff1A1927),
+      padding: appCustomTheme.sectionPadding,
+      color: appCustomTheme.color2,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -101,8 +102,8 @@ class CocktailDetailPage extends StatelessWidget {
           ),
           Text(
             "id: ${cocktail.id}",
-            style: TextStyle(
-              color: Color(0xff848396),
+            style: const TextStyle(
+              color: const Color(0xff848396),
               fontSize: 13,
             ),
           ),
@@ -135,7 +136,7 @@ class CocktailDetailPage extends StatelessWidget {
   Widget _buildIngredients(BuildContext context) {
     final appCustomTheme = AppCustomThemeProvider.of(context).appCustomTheme;
 
-    final List<TableRow> rows = cocktail.ingredients
+    final rows = cocktail.ingredients
         .map((ingredient) => TableRow(children: [
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
@@ -160,22 +161,23 @@ class CocktailDetailPage extends StatelessWidget {
         .toList();
 
     return Container(
-      padding: appCustomTheme.sectionPaddings,
+      padding: appCustomTheme.sectionPadding,
       child: Column(children: [
         Text(
           'Ингридиенты:',
           textAlign: TextAlign.center,
-          style: TextStyle(
-              color: Color(0xffB1AFC6),
-              fontSize: 16,
-              fontWeight: FontWeight.w500),
+          style: const TextStyle(
+            color: const Color(0xffB1AFC6),
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+          ),
         ),
         SizedBox(
           height: 16,
         ),
         Table(
+          defaultColumnWidth: const FractionColumnWidth(.5),
           children: rows,
-          defaultColumnWidth: FractionColumnWidth(.5),
         ),
       ]),
     );
@@ -185,8 +187,8 @@ class CocktailDetailPage extends StatelessWidget {
     final appCustomTheme = AppCustomThemeProvider.of(context).appCustomTheme;
 
     return Container(
-      padding: appCustomTheme.sectionPaddings,
-      color: Color(0xff201F2C),
+      padding: appCustomTheme.sectionPadding,
+      color: const Color(0xff201F2C),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -207,28 +209,29 @@ class CocktailDetailPage extends StatelessWidget {
   Widget _buildRating(BuildContext context) {
     final appCustomTheme = AppCustomThemeProvider.of(context).appCustomTheme;
     return Container(
-      color: Color(0xff1A1927),
-      padding: appCustomTheme.sectionPaddings,
+      color: appCustomTheme.color2,
+      padding: appCustomTheme.sectionPadding,
       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         ...List.generate(
           5,
-          (index) {
-            return Container(
-              margin: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
-              decoration: BoxDecoration(
-                  color: Color(0xff2A293A),
-                  borderRadius: BorderRadius.circular(48)),
+          (index) => Flexible(
+            child: Container(
+              height: 48,
+              width: 48,
+              margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+              decoration: const BoxDecoration(
+                color: const Color(0xff2A293A),
+                shape: BoxShape.circle,
+              ),
               child: Icon(
                 Icons.star,
                 color: (index + 1) > cocktail.rating
-                    ? Color(0xff1A1927)
+                    ? appCustomTheme.color2
                     : Colors.white,
                 size: 32,
               ),
-              height: 48,
-              width: 48,
-            );
-          },
+            ),
+          ),
         )
       ]),
     );
