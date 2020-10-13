@@ -43,13 +43,14 @@ class CocktailDetailPage extends StatelessWidget {
                   gradient: LinearGradient(
                       begin : Alignment.topCenter,
                       end:Alignment.bottomCenter,
+                      stops: [0.44,0.95],
                       colors: [Color.fromARGB(0,14, 13, 19), Color(0xff0E0D13)])
               ) ,
             ),
-            this._buildDescription(),
-            this._buildIngredients(),
-            this._buildInstructions(),
-            this._buildRatio()
+            _buildDescription(),
+            _buildIngredients(),
+            _buildInstructions(),
+            _buildRatio()
           ]),
         ),
       ],
@@ -81,7 +82,7 @@ class CocktailDetailPage extends StatelessWidget {
     ]);
   }
 
-  static Widget _buildIngredientItem(name, measure) {
+  static Widget _buildIngredientItem(String name, String measure) {
     return Container(
         margin: EdgeInsets.only(top: 16),
         child: Row(
@@ -153,7 +154,7 @@ class CocktailDetailPage extends StatelessWidget {
                       .map((ingredient) =>
                           CocktailDetailPage._buildIngredientItem(
                               ingredient.ingredientName,
-                              ingredient.ingredientName))
+                              ingredient.measure))
                       .toList()))
         ]));
   }
