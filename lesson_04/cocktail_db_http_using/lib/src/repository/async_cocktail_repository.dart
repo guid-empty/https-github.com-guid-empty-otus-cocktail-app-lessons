@@ -158,8 +158,6 @@ class AsyncCocktailRepository {
   Future<Ingredient> lookupIngredientById(String id) async {
     Ingredient result;
 
-    final client = http.Client();
-
     final begin = DateTime.now();
     final url = 'https://the-cocktail-db.p.rapidapi.com/lookup.php?iid=$id';
 
@@ -188,8 +186,6 @@ class AsyncCocktailRepository {
       print(
           'Error while http request. Request url: $url . Request duration: ${begin.difference(DateTime.now()).inMilliseconds}. ');
       throw e;
-    } finally {
-      client.close();
     }
 
     return result;
