@@ -1,0 +1,46 @@
+name: lesson04async
+description: Lesson 04 Demos
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  http: ^0.12.2
+  cupertino_icons: ^1.0.0
+
+  # обратите внимание - я могу указать зависимость на репозиторий из git с указанием отдельной ветки
+  # и конкретный путь к фолдеру/директории
+  cocktailappmodels:
+    git:
+      url: git@github.com:guid-empty/otus-lesson-01-dart-basics-packages.git
+      ref: master
+      path: cocktail_app_models
+
+
+  # это нам понадобится для описания моделей json_serializable
+  json_annotation: ^3.1.0
+
+  # это нам понадобится для описания моделей BuiltValue
+  built_value: ^ 7.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # это нам понадобится только на этапе разработки
+  build_runner: ^1.10.1
+  json_serializable: ^3.5.0
+
+  # это нам понадобится для описания моделей BuiltValue
+  built_value_generator: ^7.1.0
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/gifs/so_fast_cats.gif

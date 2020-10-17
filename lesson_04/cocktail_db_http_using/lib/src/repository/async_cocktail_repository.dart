@@ -137,6 +137,17 @@ class AsyncCocktailRepository {
     return result;
   }
 
+
+  ///
+  /// TODO: implement Lookup ingredient by ID operation to get all details about Ingredient
+  /// using an endpoint https://rapidapi.com/thecocktaildb/api/the-cocktail-db?endpoint=apiendpoint_0ee9572a-a259-4b6e-9e53-b97aa3d42b18
+  ///
+  Future<Ingredient> lookupIngredientById() async {
+    return null;
+  }
+
+
+
   Cocktail _createCocktailFromDto(CocktailDto dto) {
     final glass = GlassType.parse(dto.strGlass);
     final cocktailType = CocktailType.parse(dto.strAlcoholic);
