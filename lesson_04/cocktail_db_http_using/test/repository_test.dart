@@ -48,5 +48,15 @@ void main() {
       final actualResult = await asyncRepository.getRandomCocktail();
       expect(actualResult, isNotNull);
     });
+
+    test('get ingredient by json_serializable id homework 04', () async {
+      final actualResult = await asyncRepository.lookupIngredientById('552');
+      expect(actualResult, isNotNull);
+    });
+
+    test('get ingredient by built_value id homework 04', () async {
+      final actualResult = await asyncRepository.lookupIngredientByIdWithBuiltValue('552');
+      expect(actualResult, isNotNull);
+    });
   });
 }
