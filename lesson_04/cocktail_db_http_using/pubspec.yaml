@@ -11,12 +11,12 @@ dependencies:
     sdk: flutter
   json_annotation: ^3.0.1
   built_value: ^7.1.0
+  http: ^0.12.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   pedantic: ^1.9.0
-  http: ^0.12.2
   build_runner: ^1.10.1
   json_serializable: ^3.4.1
   built_value_generator: ^7.1.0

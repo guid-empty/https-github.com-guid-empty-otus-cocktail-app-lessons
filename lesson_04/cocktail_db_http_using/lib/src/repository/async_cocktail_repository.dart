@@ -31,7 +31,7 @@ class AsyncCocktailRepository {
     var client = http.Client();
     try {
       final url = 'https://the-cocktail-db.p.rapidapi.com/lookup.php?i=$id';
-      var response = await http.get(url, headers: _headers);
+      var response = await client.get(url, headers: _headers);
       if (response.statusCode == 200) {
         final jsonResponse = convert.jsonDecode(response.body);
         var drinks = jsonResponse['drinks'] as Iterable<dynamic>;
@@ -61,7 +61,7 @@ class AsyncCocktailRepository {
     try {
       final url =
           'https://the-cocktail-db.p.rapidapi.com/filter.php?a=${cocktailType.value}';
-      var response = await http.get(
+      var response = await client.get(
         url,
         headers: {
           'x-rapidapi-key':
@@ -101,7 +101,7 @@ class AsyncCocktailRepository {
     var client = http.Client();
     try {
       const url = 'https://the-cocktail-db.p.rapidapi.com/popular.php';
-      var response = await http.get(
+      var response = await client.get(
         url,
         headers: {
           'x-rapidapi-key':
@@ -137,7 +137,7 @@ class AsyncCocktailRepository {
     var client = http.Client();
     try {
       const url = 'https://the-cocktail-db.p.rapidapi.com/random.php';
-      var response = await http.get(url, headers: _headers);
+      var response = await client.get(url, headers: _headers);
       if (response.statusCode == 200) {
         final jsonResponse = convert.jsonDecode(response.body);
         var drinks = jsonResponse['drinks'] as Iterable<dynamic>;
@@ -168,15 +168,20 @@ class AsyncCocktailRepository {
     var client = http.Client();
     try {
       final url = 'https://the-cocktail-db.p.rapidapi.com/lookup.php?iid=$id';
-      var response = await http.get(url, headers: _headers);
+      var response = await client.get(url, headers: _headers);
       if (response.statusCode == 200) {
         final jsonResponse = convert.jsonDecode(response.body);
         var lookedUpIngredients =
             jsonResponse['ingredients'] as Iterable<dynamic>;
 
         final dtos = lookedUpIngredients
-            .cast<Map<String, dynamic>>()
             .map((json) => LookedUpIngredientDto.fromJson(json));
+
+        if(lookedUpIngredients == null || lookedUpIngredients.isEmpty) {
+          throw HttpException(
+              'Request failed with status: ${response.statusCode}');
+        }
+
         if (dtos.length > 0) {
           result = _createLookedUpIngredientsFromDto(dtos.first);
         }
@@ -196,14 +201,13 @@ class AsyncCocktailRepository {
     var client = http.Client();
     try {
       final url = 'https://the-cocktail-db.p.rapidapi.com/lookup.php?iid=$id';
-      var response = await http.get(url, headers: _headers);
+      var response = await client.get(url, headers: _headers);
       if (response.statusCode == 200) {
         final jsonResponse = convert.jsonDecode(response.body);
         var lookedUpIngredients =
         jsonResponse['ingredients'] as Iterable<dynamic>;
 
         final dtos = lookedUpIngredients
-            .cast<Map<String, dynamic>>()
             .map((json) => serializers.deserializeWith(IngredientWithBuiltValue.serializer, json));
         if (dtos.length > 0) {
           result = _createLookedUpIngredientsFromDtoWithBuiltValue(dtos.first);
