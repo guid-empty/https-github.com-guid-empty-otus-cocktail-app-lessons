@@ -1,4 +1,4 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'cocktail_definition_dto.dart';
 
 part 'cocktail_dto.g.dart';
 
@@ -92,5 +92,6 @@ class CocktailDto {
     this.strCreativeCommonsConfirmed,
   );
 
-  factory CocktailDto.fromJson(Map<String, dynamic> json) => _$CocktailDtoFromJson(json);
+  factory CocktailDto.fromJson(Map<String, dynamic> json) =>
+      _$CocktailDtoFromJson(json);
 }

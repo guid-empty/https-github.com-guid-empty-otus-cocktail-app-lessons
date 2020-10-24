@@ -1,5 +1,3 @@
-import 'package:json_annotation/json_annotation.dart';
-
 part 'cocktail_definition_dto.g.dart';
 
 ///
@@ -15,5 +13,10 @@ class CocktailDefinitionDto {
 
   CocktailDefinitionDto(this.strDrink, this.strDrinkThumb, this.idDrink);
 
-  factory CocktailDefinitionDto.fromJson(Map<String, dynamic> json) => _$CocktailDefinitionDtoFromJson(json);
+  factory CocktailDefinitionDto.fromJson(Map<String, dynamic> json) =>
+      _$CocktailDefinitionDtoFromJson(json);
+}
+
+class JsonSerializable {
+  const JsonSerializable({bool createFactory, bool createToJson});
 }
