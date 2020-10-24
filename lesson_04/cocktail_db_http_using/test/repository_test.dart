@@ -1,8 +1,6 @@
 @TestOn('vm')
-import 'package:cocktaildbhttpusing/src/model/cocktail_type.dart';
-import 'package:cocktaildbhttpusing/src/repository/async_cocktail_repository.dart';
-import 'package:cocktaildbhttpusing/src/repository/sync_cocktail_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
+import '../lib/models.dart';
 
 void main() {
   SyncCocktailRepository syncRepository;
@@ -25,28 +23,37 @@ void main() {
       expect(actualResult.length, 20);
     });
 
-    test('fetchPopularCocktails method should return all popular cocktails using real api', () async {
+    test(
+        'fetchPopularCocktails method should return all popular cocktails using real api', () async {
       final actualResult = await asyncRepository.fetchPopularCocktails();
       expect(actualResult, isNotEmpty);
     });
 
     test(
         'fetchCocktailsByCocktailType method should return all available cocktail definitions using real api and coctail type filter',
-        () async {
-      final actualResult = await asyncRepository.fetchCocktailsByCocktailType(CocktailType.alcoholic);
-      expect(actualResult, isNotEmpty);
-    });
+            () async {
+          final actualResult = await asyncRepository
+              .fetchCocktailsByCocktailType(CocktailType.alcoholic);
+          expect(actualResult, isNotEmpty);
+        });
 
-    test('fetchCocktailDetails method should return all full cocktail details using real api and coctail id', () async {
+    test(
+        'fetchCocktailDetails method should return all full cocktail details using real api and coctail id', () async {
       final actualResult = await asyncRepository.fetchCocktailDetails('15300');
       expect(actualResult, isNotNull);
     });
 
     test(
         'getRandomCocktail method should return all available cocktail definition using real api and coctail type filter',
-        () async {
-      final actualResult = await asyncRepository.getRandomCocktail();
-      expect(actualResult, isNotNull);
+            () async {
+          final actualResult = await asyncRepository.getRandomCocktail();
+          expect(actualResult, isNotNull);
+        });
+
+    test(
+        'lookupIngredientById should return an ingredient by id', () async {
+      Ingredient res = await asyncRepository.lookupIngredientById(552);
+      expect(res, isNotNull);
     });
   });
 }

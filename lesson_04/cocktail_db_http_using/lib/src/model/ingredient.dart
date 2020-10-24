@@ -17,11 +17,23 @@
 ///   }
 ///  ```
 ///
+///
+
+import 'package:json_annotation/json_annotation.dart';
+
+part 'ingredient.g.dart';
+
+@JsonSerializable(createFactory: true, createToJson: false)
 class Ingredient {
+  @JsonKey(required: true, name: "idIngredient")
   final String id;
+  @JsonKey(required: true, name: "strIngredient")
   final String name;
+  @JsonKey(required: true, name: "strDescription")
   final String description;
+  @JsonKey(required: true, name: "strType")
   final String ingredientType;
+  @JsonKey(required: true, name: "strAlcohol", defaultValue: false)
   final bool isAlcoholic;
 
   Ingredient({
@@ -31,4 +43,6 @@ class Ingredient {
     this.ingredientType,
     this.isAlcoholic,
   });
+
+  factory Ingredient.fromJson(Map<String, dynamic> json) => _$IngredientFromJson(json);
 }
