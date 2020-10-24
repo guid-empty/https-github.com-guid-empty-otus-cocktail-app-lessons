@@ -11,7 +11,8 @@
 // 8. Делаем fork от репозитория и сдаем через PR
 // 9. Помним про декомпозицию кода по методам и классам.
 
-import 'package:cocktail/ui/search_field.dart';
+import 'file:///C:/Data/FlutterProjects/otus-cocktail-app-lessons/lesson_07/homework/lib/core/src/ui/search_field.dart';
+import 'package:cocktail/core/src/ui/categories_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -39,6 +40,11 @@ class _CocktailsFilterState extends State<CocktailsFilterScreen> {
                 end: Alignment.bottomCenter,
                 stops: [0.0, 0.91],
                 colors: [Color(0xFF1A1927), Color(0xFF0B0B12)])),
-        child: Column(children: <Widget>[SearchField()]));
+        child: Column(children: <Widget>[SearchField(), CategoriesList(onCatSelection)]));
+  }
+
+  void onCatSelection(CocktailCategory category){
+    print("selected: ${category.value}");
+
   }
 }
