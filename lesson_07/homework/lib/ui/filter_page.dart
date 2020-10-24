@@ -1,4 +1,3 @@
-
 // TODO: Сделать экран Фильтр по категории
 // Ссылка на макет: https://www.figma.com/file/Uzn5jHYiiFgacPCWNhwbc5/%D0%9A%D0%BE%D0%BA%D1%82%D0%B5%D0%B9%D0%BB%D0%B8-Copy?node-id=20%3A590
 
@@ -12,14 +11,34 @@
 // 8. Делаем fork от репозитория и сдаем через PR
 // 9. Помним про декомпозицию кода по методам и классам.
 
-
-import 'package:cocktail/core/src/repository/async_cocktail_repository.dart';
+import 'package:cocktail/ui/search_field.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class CocktailsFilterScreen extends StatelessWidget {
+import '../core/models.dart';
+
+class CocktailsFilterScreen extends StatefulWidget {
+  @override
+  _CocktailsFilterState createState() => _CocktailsFilterState();
+}
+
+class _CocktailsFilterState extends State<CocktailsFilterScreen> {
+  CocktailCategory _selected;
+
   @override
   Widget build(BuildContext context) {
-
-    return Container();
+    return Container(
+        width: double.infinity,
+        height: double.infinity,
+        padding: EdgeInsets.fromLTRB(13, 49, 13, 0),
+        decoration: BoxDecoration(
+            color: Color(0xFF1A1926),
+            gradient: LinearGradient(
+              //todo почему градиент выглядит не гладко на эмуляторе?
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                stops: [0.0, 0.91],
+                colors: [Color(0xFF1A1927), Color(0xFF0B0B12)])),
+        child: Column(children: <Widget>[SearchField()]));
   }
 }
