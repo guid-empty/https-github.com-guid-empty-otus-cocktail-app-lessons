@@ -1,8 +1,6 @@
-import 'package:cocktaildbhttpusing/models.dart';
-import 'package:cocktaildbhttpusing/src/model/cocktail_type.dart';
-import 'package:cocktaildbhttpusing/src/model/glass_type.dart';
-import 'package:cocktaildbhttpusing/src/model/ingredient_definition.dart';
 import 'package:flutter/foundation.dart';
+
+import '../../models.dart';
 
 ///
 /// Cocktail Model Definition based on response from
