@@ -1,4 +1,3 @@
-
 // TODO: Сделать экран Фильтр по категории
 // Ссылка на макет: https://www.figma.com/file/Uzn5jHYiiFgacPCWNhwbc5/%D0%9A%D0%BE%D0%BA%D1%82%D0%B5%D0%B9%D0%BB%D0%B8-Copy?node-id=20%3A590
 
@@ -11,7 +10,14 @@
 // 7. Для скролла используем CustomScrollView
 // 8. Делаем fork от репозитория и сдаем через PR
 // 9. Помним про декомпозицию кода по методам и классам.
+// Немного поменял дизайн. В карточке коктейля. Нижняя плашка это будет id коктейля.
+// На FilterBar. Его можно сделать через SingleChildScrollView или ListView указав scrollDirection: Axis.horizontal
+// Для самих фильтров можно использовать что нибудь из семейства Chip из material, либо обернуть в GestureDetector(onTap:() =>  ,child: Widget(),);
 
+// Stack(children: [
+//   //Рисунок
+//   //Column -> children -> Text -> Chip
+// ]);
 
 import 'package:flutter/material.dart';
 
