@@ -24,6 +24,38 @@ import 'package:flutter/material.dart';
 class CocktailsFilterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Material(
+      color: const Color(0xFF000000),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 44),
+        child: Column(
+          children: [
+            Container(
+              height: 41,
+              width: 375,
+              padding: const EdgeInsets.fromLTRB(13, 4, 13, 22),
+              margin: const EdgeInsets.fromLTRB(20, 10, 308.69, 9.69),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                color: const Color(0xFF181723),
+              ),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.search,
+                    size: 20.31,
+                    color: const Color(0xFFFFFFFF),
+                  ),
+                  Flexible(child: TextField()),
+                ],
+              ),
+            ),
+            // CustomScrollView(
+            //   slivers: [],
+            // ),
+          ],
+        ),
+      ),
+    );
   }
 }
