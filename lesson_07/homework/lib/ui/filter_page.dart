@@ -1,23 +1,50 @@
-
-// TODO: Сделать экран Фильтр по категории
-// Ссылка на макет: https://www.figma.com/file/Uzn5jHYiiFgacPCWNhwbc5/%D0%9A%D0%BE%D0%BA%D1%82%D0%B5%D0%B9%D0%BB%D0%B8-Copy?node-id=20%3A590
-
-// 1. Фильты - это CocktailCategory, получить все значения можно через CocktailCategory.values
-// 2. Поиск по фильтру делаем через AsyncCocktailRepository().fetchCocktailsByCocktailCategory(CocktailCategory)
-// 3. Используем StreamBuilder/FutureBuilder
-// 4. По нажатию на категорию на странице должны обновится список коктейлей. Выбранная категория подсвечивается как в дизайне. По умолчанию выбрана первая категория.
-// 5. Поиск по названию пока что не делаем!
-// 6. Должны отображаться ошибки и состояние загрузки.
-// 7. Для скролла используем CustomScrollView
-// 8. Делаем fork от репозитория и сдаем через PR
-// 9. Помним про декомпозицию кода по методам и классам.
-
-
+import 'package:cocktail/core/models.dart';
+import 'package:cocktail/core/src/model/cocktail_category.dart';
 import 'package:flutter/material.dart';
 
+import 'widgets/search/view/filter_bar.dart';
+import 'widgets/search/view/results_grid.dart';
+
 class CocktailsFilterScreen extends StatelessWidget {
+  const CocktailsFilterScreen({
+    Key key,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    var categories = CocktailCategory.values;
+    return Scaffold(
+        backgroundColor: Theme.of(context).backgroundColor,
+        body: Column(children: [
+          SearchBar(),
+          Expanded(child: _buildScrollableArea(categories))
+        ]));
+  }
+
+  CustomScrollView _buildScrollableArea(Iterable<CocktailCategory> categories) {
+    return CustomScrollView(slivers: [
+      SliverPersistentHeader(pinned: true, delegate: FilterBar(categories)),
+      ResultsGrid(),
+    ]);
+  }
+}
+
+class SearchBar extends StatelessWidget {
+  const SearchBar({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        margin: const EdgeInsets.fromLTRB(13, 49, 13, 0),
+        padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+        decoration: BoxDecoration(
+            border: Border.all(color: const Color.fromARGB(255, 70, 69, 81)),
+            color: const Color.fromARGB(255, 24, 23, 35),
+            borderRadius: const BorderRadius.all(const Radius.circular(65))),
+        child: TextField(
+            decoration: InputDecoration.collapsed(hintText: null),
+            style: Theme.of(context).textTheme.bodyText1));
   }
 }
