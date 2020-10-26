@@ -19,9 +19,11 @@
 //   //Column -> children -> Text -> Chip
 // ]);
 
+import 'package:cocktail/core/src/model/cocktail_category.dart';
 import 'package:flutter/material.dart';
 
 class CocktailsFilterScreen extends StatelessWidget {
+  final items = List.generate(CocktailCategory.values.length, (index) => index);
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -30,32 +32,69 @@ class CocktailsFilterScreen extends StatelessWidget {
         padding: const EdgeInsets.only(top: 44),
         child: Column(
           children: [
-            Container(
-              height: 41,
-              width: 375,
-              padding: const EdgeInsets.fromLTRB(13, 4, 13, 22),
-              margin: const EdgeInsets.fromLTRB(20, 10, 308.69, 9.69),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                color: const Color(0xFF181723),
-              ),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.search,
-                    size: 20.31,
-                    color: const Color(0xFFFFFFFF),
-                  ),
-                  Flexible(child: TextField()),
-                ],
+            _buildSearchField(),
+            Flexible(
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: CocktailCategory.values.length,
+                itemBuilder: (context, index) {
+                  return FilterBarItem(index);
+                },
+
+                //items.map((index) => FilterBarItem(index)).toList(),
               ),
             ),
-            // CustomScrollView(
-            //   slivers: [],
-            // ),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildSearchField() {
+    return Container(
+      height: 41,
+      width: 375,
+      padding: const EdgeInsets.fromLTRB(13, 4, 13, 22),
+      margin: const EdgeInsets.fromLTRB(20, 10, 308.69, 9.69),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(30),
+        color: const Color(0xFF181723),
+      ),
+      child: Row(
+        children: [
+          Icon(
+            Icons.search,
+            size: 20.31,
+            color: const Color(0xFFFFFFFF),
+          ),
+          Flexible(child: TextField()),
+          SizedBox(height: 22),
+        ],
+      ),
+    );
+  }
+}
+
+class FilterBarItem extends StatelessWidget {
+  const FilterBarItem(this.index);
+
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        SizedBox(width: 10),
+        GestureDetector(
+          child: Chip(
+            backgroundColor: const Color(0xFF2D2C39),
+            label: Text(
+              CocktailCategory.values.elementAt(index).name,
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
