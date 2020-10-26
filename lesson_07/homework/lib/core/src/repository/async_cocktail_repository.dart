@@ -86,8 +86,8 @@ class AsyncCocktailRepository {
     return result;
   }
 
-  Future<Iterable<CocktailDefinition>> fetchCocktailsByCocktailCategory(
-      CocktailCategory category) async {
+  Stream<Iterable<CocktailDefinition>> fetchCocktailsByCocktailCategory(
+      CocktailCategory category) async* {
     var result = <CocktailDefinition>[];
 
     var client = http.Client();
@@ -125,7 +125,7 @@ class AsyncCocktailRepository {
       client.close();
     }
 
-    return result;
+    yield result;
   }
 
   Future<Iterable<Cocktail>> fetchPopularCocktails() async {

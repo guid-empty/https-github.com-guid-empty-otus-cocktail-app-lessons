@@ -20,6 +20,7 @@
 // ]);
 
 import 'package:cocktail/core/src/model/cocktail_category.dart';
+import 'package:cocktail/core/src/repository/async_cocktail_repository.dart';
 import 'package:flutter/material.dart';
 
 class CocktailsFilterScreen extends StatelessWidget {
@@ -34,6 +35,17 @@ class CocktailsFilterScreen extends StatelessWidget {
           children: [
             _buildSearchField(),
             FilterBar(),
+            StreamBuilder(
+              stream: AsyncCocktailRepository()
+                  .fetchCocktailsByCocktailCategory(CocktailCategory.beer),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Text(snapshot.data.toString());
+                }
+
+                return CircularProgressIndicator();
+              },
+            )
           ],
         ),
       ),
@@ -66,8 +78,6 @@ class CocktailsFilterScreen extends StatelessWidget {
 }
 
 class FilterBar extends StatefulWidget {
-  // const FilterBarItem(this.index);
-  // final int index;
   @override
   _FilterBarState createState() => _FilterBarState();
 }
@@ -89,6 +99,7 @@ class _FilterBarState extends State<FilterBar> {
         itemBuilder: (context, index) {
           return Wrap(
             children: [
+              SizedBox(width: 10),
               ChoiceChip(
                 selected: _defaultChoiceIndex == index,
                 backgroundColor: const Color(0xFF201F2C),
@@ -101,6 +112,7 @@ class _FilterBarState extends State<FilterBar> {
                   setState(
                     () {
                       _defaultChoiceIndex = selected ? index : 0;
+
                       print(index);
                       print(CocktailCategory.values.elementAt(index).value);
                     },
