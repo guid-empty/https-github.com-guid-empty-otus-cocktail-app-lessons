@@ -23,7 +23,6 @@ import 'package:cocktail/core/src/model/cocktail_category.dart';
 import 'package:flutter/material.dart';
 
 class CocktailsFilterScreen extends StatelessWidget {
-  final items = List.generate(CocktailCategory.values.length, (index) => index);
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -31,19 +30,10 @@ class CocktailsFilterScreen extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(top: 44),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             _buildSearchField(),
-            Flexible(
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: CocktailCategory.values.length,
-                itemBuilder: (context, index) {
-                  return FilterBarItem(index);
-                },
-
-                //items.map((index) => FilterBarItem(index)).toList(),
-              ),
-            ),
+            FilterBar(),
           ],
         ),
       ),
@@ -68,33 +58,59 @@ class CocktailsFilterScreen extends StatelessWidget {
             color: const Color(0xFFFFFFFF),
           ),
           Flexible(child: TextField()),
-          SizedBox(height: 22),
+          const SizedBox(height: 22),
         ],
       ),
     );
   }
 }
 
-class FilterBarItem extends StatelessWidget {
-  const FilterBarItem(this.index);
+class FilterBar extends StatefulWidget {
+  // const FilterBarItem(this.index);
+  // final int index;
+  @override
+  _FilterBarState createState() => _FilterBarState();
+}
 
-  final int index;
+class _FilterBarState extends State<FilterBar> {
+  int _defaultChoiceIndex;
+  @override
+  void initState() {
+    super.initState();
+    _defaultChoiceIndex = 0;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        SizedBox(width: 10),
-        GestureDetector(
-          child: Chip(
-            backgroundColor: const Color(0xFF2D2C39),
-            label: Text(
-              CocktailCategory.values.elementAt(index).name,
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-        ),
-      ],
+    return Flexible(
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: CocktailCategory.values.length,
+        itemBuilder: (context, index) {
+          return Wrap(
+            children: [
+              ChoiceChip(
+                selected: _defaultChoiceIndex == index,
+                backgroundColor: const Color(0xFF201F2C),
+                selectedColor: const Color(0xFF3B3953),
+                label: Text(
+                  CocktailCategory.values.elementAt(index).value,
+                  style: TextStyle(color: Colors.white),
+                ),
+                onSelected: (bool selected) {
+                  setState(
+                    () {
+                      _defaultChoiceIndex = selected ? index : 0;
+                      print(index);
+                      print(CocktailCategory.values.elementAt(index).value);
+                    },
+                  );
+                },
+              ),
+            ],
+          );
+        },
+      ),
     );
   }
 }
