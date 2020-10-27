@@ -5,24 +5,37 @@ typedef CategorySelectionCallback = void Function(CocktailCategory);
 
 class CategoriesList extends StatelessWidget {
   final CategorySelectionCallback onCatSelection;
-  CocktailCategory _selected;
+  final CocktailCategory _selected;
+
   CategoriesList(this._selected, this.onCatSelection);
 
   @override
   Widget build(BuildContext context) {
-    var categories = List<Widget>.generate(CocktailCategory.values.length,
+    final categories = List<Widget>.generate(CocktailCategory.values.length,
         (index) => CategoryWidget(index, _selected, onCatSelection));
-    return SingleChildScrollView(
-      child: Row(children: categories),
-      scrollDirection: Axis.horizontal,
-    );
+    return Container(
+        width: double.infinity,
+        height: 90,
+        padding: EdgeInsets.fromLTRB(10, 22, 10, 22),
+        child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (BuildContext context, int index) {
+              return categories.elementAt(index);
+            },
+            separatorBuilder: (BuildContext context, int index) {
+              return Container(width: 10);
+            },
+            itemCount: categories.length));
+    // return SingleChildScrollView(
+    //   child: Row(children: categories),
+    //   scrollDirection: Axis.horizontal,
+    // );
   }
 }
 
 class CategoryWidget extends StatelessWidget {
-
   final int index;
-  CocktailCategory _selected;
+  final CocktailCategory _selected;
   final CategorySelectionCallback onCatSelection;
 
   CategoryWidget(this.index, this._selected, this.onCatSelection);
@@ -36,8 +49,8 @@ class CategoryWidget extends StatelessWidget {
           onCatSelection(cat);
         },
         child: Container(
-            margin: EdgeInsets.fromLTRB(10, 22,
-                index == CocktailCategory.values.length - 1 ? 10 : 0, 8),
+            // margin: EdgeInsets.fromLTRB(10, 22,
+            //     index == CocktailCategory.values.length - 1 ? 10 : 0, 8),
             padding: EdgeInsets.fromLTRB(16, 14, 16, 14),
             decoration: BoxDecoration(
                 color: Color(highlight ? 0xFF3B3953 : 0xFF201F2C),
@@ -53,5 +66,4 @@ class CategoryWidget extends StatelessWidget {
                   fontWeight: FontWeight.w400),
             )));
   }
-
 }

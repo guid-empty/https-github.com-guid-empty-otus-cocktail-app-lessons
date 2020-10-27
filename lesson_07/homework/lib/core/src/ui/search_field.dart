@@ -13,7 +13,7 @@ class SearchField extends StatelessWidget {
             height: 18 / 13,
             fontFamily: "SF Pro Text",
             fontWeight: FontWeight.w500),
-        decoration: new InputDecoration(
+        decoration: InputDecoration(
             contentPadding: const EdgeInsets.fromLTRB(52, 11, 42, 11),
             enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: Color(0xFF464551), width: 1),

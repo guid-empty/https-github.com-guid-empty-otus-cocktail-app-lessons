@@ -44,7 +44,7 @@ class CocktailsGridView extends StatelessWidget {
                                 CocktailSliver.width / CocktailSliver.height),
                             delegate: SliverChildBuilderDelegate((buildContext, index) {
                               return CocktailSliver(snapshot.data.elementAt(index));
-                            }),
+                            }, childCount: snapshot.data.length),
                           )
                         ])));
             }
