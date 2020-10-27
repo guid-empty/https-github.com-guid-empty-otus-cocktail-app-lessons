@@ -35,17 +35,6 @@ class CocktailsFilterScreen extends StatelessWidget {
           children: [
             _buildSearchField(),
             FilterBar(),
-            StreamBuilder(
-              stream: AsyncCocktailRepository()
-                  .fetchCocktailsByCocktailCategory(CocktailCategory.beer),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return Text(snapshot.data.toString());
-                }
-
-                return CircularProgressIndicator();
-              },
-            )
           ],
         ),
       ),
@@ -119,10 +108,41 @@ class _FilterBarState extends State<FilterBar> {
                   );
                 },
               ),
+              CoctailList(_defaultChoiceIndex),
             ],
           );
         },
       ),
+    );
+  }
+}
+
+class CoctailList extends StatefulWidget {
+  CoctailList(this._choiceIndex);
+  final int _choiceIndex;
+  @override
+  _CoctailListState createState() => _CoctailListState(_choiceIndex);
+}
+
+class _CoctailListState extends State<CoctailList> {
+  int _choiceIndex;
+
+  _CoctailListState(this._choiceIndex);
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder(
+      stream: AsyncCocktailRepository().fetchCocktailsByCocktailCategory(
+          CocktailCategory.values.elementAt(_choiceIndex)),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Text(
+            snapshot.data[_choiceIndex].name,
+            style: TextStyle(color: Colors.white),
+          );
+        } else
+          return CircularProgressIndicator();
+      },
     );
   }
 }

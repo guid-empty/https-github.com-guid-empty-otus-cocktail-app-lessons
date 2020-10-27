@@ -90,7 +90,6 @@ class AsyncCocktailRepository {
       CocktailCategory category) async* {
     var result = <CocktailDefinition>[];
 
-    var client = http.Client();
     try {
       final url =
           'https://the-cocktail-db.p.rapidapi.com/filter.php?c=${category.value}';
@@ -121,9 +120,7 @@ class AsyncCocktailRepository {
         throw HttpException(
             'Request failed with status: ${response.statusCode}');
       }
-    } finally {
-      client.close();
-    }
+    } finally {}
 
     yield result;
   }
