@@ -1,5 +1,5 @@
 # homework
 
-![Screenshot](Screenshot.png)
+![Screenshot](Screenshot.jpg)
 
 
