@@ -13,7 +13,6 @@
 
 import 'file:///C:/Data/FlutterProjects/otus-cocktail-app-lessons/lesson_07/homework/lib/core/src/ui/search_field.dart';
 import 'package:cocktail/core/src/ui/categories_list.dart';
-import 'package:cocktail/core/src/ui/cocktail_sliver.dart';
 import 'package:cocktail/core/src/ui/cocktails_grid_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +53,7 @@ class _CocktailsFilterState extends State<CocktailsFilterScreen> {
               if(_cocktails != null) CocktailsGridView(_cocktails)]));
   }
 
-  void onCatSelection(CocktailCategory category) async{
+  void onCatSelection(CocktailCategory category) {
     setState(() {
       _selected = category;
       _cocktails = AsyncCocktailRepository().fetchCocktailsByCocktailCategory(category);
