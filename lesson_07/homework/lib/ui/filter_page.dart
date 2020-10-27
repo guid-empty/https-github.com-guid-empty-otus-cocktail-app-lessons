@@ -13,6 +13,8 @@
 
 import 'file:///C:/Data/FlutterProjects/otus-cocktail-app-lessons/lesson_07/homework/lib/core/src/ui/search_field.dart';
 import 'package:cocktail/core/src/ui/categories_list.dart';
+import 'package:cocktail/core/src/ui/cocktail_sliver.dart';
+import 'package:cocktail/core/src/ui/cocktails_grid_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -25,6 +27,13 @@ class CocktailsFilterScreen extends StatefulWidget {
 
 class _CocktailsFilterState extends State<CocktailsFilterScreen> {
   CocktailCategory _selected;
+  Future<Iterable<CocktailDefinition>> _cocktails;
+
+  @override
+  void initState() {
+    super.initState();
+    onCatSelection(CocktailCategory.values.first);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,11 +49,15 @@ class _CocktailsFilterState extends State<CocktailsFilterScreen> {
                 end: Alignment.bottomCenter,
                 stops: [0.0, 0.91],
                 colors: [Color(0xFF1A1927), Color(0xFF0B0B12)])),
-        child: Column(children: <Widget>[SearchField(), CategoriesList(onCatSelection)]));
+        child: Column(
+            children: <Widget>[SearchField(), CategoriesList(_selected, onCatSelection),
+              if(_cocktails != null) CocktailsGridView(_cocktails)]));
   }
 
-  void onCatSelection(CocktailCategory category){
-    print("selected: ${category.value}");
-
+  void onCatSelection(CocktailCategory category) async{
+    setState(() {
+      _selected = category;
+      _cocktails = AsyncCocktailRepository().fetchCocktailsByCocktailCategory(category);
+    });
   }
 }
