@@ -19,6 +19,6 @@ Ingredient _$IngredientFromJson(Map<String, dynamic> json) {
     name: json['strIngredient'] as String,
     description: json['strDescription'] as String,
     ingredientType: json['strType'] as String,
-    isAlcoholic: json['strAlcohol'] as bool ?? false,
+    isAlcoholic: yesNoToBool(json['strAlcohol'] as String) ?? false,
   );
 }
