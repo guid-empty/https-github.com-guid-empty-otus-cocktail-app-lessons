@@ -19,6 +19,8 @@
 //   //Column -> children -> Text -> Chip
 // ]);
 
+import 'dart:async';
+
 import 'package:cocktail/core/src/model/cocktail_category.dart';
 import 'package:cocktail/core/src/repository/async_cocktail_repository.dart';
 import 'package:flutter/material.dart';
@@ -73,6 +75,7 @@ class FilterBar extends StatefulWidget {
 
 class _FilterBarState extends State<FilterBar> {
   int _defaultChoiceIndex;
+
   @override
   void initState() {
     super.initState();
@@ -101,15 +104,9 @@ class _FilterBarState extends State<FilterBar> {
                         style: TextStyle(color: Colors.white),
                       ),
                       onSelected: (bool selected) {
-                        setState(
-                          () {
-                            _defaultChoiceIndex = selected ? index : 0;
-
-                            print('default = $_defaultChoiceIndex');
-                            print(
-                                CocktailCategory.values.elementAt(index).value);
-                          },
-                        );
+                        setState(() {
+                          _defaultChoiceIndex = selected ? index : 0;
+                        });
                       },
                     ),
                   ],
@@ -141,8 +138,9 @@ class CoctailList extends StatelessWidget {
           return Expanded(
             child: GridView.custom(
               childrenDelegate: SliverChildBuilderDelegate(
-                (context, index) => _buildCoctailGridElement(snapshot),
-              ),
+                  (context, index) => _buildCoctailGridElement(snapshot, index),
+                  childCount:
+                      5), ////////////////////////////////////////////////////////
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 mainAxisSpacing: 2,
                 childAspectRatio: 1.0,
@@ -156,11 +154,11 @@ class CoctailList extends StatelessWidget {
     );
   }
 
-  Widget _buildCoctailGridElement(AsyncSnapshot snapshot) {
-    print('choice = $choiceIndex');
+  Widget _buildCoctailGridElement(AsyncSnapshot snapshot, int index) {
+    print('ind = $index');
     return Container(
       child: Text(
-        snapshot.data[choiceIndex].name,
+        snapshot.data[index].name,
         style: TextStyle(color: Colors.white),
       ),
     );
