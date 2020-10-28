@@ -81,68 +81,88 @@ class _FilterBarState extends State<FilterBar> {
 
   @override
   Widget build(BuildContext context) {
-    return Flexible(
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: CocktailCategory.values.length,
-        itemBuilder: (context, index) {
-          return Wrap(
-            children: [
-              SizedBox(width: 10),
-              ChoiceChip(
-                selected: _defaultChoiceIndex == index,
-                backgroundColor: const Color(0xFF201F2C),
-                selectedColor: const Color(0xFF3B3953),
-                label: Text(
-                  CocktailCategory.values.elementAt(index).value,
-                  style: TextStyle(color: Colors.white),
-                ),
-                onSelected: (bool selected) {
-                  setState(
-                    () {
-                      _defaultChoiceIndex = selected ? index : 0;
+    return Expanded(
+      child: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: CocktailCategory.values.length,
+              itemBuilder: (context, index) {
+                return Wrap(
+                  children: [
+                    SizedBox(width: 10),
+                    ChoiceChip(
+                      selected: _defaultChoiceIndex == index,
+                      backgroundColor: const Color(0xFF201F2C),
+                      selectedColor: const Color(0xFF3B3953),
+                      label: Text(
+                        CocktailCategory.values.elementAt(index).value,
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onSelected: (bool selected) {
+                        setState(
+                          () {
+                            _defaultChoiceIndex = selected ? index : 0;
 
-                      print(index);
-                      print(CocktailCategory.values.elementAt(index).value);
-                    },
-                  );
-                },
-              ),
-              CoctailList(_defaultChoiceIndex),
-            ],
-          );
-        },
+                            print('default = $_defaultChoiceIndex');
+                            print(
+                                CocktailCategory.values.elementAt(index).value);
+                          },
+                        );
+                      },
+                    ),
+                  ],
+                );
+              },
+            ),
+          ),
+          CoctailList(
+            choiceIndex: _defaultChoiceIndex,
+          ),
+        ],
       ),
     );
   }
 }
 
-class CoctailList extends StatefulWidget {
-  CoctailList(this._choiceIndex);
-  final int _choiceIndex;
-  @override
-  _CoctailListState createState() => _CoctailListState(_choiceIndex);
-}
+class CoctailList extends StatelessWidget {
+  final int choiceIndex;
 
-class _CoctailListState extends State<CoctailList> {
-  int _choiceIndex;
-
-  _CoctailListState(this._choiceIndex);
+  const CoctailList({Key key, this.choiceIndex}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
       stream: AsyncCocktailRepository().fetchCocktailsByCocktailCategory(
-          CocktailCategory.values.elementAt(_choiceIndex)),
+          CocktailCategory.values.elementAt(choiceIndex)),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return Text(
-            snapshot.data[_choiceIndex].name,
-            style: TextStyle(color: Colors.white),
+          return Expanded(
+            child: GridView.custom(
+              childrenDelegate: SliverChildBuilderDelegate(
+                (context, index) => _buildCoctailGridElement(snapshot),
+              ),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                mainAxisSpacing: 2,
+                childAspectRatio: 1.0,
+                crossAxisCount: 2,
+              ),
+            ),
           );
         } else
           return CircularProgressIndicator();
       },
+    );
+  }
+
+  Widget _buildCoctailGridElement(AsyncSnapshot snapshot) {
+    print('choice = $choiceIndex');
+    return Container(
+      child: Text(
+        snapshot.data[choiceIndex].name,
+        style: TextStyle(color: Colors.white),
+      ),
     );
   }
 }
