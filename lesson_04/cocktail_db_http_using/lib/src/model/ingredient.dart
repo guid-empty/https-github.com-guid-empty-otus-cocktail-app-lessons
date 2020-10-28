@@ -33,7 +33,7 @@ class Ingredient {
   final String description;
   @JsonKey(required: true, name: "strType")
   final String ingredientType;
-  @JsonKey(required: true, name: "strAlcohol", defaultValue: false)
+  @JsonKey(required: true, name: "strAlcohol", defaultValue: false, fromJson: yesNoToBool)
   final bool isAlcoholic;
 
   Ingredient({
@@ -45,4 +45,9 @@ class Ingredient {
   });
 
   factory Ingredient.fromJson(Map<String, dynamic> json) => _$IngredientFromJson(json);
+}
+
+bool yesNoToBool(String value){
+  if(value == null) return false;
+  return value.toLowerCase() == "yes";
 }

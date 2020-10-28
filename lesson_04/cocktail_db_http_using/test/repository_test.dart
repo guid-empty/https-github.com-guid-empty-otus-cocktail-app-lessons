@@ -52,8 +52,9 @@ void main() {
 
     test(
         'lookupIngredientById should return an ingredient by id', () async {
-      Ingredient res = await asyncRepository.lookupIngredientById(552);
+      Ingredient res = await asyncRepository.lookupIngredientById(551);
       expect(res, isNotNull);
+      expect(res.isAlcoholic, isTrue);
     });
   });
 }
