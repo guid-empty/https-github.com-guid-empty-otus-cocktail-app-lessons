@@ -48,5 +48,22 @@ void main() {
       final actualResult = await asyncRepository.getRandomCocktail();
       expect(actualResult, isNotNull);
     });
+
+    test(
+        'lookupIngredientById method should return ingridient full ingridient details using real api and ingridient id',
+        () async {
+      const String testId = "554";
+      final actualResult = await asyncRepository.lookupIngredientById(testId);
+      expect(actualResult.id, testId);
+      expect(actualResult, isNotNull);
+    });
+
+    test(
+        'lookupIngredientById method should return ingridient null using real api and wrong ingridient id',
+        () async {
+      const String testId = "543435324";
+      expect(() => asyncRepository.lookupIngredientById(testId), throwsA(isInstanceOf<Exception>()));            
+    });
+
   });
 }
