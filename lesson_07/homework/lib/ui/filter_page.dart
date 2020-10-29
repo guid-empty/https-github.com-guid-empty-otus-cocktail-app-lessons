@@ -126,8 +126,8 @@ class _FilterBarState extends State<FilterBar> {
 class CoctailList extends StatelessWidget {
   final int choiceIndex;
 
-  const CoctailList({Key key, this.choiceIndex}) : super(key: key);
-
+  CoctailList({Key key, this.choiceIndex}) : super(key: key);
+  List dataCount = [];
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -135,17 +135,22 @@ class CoctailList extends StatelessWidget {
           CocktailCategory.values.elementAt(choiceIndex)),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
+          dataCount = snapshot.data;
+          print('DC = ' + dataCount?.length.toString());
           return Expanded(
-            child: GridView.custom(
-              childrenDelegate: SliverChildBuilderDelegate(
-                  (context, index) => _buildCoctailGridElement(snapshot, index),
-                  childCount:
-                      5), ////////////////////////////////////////////////////////
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                mainAxisSpacing: 2,
-                childAspectRatio: 1.0,
-                crossAxisCount: 2,
-              ),
+            child: CustomScrollView(
+              slivers: [
+                SliverGrid(
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) =>
+                        _buildCoctailGridElement(snapshot, index),
+                    childCount: dataCount.length,
+                  ),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                  ),
+                )
+              ],
             ),
           );
         } else
