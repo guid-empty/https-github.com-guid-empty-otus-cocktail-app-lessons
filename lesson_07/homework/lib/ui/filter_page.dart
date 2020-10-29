@@ -19,8 +19,6 @@
 //   //Column -> children -> Text -> Chip
 // ]);
 
-import 'dart:async';
-
 import 'package:cocktail/core/src/model/cocktail_category.dart';
 import 'package:cocktail/core/src/repository/async_cocktail_repository.dart';
 import 'package:flutter/material.dart';
@@ -126,8 +124,11 @@ class _FilterBarState extends State<FilterBar> {
 class CoctailList extends StatelessWidget {
   final int choiceIndex;
 
-  CoctailList({Key key, this.choiceIndex}) : super(key: key);
-  List dataCount = [];
+  CoctailList({
+    Key key,
+    this.choiceIndex,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -135,8 +136,7 @@ class CoctailList extends StatelessWidget {
           CocktailCategory.values.elementAt(choiceIndex)),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          dataCount = snapshot.data;
-          print('DC = ' + dataCount?.length.toString());
+          final List dataCount = snapshot.data;
           return Expanded(
             child: CustomScrollView(
               slivers: [
@@ -160,12 +160,54 @@ class CoctailList extends StatelessWidget {
   }
 
   Widget _buildCoctailGridElement(AsyncSnapshot snapshot, int index) {
-    print('ind = $index');
-    return Container(
-      child: Text(
-        snapshot.data[index].name,
-        style: TextStyle(color: Colors.white),
-      ),
+    return Stack(
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              colors: [Colors.black54, Colors.black],
+              begin: Alignment.center,
+              end: Alignment.bottomCenter,
+            ),
+          ),
+          child: Opacity(
+            opacity: 0.8,
+            child: Image(
+              image: NetworkImage(snapshot.data[index].drinkThumbUrl),
+            ),
+          ),
+        ),
+        Positioned(
+          bottom: 16,
+          left: 14,
+          child: Chip(
+            label: Text(
+              'id: ${snapshot.data[index].id}',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 10),
+            ),
+            backgroundColor: const Color(0xFF15151C),
+          ),
+        ),
+        Positioned(
+          bottom: 74,
+          left: 16,
+          child: Container(
+            width: 128,
+            height: 34,
+            child: Text(
+              '"${snapshot.data[index].name}"',
+              maxLines: 2,
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 14),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
