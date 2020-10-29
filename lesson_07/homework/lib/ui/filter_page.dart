@@ -147,8 +147,9 @@ class CoctailList extends StatelessWidget {
                     childCount: dataCount.length,
                   ),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                  ),
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 5,
+                      crossAxisSpacing: 5),
                 )
               ],
             ),
@@ -172,8 +173,11 @@ class CoctailList extends StatelessWidget {
           ),
           child: Opacity(
             opacity: 0.8,
-            child: Image(
-              image: NetworkImage(snapshot.data[index].drinkThumbUrl),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Image(
+                image: NetworkImage(snapshot.data[index].drinkThumbUrl),
+              ),
             ),
           ),
         ),
@@ -192,7 +196,7 @@ class CoctailList extends StatelessWidget {
           ),
         ),
         Positioned(
-          bottom: 74,
+          bottom: 60,
           left: 16,
           child: Container(
             width: 128,
