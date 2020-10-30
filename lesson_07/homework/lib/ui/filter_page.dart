@@ -21,6 +21,7 @@
 
 import 'package:cocktail/core/src/model/cocktail_category.dart';
 import 'package:cocktail/core/src/repository/async_cocktail_repository.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class CocktailsFilterScreen extends StatelessWidget {
@@ -29,7 +30,7 @@ class CocktailsFilterScreen extends StatelessWidget {
     return Material(
       color: const Color(0xFF000000),
       child: Padding(
-        padding: const EdgeInsets.only(top: 44),
+        padding: const EdgeInsets.only(top: 100),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -45,8 +46,8 @@ class CocktailsFilterScreen extends StatelessWidget {
     return Container(
       height: 41,
       width: 375,
-      padding: const EdgeInsets.fromLTRB(13, 4, 13, 22),
-      margin: const EdgeInsets.fromLTRB(20, 10, 308.69, 9.69),
+      //padding: const EdgeInsets.fromLTRB(13, 4, 13, 22),
+      // margin: const EdgeInsets.fromLTRB(20, 10, 308.69, 9.69),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(30),
         color: const Color(0xFF181723),
@@ -59,7 +60,7 @@ class CocktailsFilterScreen extends StatelessWidget {
             color: const Color(0xFFFFFFFF),
           ),
           Flexible(child: TextField()),
-          const SizedBox(height: 22),
+          //const SizedBox(height: 22),
         ],
       ),
     );
@@ -73,6 +74,7 @@ class FilterBar extends StatefulWidget {
 
 class _FilterBarState extends State<FilterBar> {
   int _defaultChoiceIndex;
+  final _controller = ScrollController();
 
   @override
   void initState() {
@@ -102,9 +104,12 @@ class _FilterBarState extends State<FilterBar> {
                         style: TextStyle(color: Colors.white),
                       ),
                       onSelected: (bool selected) {
-                        setState(() {
-                          _defaultChoiceIndex = selected ? index : 0;
-                        });
+                        setState(
+                          () {
+                            _defaultChoiceIndex = selected ? index : 0;
+                            _controller.jumpTo(0);
+                          },
+                        );
                       },
                     ),
                   ],
@@ -114,6 +119,7 @@ class _FilterBarState extends State<FilterBar> {
           ),
           CoctailList(
             choiceIndex: _defaultChoiceIndex,
+            controller: _controller,
           ),
         ],
       ),
@@ -123,10 +129,12 @@ class _FilterBarState extends State<FilterBar> {
 
 class CoctailList extends StatelessWidget {
   final int choiceIndex;
+  final ScrollController controller;
 
   CoctailList({
     Key key,
     this.choiceIndex,
+    this.controller,
   }) : super(key: key);
 
   @override
@@ -139,6 +147,7 @@ class CoctailList extends StatelessWidget {
           final List dataCount = snapshot.data;
           return Expanded(
             child: CustomScrollView(
+              controller: controller,
               slivers: [
                 SliverGrid(
                   delegate: SliverChildBuilderDelegate(
