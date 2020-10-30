@@ -19,8 +19,12 @@ class FilterTextItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<Object>(
+      initialData: CocktailCategory.values.toList()[0].name,
       stream: categoryController.stream,
       builder: (context, snapshot) {
+        if(snapshot.data == category.name) {
+          _searchCocktails(category);
+        }
         return RaisedButton(
           onPressed: () {
             categoryController.sink.add(category.name);
@@ -36,6 +40,8 @@ class FilterTextItem extends StatelessWidget {
       }
     );
   }
+
+
 
   Color _getColor(String data) {
     if(data == category.name) {

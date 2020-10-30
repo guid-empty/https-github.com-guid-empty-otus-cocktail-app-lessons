@@ -7,7 +7,8 @@ class SearchRow extends StatelessWidget {
     return Material(
       color: Colors.transparent,
       child: Padding(
-          padding: const EdgeInsets.only(top: 38.0, left: 10.0, right: 10.0, bottom: 22),
+          padding: const EdgeInsets.only(
+              top: 38.0, left: 10.0, right: 10.0, bottom: 22),
           child: TextField(
             style: TextStyle(color: Colors.white, fontSize: 13),
             decoration: InputDecoration(

@@ -13,8 +13,10 @@ class CocktailCard extends StatelessWidget {
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(16.0),
-          child: Image.network(cocktail.drinkThumbUrl,
-              fit: BoxFit.fill),
+          child: AspectRatio(
+            aspectRatio: 170 / 215,
+            child: Image.network(cocktail.drinkThumbUrl, fit: BoxFit.fitHeight),
+          ),
         ),
         Positioned(
           bottom: 16.0,
@@ -25,10 +27,14 @@ class CocktailCard extends StatelessWidget {
                 padding: const EdgeInsets.all(18.0),
                 child: Material(
                   color: Colors.transparent,
-                  child: Text(cocktail.name,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 2,
-                      style: const TextStyle(color: Colors.white, fontSize: 14)),
+                  child: Container(
+                    width: 160,
+                    child: Text(cocktail.name,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 14)),
+                  ),
                 ),
               ),
               Padding(
@@ -39,12 +45,14 @@ class CocktailCard extends StatelessWidget {
                     color: Color(0xff15151C),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 6.0, bottom: 6.0),
+                    padding: const EdgeInsets.only(
+                        left: 16.0, right: 16.0, top: 6.0, bottom: 6.0),
                     child: Material(
                       color: Colors.transparent,
                       child: Text(
                         "id: ${cocktail.id}",
-                        style: const TextStyle(color: Colors.white, fontSize: 10),
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 10),
                       ),
                     ),
                   ),

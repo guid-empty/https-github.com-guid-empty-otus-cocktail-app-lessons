@@ -20,16 +20,26 @@ import 'package:cocktail/ui/custom_widgets/filter/filter_text_item.dart';
 import 'package:cocktail/ui/custom_widgets/search_row/search_row.dart';
 import 'package:flutter/material.dart';
 
-class CocktailsFilterScreen extends StatelessWidget {
-  // ignore: close_sinks
-  final cocktailsController = StreamController<Iterable<CocktailDefinition>>();
+class CocktailsFilterScreen extends StatefulWidget {
 
-  // ignore: close_sinks
+  @override
+  State createState() => _CocktailsFilterScreenState();
+}
+
+class _CocktailsFilterScreenState extends State<CocktailsFilterScreen> {
+
+  final cocktailsController = StreamController<Iterable<CocktailDefinition>>();
   final streamController = StreamController<String>.broadcast();
 
   @override
+  void dispose() {
+    cocktailsController.close();
+    streamController.close();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    streamController.sink.add(CocktailCategory.values.toList()[0].name);
     return Container(
       color: Color(0xff1A1927),
       child: Column(
@@ -64,23 +74,23 @@ class CocktailsFilterScreen extends StatelessWidget {
                       return CustomScrollView(slivers: [
                         SliverGrid(
                           gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  mainAxisSpacing: 3.0,
-                                  crossAxisSpacing: 3.0,
-                                  childAspectRatio: 0.8),
+                          SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              mainAxisSpacing: 3.0,
+                              crossAxisSpacing: 3.0,
+                              childAspectRatio: 0.8),
                           delegate: SliverChildBuilderDelegate(
-                            (BuildContext context, int index) {
+                                (BuildContext context, int index) {
                               return CocktailCard(
                                 cocktail: (snapshot.data
-                                        as Iterable<CocktailDefinition>)
+                                as Iterable<CocktailDefinition>)
                                     .toList()[index],
                               );
                             },
                             childCount:
-                                (snapshot.data as Iterable<CocktailDefinition>)
-                                    .toList()
-                                    .length,
+                            (snapshot.data as Iterable<CocktailDefinition>)
+                                .toList()
+                                .length,
                           ),
                         ),
                       ]);
@@ -92,7 +102,7 @@ class CocktailsFilterScreen extends StatelessWidget {
                             child: Text(
                               "${snapshot.error}",
                               style:
-                                  TextStyle(color: Colors.white, fontSize: 14),
+                              TextStyle(color: Colors.white, fontSize: 14),
                             )),
                       );
                     } else {
