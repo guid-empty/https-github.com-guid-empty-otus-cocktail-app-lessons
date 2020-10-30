@@ -26,12 +26,7 @@ class MyApp extends StatelessWidget {
             headline4: TextStyle(
                 color: Colors.white, fontWeight: FontWeight.normal, fontSize: 15),
             headline5: TextStyle(
-                color: Colors.white, fontSize: 14, fontWeight: FontWeight.normal),
-            headline6: TextStyle(
-                color: CustomColors.headline6,
-                fontSize: 16,
-                fontWeight: FontWeight.normal),
-            bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+                color: Colors.white, fontSize: 14, fontWeight: FontWeight.normal)
           )),
       home: CocktailsFilterScreen(),
     );

@@ -9,7 +9,7 @@ class CustomColors {
   static const headline2 = Color(0xff848396);
   static const headline6 = Color(0xffb1afc6);
   static const gradient_first = Color.fromRGBO(14, 13, 19, 0);
-  static const gradient_second = Color(0xff0e0d13);
+  static const border_side = Color(0xff464551);
   static const black = Color(0xff15151C);
   static const border = Color(0xff2D2C39);
   static const filter_item_1 = Color(0xff201F2C);

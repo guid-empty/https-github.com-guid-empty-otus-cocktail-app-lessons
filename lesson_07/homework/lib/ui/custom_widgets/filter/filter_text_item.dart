@@ -30,6 +30,7 @@ class FilterTextItem extends StatelessWidget {
           }
           return RaisedButton(
             onPressed: () {
+              cocktailsController.sink.add(null);
               categoryController.sink.add(category.name);
               _searchCocktails(category);
             },

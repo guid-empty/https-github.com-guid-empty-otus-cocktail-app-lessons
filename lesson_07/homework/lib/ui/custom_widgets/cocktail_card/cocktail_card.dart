@@ -26,15 +26,12 @@ class CocktailCard extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(18.0),
-                child: Material(
-                  color: Colors.transparent,
-                  child: Container(
-                    width: 160,
-                    child: Text(cocktail.name,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                        style: Theme.of(context).textTheme.headline1),
-                  ),
+                child: Container(
+                  width: 160,
+                  child: Text(cocktail.name,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                      style: Theme.of(context).textTheme.headline1),
                 ),
               ),
               Padding(
@@ -47,12 +44,9 @@ class CocktailCard extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(
                         left: 16.0, right: 16.0, top: 6.0, bottom: 6.0),
-                    child: Material(
-                      color: Colors.transparent,
-                      child: Text(
-                        "id: ${cocktail.id}",
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
+                    child: Text(
+                      "id: ${cocktail.id}",
+                      style: Theme.of(context).textTheme.headline3,
                     ),
                   ),
                 ),
