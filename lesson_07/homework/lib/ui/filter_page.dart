@@ -21,7 +21,6 @@
 
 import 'package:cocktail/core/src/model/cocktail_category.dart';
 import 'package:cocktail/core/src/repository/async_cocktail_repository.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class CocktailsFilterScreen extends StatelessWidget {
@@ -163,8 +162,24 @@ class CoctailList extends StatelessWidget {
               ],
             ),
           );
-        } else
-          return CircularProgressIndicator();
+        } else if (snapshot.hasError) {
+          return Center(
+            child: Text(
+              'Сообщение об ошибке',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 14),
+            ),
+          );
+        }
+        return Center(
+          child: Text(
+            'Поиск...',
+            style: TextStyle(
+                color: Colors.white, fontWeight: FontWeight.w400, fontSize: 14),
+          ),
+        );
       },
     );
   }
