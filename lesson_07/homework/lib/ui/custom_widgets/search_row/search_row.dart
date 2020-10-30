@@ -1,3 +1,4 @@
+import 'package:cocktail/ui/custom_colors/custom_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -5,12 +6,12 @@ class SearchRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.transparent,
+      color: CustomColors.transparent,
       child: Padding(
           padding: const EdgeInsets.only(
               top: 38.0, left: 10.0, right: 10.0, bottom: 22),
           child: TextField(
-            style: TextStyle(color: Colors.white, fontSize: 13),
+            style: Theme.of(context).textTheme.headline2,
             decoration: InputDecoration(
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white, width: 1),

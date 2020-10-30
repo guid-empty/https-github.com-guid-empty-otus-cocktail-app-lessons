@@ -15,6 +15,7 @@ import 'dart:async';
 
 import 'package:cocktail/core/models.dart';
 import 'package:cocktail/core/src/model/cocktail_category.dart';
+import 'package:cocktail/ui/custom_colors/custom_colors.dart';
 import 'package:cocktail/ui/custom_widgets/cocktail_card/cocktail_card.dart';
 import 'package:cocktail/ui/custom_widgets/filter/filter_text_item.dart';
 import 'package:cocktail/ui/custom_widgets/search_row/search_row.dart';
@@ -41,7 +42,7 @@ class _CocktailsFilterScreenState extends State<CocktailsFilterScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(0xff1A1927),
+      color: CustomColors.background,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -101,8 +102,7 @@ class _CocktailsFilterScreenState extends State<CocktailsFilterScreen> {
                             color: Colors.transparent,
                             child: Text(
                               "${snapshot.error}",
-                              style:
-                              TextStyle(color: Colors.white, fontSize: 14),
+                              style: Theme.of(context).textTheme.headline5,
                             )),
                       );
                     } else {
@@ -120,7 +120,7 @@ class _CocktailsFilterScreenState extends State<CocktailsFilterScreen> {
                               color: Colors.transparent,
                               child: Text(
                                 "loading ...",
-                                style: TextStyle(color: Colors.white),
+                                style: Theme.of(context).textTheme.headline5,
                               ),
                             ),
                           ),

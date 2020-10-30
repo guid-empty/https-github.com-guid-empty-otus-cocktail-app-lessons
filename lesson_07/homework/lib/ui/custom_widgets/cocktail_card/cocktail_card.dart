@@ -1,4 +1,5 @@
 import 'package:cocktail/core/models.dart';
+import 'package:cocktail/ui/custom_colors/custom_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -32,8 +33,7 @@ class CocktailCard extends StatelessWidget {
                     child: Text(cocktail.name,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
-                        style:
-                            const TextStyle(color: Colors.white, fontSize: 14)),
+                        style: Theme.of(context).textTheme.headline1),
                   ),
                 ),
               ),
@@ -42,7 +42,7 @@ class CocktailCard extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16.0),
-                    color: Color(0xff15151C),
+                    color: CustomColors.black,
                   ),
                   child: Padding(
                     padding: const EdgeInsets.only(
@@ -51,8 +51,7 @@ class CocktailCard extends StatelessWidget {
                       color: Colors.transparent,
                       child: Text(
                         "id: ${cocktail.id}",
-                        style:
-                            const TextStyle(color: Colors.white, fontSize: 10),
+                        style: Theme.of(context).textTheme.headline3,
                       ),
                     ),
                   ),
