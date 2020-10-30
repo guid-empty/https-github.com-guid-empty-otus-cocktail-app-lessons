@@ -31,7 +31,6 @@ class CocktailsFilterScreen extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(top: 100),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             _buildSearchField(),
             FilterBar(),
@@ -116,9 +115,13 @@ class _FilterBarState extends State<FilterBar> {
               },
             ),
           ),
-          CoctailList(
-            choiceIndex: _defaultChoiceIndex,
-            controller: _controller,
+          Container(
+            padding: EdgeInsets.fromLTRB(27, 27, 27, 0),
+            height: MediaQuery.of(context).size.height / 1.3,
+            child: CoctailList(
+              choiceIndex: _defaultChoiceIndex,
+              controller: _controller,
+            ),
           ),
         ],
       ),
@@ -144,23 +147,18 @@ class CoctailList extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           final List dataCount = snapshot.data;
-          return Expanded(
-            child: CustomScrollView(
-              controller: controller,
-              slivers: [
-                SliverGrid(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) =>
-                        _buildCoctailGridElement(snapshot, index),
-                    childCount: dataCount.length,
-                  ),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 5,
-                      crossAxisSpacing: 5),
-                )
-              ],
-            ),
+          return CustomScrollView(
+            controller: controller,
+            slivers: [
+              SliverGrid(
+                delegate: SliverChildBuilderDelegate(
+                  (context, index) => _buildCoctailGridElement(snapshot, index),
+                  childCount: dataCount.length,
+                ),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2, mainAxisSpacing: 5, crossAxisSpacing: 5),
+              )
+            ],
           );
         } else if (snapshot.hasError) {
           return Center(
