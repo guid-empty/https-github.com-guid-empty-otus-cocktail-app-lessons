@@ -24,85 +24,103 @@ class CocktailsFilterScreen extends StatelessWidget {
   // ignore: close_sinks
   final cocktailsController = StreamController<Iterable<CocktailDefinition>>();
 
+  // ignore: close_sinks
+  final streamController = StreamController<String>.broadcast();
+
   @override
   Widget build(BuildContext context) {
-    // ignore: close_sinks
-    var streamController = StreamController<String>.broadcast();
     streamController.sink.add(CocktailCategory.values.toList()[0].name);
-    return MaterialApp(
-      home: SafeArea(
-        child: Container(
-            color: Color(0xff1A1927),
-            child: CustomScrollView(
-              slivers: [
-                SliverAppBar(
-                  backgroundColor: Color(0xff1A1927),
-                  pinned: true,
-                  expandedHeight: 140.0,
-                  collapsedHeight: 140.0,
-                  flexibleSpace: FlexibleSpaceBar(
-                    titlePadding: const EdgeInsets.all(0.0),
-                    title: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Material(child: SearchRow()),
-                        Expanded(
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: CocktailCategory.values.length,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8.0),
-                                child: FilterTextItem(
-                                  category:
-                                      CocktailCategory.values.toList()[index],
-                                  categoryController: streamController,
-                                  cocktailsController: cocktailsController,
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
+    return Container(
+      color: Color(0xff1A1927),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          SearchRow(),
+          Container(
+            height: 46,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: CocktailCategory.values.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: FilterTextItem(
+                    category: CocktailCategory.values.toList()[index],
+                    categoryController: streamController,
+                    cocktailsController: cocktailsController,
                   ),
-                ),
-                StreamBuilder<Object>(
-                    stream: cocktailsController.stream,
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        return SliverGrid(
+                );
+              },
+            ),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(22.0),
+              child: StreamBuilder<Object>(
+                  stream: cocktailsController.stream,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return CustomScrollView(slivers: [
+                        SliverGrid(
                           gridDelegate:
-                              SliverGridDelegateWithMaxCrossAxisExtent(
-                            maxCrossAxisExtent: 215.0,
-                            mainAxisSpacing: 5.0,
-                            crossAxisSpacing: 3.0,
-                            childAspectRatio: 0.8
-                          ),
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  mainAxisSpacing: 3.0,
+                                  crossAxisSpacing: 3.0,
+                                  childAspectRatio: 0.8),
                           delegate: SliverChildBuilderDelegate(
                             (BuildContext context, int index) {
-                              return Container(
-                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(16.0)),
-                                  child: CocktailCard(
-                                    height: 215 + 215*0.8,
-                                    cocktail: (snapshot.data as Iterable<CocktailDefinition>).toList()[index],));
+                              return CocktailCard(
+                                cocktail: (snapshot.data
+                                        as Iterable<CocktailDefinition>)
+                                    .toList()[index],
+                              );
                             },
-                            childCount: (snapshot.data as Iterable<CocktailDefinition>).toList().length,
+                            childCount:
+                                (snapshot.data as Iterable<CocktailDefinition>)
+                                    .toList()
+                                    .length,
                           ),
-                        );
-                      } else {
-                        return SliverToBoxAdapter(
-                          child: Container(
-                            child: Text("error"),
+                        ),
+                      ]);
+                      // } else if (snapshot.hasError) {
+                    } else if (snapshot.hasError) {
+                      return Center(
+                        child: Material(
+                            color: Colors.transparent,
+                            child: Text(
+                              "${snapshot.error}",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 14),
+                            )),
+                      );
+                    } else {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.file_download,
+                            color: Colors.white,
                           ),
-                        );
-                      }
-                    }),
-              ],
-            )),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Material(
+                              color: Colors.transparent,
+                              child: Text(
+                                "loading ...",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    }
+                  }),
+            ),
+          )
+        ],
       ),
     );
   }

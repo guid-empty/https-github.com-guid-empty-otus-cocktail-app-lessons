@@ -27,7 +27,7 @@ class FilterTextItem extends StatelessWidget {
             _searchCocktails(category);
           },
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(18.0),
+              borderRadius: BorderRadius.circular(30.0),
               side: _getBorderSide(snapshot.data)
           ),
           color: _getColor(snapshot.data),
