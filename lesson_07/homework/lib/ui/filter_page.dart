@@ -1,23 +1,36 @@
-
-// TODO: Сделать экран Фильтр по категории
-// Ссылка на макет: https://www.figma.com/file/Uzn5jHYiiFgacPCWNhwbc5/%D0%9A%D0%BE%D0%BA%D1%82%D0%B5%D0%B9%D0%BB%D0%B8-Copy?node-id=20%3A590
-
-// 1. Фильты - это CocktailCategory, получить все значения можно через CocktailCategory.values
-// 2. Поиск по фильтру делаем через AsyncCocktailRepository().fetchCocktailsByCocktailCategory(CocktailCategory)
-// 3. Используем StreamBuilder/FutureBuilder
-// 4. По нажатию на категорию на странице должны обновится список коктейлей. Выбранная категория подсвечивается как в дизайне. По умолчанию выбрана первая категория.
-// 5. Поиск по названию пока что не делаем!
-// 6. Должны отображаться ошибки и состояние загрузки.
-// 7. Для скролла используем CustomScrollView
-// 8. Делаем fork от репозитория и сдаем через PR
-// 9. Помним про декомпозицию кода по методам и классам.
-
-
+import 'package:cocktail/core/models.dart';
+import 'package:cocktail/network/cocktail_category_filter_request.dart';
+import 'package:cocktail/ui/common/app_colors.dart';
+import 'package:cocktail/ui/widgets/filterPage/category_filter_results_widget.dart';
+import 'package:cocktail/ui/widgets/filterPage/categories_row/category_row_widget.dart';
 import 'package:flutter/material.dart';
 
-class CocktailsFilterScreen extends StatelessWidget {
+class CocktailsFilterScreen extends StatelessWidget {  
+  final CategoryFilterRequest _categoryFilterRequest = CategoryFilterRequest();
+
   @override
-  Widget build(BuildContext context) {
-    return Container();
+  Widget build(BuildContext context) {    
+    return Container(
+      decoration: AppColors.filterBackgroundDecoration,
+      child: SafeArea(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children:[
+            CategoriesRowWidget(
+              _categoryFilterRequest.requestUpdates,
+              _onCategoryClick
+            ),
+            CategoryFilterResultsWidget(
+              _categoryFilterRequest.requestUpdates
+            )
+          ]
+        ) 
+      )
+    );        
+  }
+
+  void _onCategoryClick(CocktailCategory category) {
+      _categoryFilterRequest.requestCocktailsByCategory(category);
   }
 }
