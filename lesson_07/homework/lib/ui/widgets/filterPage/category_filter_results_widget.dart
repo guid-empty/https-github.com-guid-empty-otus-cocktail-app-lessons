@@ -1,5 +1,6 @@
 import 'package:cocktail/core/models.dart';
 import 'package:cocktail/network/model/network_request_state.dart';
+import 'package:cocktail/network/model/network_request_state_enum.dart';
 import 'package:cocktail/ui/common/app_colors.dart';
 import 'package:cocktail/ui/common/app_string_const.dart';
 import 'package:cocktail/ui/widgets/filterPage/results_grid/category_results_grid.dart';
@@ -30,20 +31,20 @@ class _CategoryFilterResultsWidgetState extends State<CategoryFilterResultsWidge
           NetworkRequestState currentState = requestState.data as NetworkRequestState;
 
           switch (currentState.state) {
-            case NetworkRequestState.inProgressState:
+            case NetworkRequestStateEnum.inProgressState:
               buildedWidget = _buildInProgressStateWidget();
               break;
 
-            case NetworkRequestState.inErrorState:
+            case NetworkRequestStateEnum.inErrorState:
               buildedWidget = _buildInErrorStateWidget();
               break;
 
-            case NetworkRequestState.inSuccess:
+            case NetworkRequestStateEnum.inSuccess:
               _results = currentState.coctails;
               buildedWidget = _renderResults();
               break;
 
-            case NetworkRequestState.inIdleState:
+            case NetworkRequestStateEnum.inIdleState:
               buildedWidget = _renderResults();
               break;
 

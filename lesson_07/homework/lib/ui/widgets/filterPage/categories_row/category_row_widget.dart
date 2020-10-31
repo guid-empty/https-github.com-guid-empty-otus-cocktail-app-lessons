@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cocktail/core/models.dart';
 import 'package:cocktail/network/model/callback_types.dart';
 import 'package:cocktail/network/model/network_request_state.dart';
+import 'package:cocktail/network/model/network_request_state_enum.dart';
 import 'package:cocktail/ui/common/app_colors.dart';
 import 'package:cocktail/ui/common/app_spacing.dart';
 import 'package:cocktail/ui/common/app_styles.dart';
@@ -23,7 +24,7 @@ class CategoriesRowWidget extends StatefulWidget {
 }
 
 class _CategoriesRowWidgetState extends State<CategoriesRowWidget> {  
-  int _requestState = NetworkRequestState.inIdleState;
+  NetworkRequestStateEnum _requestState = NetworkRequestStateEnum.inIdleState;
 
   CocktailCategory _selectedCategory;  
   StreamSubscription _streamSubscription;
@@ -78,7 +79,7 @@ class _CategoriesRowWidgetState extends State<CategoriesRowWidget> {
   }
 
   void _categoryButtonClick(CocktailCategory category) {
-    if (_requestState == NetworkRequestState.inProgressState) return;
+    if (_requestState == NetworkRequestStateEnum.inProgressState) return;
 
     widget._callback(category);
     setState(() {

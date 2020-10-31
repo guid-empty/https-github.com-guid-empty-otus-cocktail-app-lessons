@@ -1,15 +1,16 @@
 import 'dart:async';
 import 'package:cocktail/core/models.dart';
 import 'package:cocktail/network/model/network_request_state.dart';
+import 'package:cocktail/network/model/network_request_state_enum.dart';
 
 class CategoryFilterRequest {
   static final NetworkRequestState _inProgress = NetworkRequestState(
-    NetworkRequestState.inProgressState,     
+    NetworkRequestStateEnum.inProgressState,     
     List.empty()
   );
 
   static final NetworkRequestState _errorResult = NetworkRequestState(
-    NetworkRequestState.inErrorState,     
+    NetworkRequestStateEnum.inErrorState,     
     List.empty()
   ); 
 
@@ -28,14 +29,13 @@ class CategoryFilterRequest {
 
   void _processData(Iterable<CocktailDefinition> cocktails) {
     _streamController.add(NetworkRequestState(
-      NetworkRequestState.inSuccess, 
+      NetworkRequestStateEnum.inSuccess, 
         cocktails.toList()
       )
     );
   }
 
-  void _processError(Object error) {
-    print(error);
+  void _processError(Object error) {    
     _streamController.add(_errorResult);
   }
 }
