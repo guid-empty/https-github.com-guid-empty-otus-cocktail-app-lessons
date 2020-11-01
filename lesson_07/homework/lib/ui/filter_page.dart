@@ -72,45 +72,53 @@ class _FilterBarState extends State<FilterBar> {
     return Expanded(
       child: Column(
         children: [
-          Expanded(
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: CocktailCategory.values.length,
-              itemBuilder: (context, index) {
-                return Wrap(
-                  children: [
-                    SizedBox(width: 10),
-                    ChoiceChip(
-                      selected: _defaultChoiceIndex == index,
-                      backgroundColor: const Color(0xFF201F2C),
-                      selectedColor: const Color(0xFF3B3953),
-                      label: Text(
-                        CocktailCategory.values.elementAt(index).value,
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      onSelected: (bool selected) {
-                        setState(
-                          () {
-                            _defaultChoiceIndex = selected ? index : 0;
-                            _controller.jumpTo(0);
-                          },
-                        );
-                      },
-                    ),
-                  ],
-                );
-              },
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.fromLTRB(27, 0, 27, 0),
-            height: MediaQuery.of(context).size.height / 1.37,
-            child: CoctailList(
-              choiceIndex: _defaultChoiceIndex,
-              controller: _controller,
-            ),
-          ),
+          _buildFilterBar(),
+          _buildCoctailList(context),
         ],
+      ),
+    );
+  }
+
+  Widget _buildFilterBar() {
+    return Expanded(
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: CocktailCategory.values.length,
+        itemBuilder: (context, index) {
+          return Wrap(
+            children: [
+              const SizedBox(width: 10),
+              ChoiceChip(
+                selected: _defaultChoiceIndex == index,
+                backgroundColor: const Color(0xFF201F2C),
+                selectedColor: const Color(0xFF3B3953),
+                label: Text(
+                  CocktailCategory.values.elementAt(index).value,
+                  style: TextStyle(color: Colors.white),
+                ),
+                onSelected: (bool selected) {
+                  setState(
+                    () {
+                      _defaultChoiceIndex = selected ? index : 0;
+                      _controller.jumpTo(0);
+                    },
+                  );
+                },
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildCoctailList(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(27, 0, 27, 0),
+      height: MediaQuery.of(context).size.height / 1.37,
+      child: CoctailList(
+        choiceIndex: _defaultChoiceIndex,
+        controller: _controller,
       ),
     );
   }
@@ -134,54 +142,71 @@ class CoctailList extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           final List dataCount = snapshot.data;
-          return CustomScrollView(
-            controller: controller,
-            slivers: [
-              SliverGrid(
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) => _buildCoctailGridElement(snapshot, index),
-                  childCount: dataCount.length,
-                ),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, mainAxisSpacing: 5, crossAxisSpacing: 5),
-              )
-            ],
-          );
+          return _buildCoctailsScrollView(snapshot, dataCount);
         } else if (snapshot.hasError) {
-          return Center(
-            child: Text(
-              'Сообщение об ошибке',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 14),
-            ),
-          );
+          return _buildErrorMessage();
         }
-        return Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image(
-                height: 44,
-                width: 44,
-                image: AssetImage('assets/shaker.png'),
-                fit: BoxFit.fitHeight,
-              ),
-              const SizedBox(
-                height: 9,
-              ),
-              Text(
-                'Поиск...',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 14),
-              ),
-            ],
-          ),
-        );
+        return _buildSearchMessage();
       },
+    );
+  }
+
+  Widget _buildSearchMessage() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image(
+            height: 44,
+            width: 44,
+            image: AssetImage('assets/shaker.png'),
+            fit: BoxFit.fitHeight,
+          ),
+          const SizedBox(
+            height: 9,
+          ),
+          Text(
+            'Поиск...',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w400,
+              fontSize: 14,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildErrorMessage() {
+    return Center(
+      child: Text(
+        'Сообщение об ошибке',
+        style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.w400,
+          fontSize: 14,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCoctailsScrollView(AsyncSnapshot snapshot, List dataCount) {
+    return CustomScrollView(
+      controller: controller,
+      slivers: [
+        SliverGrid(
+          delegate: SliverChildBuilderDelegate(
+            (context, index) => _buildCoctailGridElement(snapshot, index),
+            childCount: dataCount.length,
+          ),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisSpacing: 5,
+            crossAxisSpacing: 5,
+          ),
+        ),
+      ],
     );
   }
 
@@ -213,9 +238,10 @@ class CoctailList extends StatelessWidget {
             label: Text(
               'id: ${snapshot.data[index].id}',
               style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 10),
+                color: Colors.white,
+                fontWeight: FontWeight.w400,
+                fontSize: 10,
+              ),
             ),
             backgroundColor: const Color(0xFF15151C),
           ),
@@ -230,9 +256,10 @@ class CoctailList extends StatelessWidget {
               '"${snapshot.data[index].name}"',
               maxLines: 2,
               style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 14),
+                color: Colors.white,
+                fontWeight: FontWeight.w500,
+                fontSize: 14,
+              ),
             ),
           ),
         ),
