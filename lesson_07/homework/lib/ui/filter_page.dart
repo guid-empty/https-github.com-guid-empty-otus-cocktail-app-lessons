@@ -8,24 +8,25 @@ class CocktailsFilterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: const Color(0xFF1A1926),
-      child: Padding(
-        padding: const EdgeInsets.only(top: 48),
-        child: Column(
-          children: [
-            _buildSearchField(),
-            FilterBar(),
-          ],
-        ),
+      color: const Color(0xFF000000),
+      child: Column(
+        children: [
+          _buildSearchField(),
+          FilterBar(),
+        ],
       ),
     );
   }
 
   Widget _buildSearchField() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(13, 0, 13, 19),
+      padding: const EdgeInsets.fromLTRB(13, 48, 13, 19),
       child: Container(
         decoration: BoxDecoration(
+          border: Border.all(
+            width: 1,
+            color: const Color(0xFF464551),
+          ),
           borderRadius: BorderRadius.circular(30),
           color: const Color(0xFF181723),
         ),
@@ -158,10 +159,26 @@ class CoctailList extends StatelessWidget {
           );
         }
         return Center(
-          child: Text(
-            'Поиск...',
-            style: TextStyle(
-                color: Colors.white, fontWeight: FontWeight.w400, fontSize: 14),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image(
+                height: 44,
+                width: 44,
+                image: AssetImage('assets/shaker.png'),
+                fit: BoxFit.fitHeight,
+              ),
+              const SizedBox(
+                height: 9,
+              ),
+              Text(
+                'Поиск...',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 14),
+              ),
+            ],
           ),
         );
       },
