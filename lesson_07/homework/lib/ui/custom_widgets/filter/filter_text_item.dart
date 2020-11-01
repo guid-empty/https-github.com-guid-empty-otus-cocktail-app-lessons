@@ -6,57 +6,42 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class FilterTextItem extends StatelessWidget {
-  final CocktailCategory category;
-  final StreamController categoryController;
-  final StreamController cocktailsController;
+  final String category;
+  final bool isSelected;
 
-  FilterTextItem(
-      {this.category, this.categoryController, this.cocktailsController});
-
-  _searchCocktails(CocktailCategory category) async {
-    var result = await AsyncCocktailRepository()
-        .fetchCocktailsByCocktailCategory(category);
-    cocktailsController.sink.add(result);
-  }
+  FilterTextItem({this.category, this.isSelected});
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<Object>(
-        initialData: CocktailCategory.values.toList()[0].name,
-        stream: categoryController.stream,
-        builder: (context, snapshot) {
-          if (snapshot.data == category.name) {
-            _searchCocktails(category);
-          }
-          return RaisedButton(
-            onPressed: () {
-              cocktailsController.sink.add(null);
-              categoryController.sink.add(category.name);
-              _searchCocktails(category);
-            },
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30.0),
-                side: _getBorderSide(snapshot.data)),
-            color: _getColor(snapshot.data),
-            child: Text(category.name,
-                style: Theme.of(context).textTheme.headline4),
-          );
-        });
+    return Container(
+      decoration: BoxDecoration(
+        color: _getColor(),
+        border: Border.all(color: _getBorderSideColor()),
+        borderRadius: BorderRadius.circular(30.0)
+      ),
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(category,
+              style: Theme.of(context).textTheme.headline4),
+        ),
+      ),
+    );
   }
 
-  Color _getColor(String data) {
-    if (data == category.name) {
+  Color _getColor() {
+    if (isSelected) {
       return CustomColors.filter_item_2;
     } else {
       return CustomColors.filter_item_1;
     }
   }
 
-  _getBorderSide(String data) {
-    if (data == category.name) {
-      return BorderSide(color: CustomColors.filter_item_2);
+  _getBorderSideColor() {
+    if (isSelected) {
+      return CustomColors.filter_item_2;
     } else {
-      return BorderSide(color: CustomColors.border);
+      return CustomColors.border;
     }
   }
 }

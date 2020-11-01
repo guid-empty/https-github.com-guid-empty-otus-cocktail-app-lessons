@@ -13,13 +13,13 @@
 
 import 'dart:async';
 
-import 'package:cocktail/core/models.dart';
-import 'package:cocktail/core/src/model/cocktail_category.dart';
+import 'package:cocktail/events/category_filter_events.dart';
 import 'package:cocktail/ui/custom_colors/custom_colors.dart';
 import 'package:cocktail/ui/custom_widgets/cocktail_card/cocktail_card.dart';
-import 'package:cocktail/ui/custom_widgets/filter/filter_text_item.dart';
 import 'package:cocktail/ui/custom_widgets/search_row/search_row.dart';
 import 'package:flutter/material.dart';
+
+import 'custom_sliver/cocktail_header_sliver_delegate.dart';
 
 class CocktailsFilterScreen extends StatefulWidget {
   @override
@@ -27,121 +27,119 @@ class CocktailsFilterScreen extends StatefulWidget {
 }
 
 class _CocktailsFilterScreenState extends State<CocktailsFilterScreen> {
-  final cocktailsController = StreamController<Iterable<CocktailDefinition>>();
-  final streamController = StreamController<String>.broadcast();
+  final cocktailsController = StreamController<dynamic>.broadcast();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CustomColors.background,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          SearchRow(),
-          _filterCategoriesList(context),
-          _streamBuilder(context)
-        ],
-      ),
-    );
+        backgroundColor: CustomColors.background,
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(80),
+          child: SearchRow(),
+        ),
+        body: StreamBuilder<Object>(
+            stream: cocktailsController.stream.where((event) => event is Event),
+            builder: (context, snapshot) {
+              return CustomScrollView(
+                slivers: [
+                  SliverPersistentHeader(
+                    floating: true,
+                    pinned: true,
+                    delegate: CocktailsCategoriesList(
+                        cocktailsController: cocktailsController,
+                        height: 70,
+                        openHeight: 70),
+                  ),
+                  _streamBuilder(context, snapshot)
+                ],
+              );
+            }));
   }
 
   Widget _loading(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(
-          Icons.file_download,
-          color: Colors.white,
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Material(
-            color: Colors.transparent,
-            child: Text(
-              "loading ...",
-              style: Theme.of(context).textTheme.headline5,
-            ),
+    return SliverToBoxAdapter(
+      child: Container(
+        height: MediaQuery.of(context).size.height - 180,
+        child: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.file_download,
+                color: Colors.white,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Material(
+                  color: Colors.transparent,
+                  child: Text(
+                    "loading ...",
+                    style: Theme.of(context).textTheme.headline5,
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
-      ],
+      ),
     );
   }
 
   Widget _error(BuildContext context, String error) {
-    return Center(
-      child: Material(
-          color: Colors.transparent,
-          child: Text(
-            error,
-            style: Theme.of(context).textTheme.headline5,
-          )),
-    );
-  }
-
-  Widget _streamBuilder(BuildContext context) {
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.all(22.0),
-        child: StreamBuilder<Object>(
-            stream: cocktailsController.stream,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                var cocktails =
-                    (snapshot.data as Iterable<CocktailDefinition>).toList();
-                return CustomScrollView(slivers: [
-                  SliverGrid(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 3.0,
-                        crossAxisSpacing: 3.0,
-                        childAspectRatio: 0.8),
-                    delegate: SliverChildBuilderDelegate(
-                      (BuildContext context, int index) {
-                        return CocktailCard(
-                          cocktail: cocktails[index],
-                        );
-                      },
-                      childCount: cocktails.length,
-                    ),
-                  ),
-                ]);
-                // } else if (snapshot.hasError) {
-              } else if (snapshot.hasError) {
-                return _error(context, snapshot.error);
-              } else {
-                return _loading(context);
-              }
-            }),
+    return SliverToBoxAdapter(
+      child: Container(
+        height: MediaQuery.of(context).size.height - 180,
+        child: Center(
+          child: Material(
+              color: Colors.transparent,
+              child: Text(
+                error,
+                style: Theme.of(context).textTheme.headline5,
+              )),
+        ),
       ),
     );
   }
 
-  Widget _filterCategoriesList(BuildContext context) {
-    return Container(
-      height: 46,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: CocktailCategory.values.length,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: FilterTextItem(
-              category: CocktailCategory.values.toList()[index],
-              categoryController: streamController,
-              cocktailsController: cocktailsController,
+  Widget _streamBuilder(BuildContext context, AsyncSnapshot snapshot) {
+    debugPrint("${snapshot.data} <= _streamBuilder");
+    if (snapshot.hasError) {
+      return _error(context, snapshot.error);
+    } else if (snapshot.hasData) {
+      if (snapshot.data is SuccessEvent) {
+        var cocktails = (snapshot.data as SuccessEvent).value;
+        return SliverPadding(
+          padding: const EdgeInsets.only(left: 22, right: 22, bottom: 22),
+          sliver: SliverGrid(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 3.0,
+                crossAxisSpacing: 3.0,
+                childAspectRatio: 0.8),
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                return CocktailCard(
+                  cocktail: cocktails[index],
+                );
+              },
+              childCount: cocktails.length,
             ),
-          );
-        },
-      ),
-    );
+          ),
+        );
+      } else if (snapshot.data is Loading) {
+        return _loading(context);
+      } else {
+        return _error(context, (snapshot.data as Error).message);
+      }
+    } else {
+      return _error(context, "Unknown error");
+    }
   }
 
   @override
   void dispose() {
     cocktailsController.close();
-    streamController.close();
     super.dispose();
   }
 }
