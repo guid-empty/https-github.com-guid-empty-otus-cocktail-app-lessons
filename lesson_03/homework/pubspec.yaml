@@ -23,6 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_svg: ^0.19.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -43,6 +44,15 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+    - ./assets/back.svg
+    - ./assets/star.svg
+    - ./assets/fav.svg
+    - ./assets/fullscr.svg
+  fonts:
+    - family: SFProText
+      fonts:
+        - asset: ./fonts/SFProText-Regular.ttf
 
   # To add assets to your application, add an assets section, like this:
   # assets:
