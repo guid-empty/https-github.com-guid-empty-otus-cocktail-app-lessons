@@ -1,3 +1,5 @@
+import 'package:cocktaildbhttpusing/src/dto/ingredient_dto.dart';
+
 ///
 /// Ingredient Model Definition based on response from
 /// curl https://the-cocktail-db.p.rapidapi.com/lookup.php\?iid\=552
@@ -12,8 +14,10 @@
 ///               "strType": "Cordial",
 ///               "strAlcohol": null,
 ///               "strABV": null
-///           }
+///           },
 ///       ]
+///
+///
 ///   }
 ///  ```
 ///
@@ -31,4 +35,16 @@ class Ingredient {
     this.ingredientType,
     this.isAlcoholic,
   });
+
+  factory Ingredient.fromDto(IngredientDto dto) {
+    final isAlcoholic = dto.strAlcohol == null ? false : true;
+
+    return Ingredient(
+      id: dto.idIngredient,
+      name: dto.strIngredient,
+      description: dto.strDescription,
+      ingredientType: dto.strType,
+      isAlcoholic: isAlcoholic,
+    );
+  }
 }
