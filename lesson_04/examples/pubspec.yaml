@@ -16,7 +16,7 @@ dependencies:
   # и конкретный путь к фолдеру/директории
   cocktailappmodels:
     git:
-      url: git@github.com:guid-empty/otus-lesson-01-dart-basics-packages.git
+      url: https://github.com/guid-empty/otus-lesson-01-dart-basics-packages.git
       ref: master
       path: cocktail_app_models
 
