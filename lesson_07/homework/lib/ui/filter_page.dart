@@ -84,10 +84,13 @@ class _CocktailsFilterScreenState extends State<CocktailsFilterScreen> {
 
         if (snapshot.hasError) {
           return SliverToBoxAdapter(
-            child: Center(
-              child: Text(
-                snapshot.error.toString(),
-                style: const TextStyle(color: Colors.red),
+            child: Container(
+              height: MediaQuery.of(context).size.height - _headerHeight,
+              child: Center(
+                child: Text(
+                  snapshot.error.toString(),
+                  style: const TextStyle(color: Colors.red),
+                ),
               ),
             ),
           );

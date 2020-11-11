@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cocktail/core/models.dart';
 import 'package:cocktail/core/src/repository/async_cocktail_repository.dart';
 import 'package:rxdart/rxdart.dart';
@@ -25,12 +27,13 @@ class FilterService {
 
   Stream<Iterable<CocktailDefinition>> get selectedCategoryItems$ {
     return activeCategory$$.stream
-        .switchMap((value) => _http
-            .fetchCocktailsByCocktailCategory(value)
-            .asStream()
-            // исскуственая задержка
-            .debounceTime(Duration(seconds: 3)))
-        .asBroadcastStream();
+        .switchMap(
+            (value) => _http.fetchCocktailsByCocktailCategory(value).asStream())
+        // искусственная задержка
+        .delay(Duration(seconds: 1))
+        .map((data) => Random().nextInt(10) + 1 > 8
+            ? throw Exception('Искусственная ошибка')
+            : data);
   }
 
   Stream<Iterable<CocktailDefinition>> get _filteredSelectedCategoryItems$ {
