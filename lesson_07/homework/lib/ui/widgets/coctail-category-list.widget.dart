@@ -35,9 +35,7 @@ class CoctailCategoryList extends StatelessWidget {
           return OutlinedButton(
             onPressed: () {
               // очистка контрола
-              _filterService.searchInCategoryCtrl.clear();
-              // обновление состояния фильтра по категории
-              _filterService.categoryFilterValue$$.add('');
+              _filterService.clearSearchInCategoryTextField();
               // обновление состояния выбранной категории
               _filterService.activeCategory$$.add(category);
 

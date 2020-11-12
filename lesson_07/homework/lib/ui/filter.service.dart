@@ -51,6 +51,11 @@ class FilterService {
         .mergeWith([activeCategory$$.asBroadcastStream().mapTo(null)]);
   }
 
+  clearSearchInCategoryTextField() {
+    searchInCategoryCtrl.clear();
+    categoryFilterValue$$.add('');
+  }
+
   dispose() {
     activeCategory$$.close();
     categoryFilterValue$$.close();

@@ -38,6 +38,21 @@ class _CocktailsFilterScreenState extends State<CocktailsFilterScreen> {
         decoration: InputDecoration(
           labelText: 'Поиск в категории',
           floatingLabelBehavior: FloatingLabelBehavior.never,
+          prefixIcon: Icon(
+            Icons.search,
+            color: Colors.white,
+            size: 20,
+          ),
+          suffixIcon: IconButton(
+            icon: Icon(
+              Icons.clear,
+              color: const Color(0xff999999),
+              size: 8,
+            ),
+            onPressed: () {
+              _filterService.clearSearchInCategoryTextField();
+            },
+          ),
         ),
       ),
     );

@@ -35,3 +35,4 @@ flutter:
           weight: 500
         - asset: assets/fonts/SFProText-Bold.ttf
           weight: 700 
+  uses-material-design: true
