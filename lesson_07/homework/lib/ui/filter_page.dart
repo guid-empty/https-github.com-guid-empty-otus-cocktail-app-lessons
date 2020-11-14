@@ -12,7 +12,7 @@ class CocktailsFilterScreen extends StatelessWidget {
       child: Column(
         children: [
           _buildSearchField(),
-          FilterBar(),
+          FilteredCoctailList(),
         ],
       ),
     );
@@ -52,12 +52,12 @@ class CocktailsFilterScreen extends StatelessWidget {
   }
 }
 
-class FilterBar extends StatefulWidget {
+class FilteredCoctailList extends StatefulWidget {
   @override
-  _FilterBarState createState() => _FilterBarState();
+  _FilteredCoctailListState createState() => _FilteredCoctailListState();
 }
 
-class _FilterBarState extends State<FilterBar> {
+class _FilteredCoctailListState extends State<FilteredCoctailList> {
   int _defaultChoiceIndex;
   final _controller = ScrollController();
 
