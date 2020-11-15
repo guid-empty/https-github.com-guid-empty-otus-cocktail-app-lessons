@@ -12,7 +12,7 @@ class CocktailsFilterScreen extends StatelessWidget {
       child: Column(
         children: [
           _buildSearchField(),
-          FilteredCoctailList(),
+          Expanded(child: FilteredCoctailList()),
         ],
       ),
     );
@@ -69,18 +69,17 @@ class _FilteredCoctailListState extends State<FilteredCoctailList> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        children: [
-          _buildFilterBar(),
-          _buildCoctailList(context),
-        ],
-      ),
+    return Column(
+      children: [
+        _buildFilterBar(),
+        Expanded(child: _buildCoctailList(context)),
+      ],
     );
   }
 
   Widget _buildFilterBar() {
-    return Expanded(
+    return Container(
+      height: MediaQuery.of(context).size.height / 10,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: CocktailCategory.values.length,
@@ -115,7 +114,6 @@ class _FilteredCoctailListState extends State<FilteredCoctailList> {
   Widget _buildCoctailList(BuildContext context) {
     return Container(
       padding: const EdgeInsets.fromLTRB(27, 0, 27, 0),
-      height: MediaQuery.of(context).size.height / 1.37,
       child: CoctailList(
         choiceIndex: _defaultChoiceIndex,
         controller: _controller,
