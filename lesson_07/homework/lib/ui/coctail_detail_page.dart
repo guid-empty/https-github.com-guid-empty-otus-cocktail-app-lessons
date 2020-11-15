@@ -1,5 +1,3 @@
-//TODO: Добавить сюда экран из домашнего задания с урока 4
-
 import 'package:flutter/material.dart';
 
 import '../core/models.dart';
