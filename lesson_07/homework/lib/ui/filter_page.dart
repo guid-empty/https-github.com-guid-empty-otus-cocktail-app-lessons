@@ -229,37 +229,35 @@ class CoctailList extends StatelessWidget {
             ),
           ),
         ),
-        Positioned(
-          bottom: 16,
-          left: 14,
-          child: Chip(
-            label: Text(
-              'id: ${snapshot.data[index].id}',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w400,
-                fontSize: 10,
+        Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Container(
+              padding: EdgeInsets.only(left: 17),
+              width: 128,
+              height: 34,
+              child: Text(
+                '"${snapshot.data[index].name}"',
+                maxLines: 2,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 14,
+                ),
               ),
             ),
-            backgroundColor: const Color(0xFF15151C),
-          ),
-        ),
-        Positioned(
-          bottom: 60,
-          left: 16,
-          child: Container(
-            width: 128,
-            height: 34,
-            child: Text(
-              '"${snapshot.data[index].name}"',
-              maxLines: 2,
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w500,
-                fontSize: 14,
+            Chip(
+              label: Text(
+                'id: ${snapshot.data[index].id}',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 10,
+                ),
               ),
+              backgroundColor: const Color(0xFF15151C),
             ),
-          ),
+          ],
         ),
       ],
     );
