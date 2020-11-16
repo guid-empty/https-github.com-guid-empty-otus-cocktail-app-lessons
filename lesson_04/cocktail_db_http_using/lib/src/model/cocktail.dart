@@ -4,6 +4,8 @@ import 'package:cocktaildbhttpusing/src/model/glass_type.dart';
 import 'package:cocktaildbhttpusing/src/model/ingredient_definition.dart';
 import 'package:flutter/foundation.dart';
 
+import '../dto/cocktail_dto.dart';
+
 ///
 /// Cocktail Model Definition based on response from
 /// curl https://the-cocktail-db.p.rapidapi.com/popular.php
@@ -88,4 +90,46 @@ class Cocktail {
     @required this.drinkThumbUrl,
     @required this.isFavourite,
   });
+
+  factory Cocktail.fromDto(CocktailDto dto) {
+    final glass = GlassType.parse(dto.strGlass);
+    final cocktailType = CocktailType.parse(dto.strAlcoholic);
+    final category = CocktailCategory.parse(dto.strCategory);
+
+    var ingredients = <IngredientDefinition>[];
+
+    _getIngredients(dto).forEach((key, value) => ingredients.add(IngredientDefinition(key, value)));
+
+    return Cocktail(
+      id: dto.idDrink,
+      category: category,
+      cocktailType: cocktailType,
+      glassType: glass,
+      instruction: dto.strInstructions,
+      isFavourite: true,
+      name: dto.strDrink,
+      ingredients: ingredients,
+      drinkThumbUrl: dto.strDrinkThumb,
+    );
+  }
+
+  static Map<String, String> _getIngredients(CocktailDto dto) {
+    return <String, String>{
+      if (dto.strIngredient1 != null) dto.strIngredient1: dto.strMeasure1,
+      if (dto.strIngredient2 != null) dto.strIngredient2: dto.strMeasure2,
+      if (dto.strIngredient3 != null) dto.strIngredient3: dto.strMeasure3,
+      if (dto.strIngredient4 != null) dto.strIngredient4: dto.strMeasure4,
+      if (dto.strIngredient5 != null) dto.strIngredient5: dto.strMeasure5,
+      if (dto.strIngredient6 != null) dto.strIngredient6: dto.strMeasure6,
+      if (dto.strIngredient7 != null) dto.strIngredient7: dto.strMeasure7,
+      if (dto.strIngredient8 != null) dto.strIngredient8: dto.strMeasure8,
+      if (dto.strIngredient9 != null) dto.strIngredient9: dto.strMeasure9,
+      if (dto.strIngredient10 != null) dto.strIngredient10: dto.strMeasure10,
+      if (dto.strIngredient11 != null) dto.strIngredient11: dto.strMeasure11,
+      if (dto.strIngredient12 != null) dto.strIngredient12: dto.strMeasure12,
+      if (dto.strIngredient13 != null) dto.strIngredient13: dto.strMeasure13,
+      if (dto.strIngredient14 != null) dto.strIngredient14: dto.strMeasure14,
+      if (dto.strIngredient15 != null) dto.strIngredient15: dto.strMeasure15,
+    };
+  }
 }
