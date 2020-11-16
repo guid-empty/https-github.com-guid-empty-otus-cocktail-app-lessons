@@ -11,10 +11,11 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    //final cocktail = SyncCocktailRepository().getHomeworkCocktail();
+    final cocktail = SyncCocktailRepository().getHomeworkCocktail();
     return MaterialApp(
-        debugShowCheckedModeBanner: false, home: CocktailsFilterScreen()
-        //Material(child: CocktailDetailPage(cocktail)),
-        );
+      debugShowCheckedModeBanner: false,
+      home: //CocktailsFilterScreen()
+          Material(child: CocktailDetailPage(cocktail)),
+    );
   }
 }
