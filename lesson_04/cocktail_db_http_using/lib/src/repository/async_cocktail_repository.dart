@@ -2,8 +2,10 @@ import 'dart:convert' as convert;
 import 'dart:io';
 
 import 'package:cocktaildbhttpusing/models.dart';
+import 'package:cocktaildbhttpusing/src/extensions/ingredient_dto_extensions.dart';
 import 'package:cocktaildbhttpusing/src/dto/cocktail_definition_dto.dart';
 import 'package:cocktaildbhttpusing/src/dto/cocktail_dto.dart';
+import 'package:cocktaildbhttpusing/src/dto/ingredient_dto.dart';
 import 'package:cocktaildbhttpusing/src/model/cocktail.dart';
 import 'package:cocktaildbhttpusing/src/model/cocktail_category.dart';
 import 'package:cocktaildbhttpusing/src/model/cocktail_definition.dart';
@@ -142,7 +144,25 @@ class AsyncCocktailRepository {
   /// TODO: implement Lookup ingredient by ID operation to get all details about Ingredient
   /// using an endpoint https://rapidapi.com/thecocktaildb/api/the-cocktail-db?endpoint=apiendpoint_0ee9572a-a259-4b6e-9e53-b97aa3d42b18
   ///
-  Future<Ingredient> lookupIngredientById() async {
+  Future<Ingredient> lookupIngredientById(String id) async {
+    var client = http.Client();
+    try {
+      final url = 'https://the-cocktail-db.p.rapidapi.com/lookup.php?iid=$id';
+      var response = await http.get(url, headers: _headers);
+      if (response.statusCode == 200) {
+        final jsonResponse = convert.jsonDecode(response.body);
+        final ingredients = jsonResponse['ingredients'] as Iterable<dynamic>;
+        if (ingredients == null || ingredients.length == 0)
+          throw HttpException('Ingredient with id = $id didn\'t found.');
+
+        var dto = IngredientDto.fromJson(ingredients.first);
+        return dto.toModel();
+      } else {
+        throw HttpException('Request failed with status: ${response.statusCode}');
+      }
+    } finally {
+      client.close();
+    }
     return null;
   }
 
