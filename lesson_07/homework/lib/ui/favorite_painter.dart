@@ -14,12 +14,29 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyCustomPainter extends CustomPainter {
+class RingPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint = new Paint()
       ..color = Colors.yellow[800]
       ..style = PaintingStyle.stroke
+      ..strokeWidth = 10;
+
+    canvas.drawCircle(Offset.zero, 25, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
+  }
+}
+
+class HeartPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    Paint paint = new Paint()
+      ..color = Colors.red
+      ..style = PaintingStyle.fill
       ..strokeWidth = 10;
 
     // Path path = Path();
@@ -39,7 +56,7 @@ class MyCustomPainter extends CustomPainter {
 
     //canvas.drawPath(path, paint_0);
 
-    canvas.drawCircle(Offset.zero, 25, paint);
+    canvas.drawLine(Offset.zero, Offset.fromDirection(5), paint);
   }
 
   @override
@@ -57,8 +74,23 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: CustomPaint(
-        painter: MyCustomPainter(),
+      child: Stack(
+        children: [
+          CustomPaint(
+            painter: RingPainter(),
+            child: Container(
+              height: 20,
+              width: 20,
+            ),
+          ),
+          CustomPaint(
+            painter: HeartPainter(),
+            child: Container(
+              height: 20,
+              width: 20,
+            ),
+          ),
+        ],
       ),
     );
   }
