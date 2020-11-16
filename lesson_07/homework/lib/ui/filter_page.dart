@@ -1,5 +1,7 @@
 import 'package:cocktail/core/src/model/cocktail_category.dart';
 import 'package:cocktail/core/src/repository/async_cocktail_repository.dart';
+import 'package:cocktail/ui/progress_loader.dart';
+
 import 'package:flutter/material.dart';
 
 class CocktailsFilterScreen extends StatelessWidget {
@@ -142,35 +144,8 @@ class CoctailList extends StatelessWidget {
         } else if (snapshot.hasError) {
           return _buildErrorMessage();
         }
-        return _buildSearchMessage();
+        return ProgressLoader();
       },
-    );
-  }
-
-  Widget _buildSearchMessage() {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image(
-            height: 44,
-            width: 44,
-            image: AssetImage('assets/shaker.png'),
-            fit: BoxFit.fitHeight,
-          ),
-          const SizedBox(
-            height: 9,
-          ),
-          Text(
-            'Поиск...',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w400,
-              fontSize: 14,
-            ),
-          ),
-        ],
-      ),
     );
   }
 
