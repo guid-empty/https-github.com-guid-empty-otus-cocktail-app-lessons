@@ -1,5 +1,3 @@
-// TODO: Сделать экран Фильтр по категории
-
 import 'package:cocktail/core/src/model/cocktail_category.dart';
 import 'package:cocktail/core/src/repository/async_cocktail_repository.dart';
 import 'package:flutter/material.dart';
