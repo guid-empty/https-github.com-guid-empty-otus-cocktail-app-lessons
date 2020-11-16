@@ -22,7 +22,7 @@ class RingPainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = 10;
 
-    canvas.drawCircle(Offset.zero, 25, paint);
+    canvas.drawCircle(Offset(100.0, 100.0), 25, paint);
   }
 
   @override
@@ -36,27 +36,34 @@ class HeartPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     Paint paint = new Paint()
       ..color = Colors.red
-      ..style = PaintingStyle.fill
-      ..strokeWidth = 10;
+      ..style = PaintingStyle.fill;
 
-    // Path path = Path();
-    // path.moveTo(size.width * 0.25, size.height * 0.79);
-    // path.quadraticBezierTo(size.width * 0.21, size.height * 0.64,
-    //     size.width * 0.25, size.height * 0.57);
-    // path.cubicTo(size.width * 0.30, size.height * 0.55, size.width * 0.41,
-    //     size.height * 0.52, size.width * 0.46, size.height * 0.50);
-    // path.cubicTo(size.width * 0.46, size.height * 0.65, size.width * 0.58,
-    //     size.height * 0.64, size.width * 0.58, size.height * 0.50);
-    // path.cubicTo(size.width * 0.64, size.height * 0.52, size.width * 0.74,
-    //     size.height * 0.55, size.width * 0.79, size.height * 0.57);
-    // path.quadraticBezierTo(size.width * 0.83, size.height * 0.61,
-    //     size.width * 0.79, size.height * 0.79);
-    // path.lineTo(size.width * 0.25, size.height * 0.79);
-    // path.close();
+    Path path_0 = Path();
 
-    //canvas.drawPath(path, paint_0);
+    path_0.moveTo(size.width * 0.50, size.height);
+    path_0.quadraticBezierTo(size.width * 0.20, size.height * 0.63,
+        size.width * 0.10, size.height * 0.50);
+    path_0.cubicTo(size.width * 0.02, size.height * 0.37, size.width * 0.03,
+        size.height * 0.28, size.width * 0.10, size.height * 0.20);
+    path_0.cubicTo(size.width * 0.13, size.height * 0.17, size.width * 0.13,
+        size.height * 0.14, size.width * 0.20, size.height * 0.10);
+    path_0.cubicTo(size.width * 0.30, size.height * 0.07, size.width * 0.30,
+        size.height * 0.07, size.width * 0.40, size.height * 0.10);
+    path_0.quadraticBezierTo(size.width * 0.50, size.height * 0.16,
+        size.width * 0.50, size.height * 0.30);
+    path_0.quadraticBezierTo(size.width * 0.50, size.height * 0.15,
+        size.width * 0.60, size.height * 0.10);
+    path_0.cubicTo(size.width * 0.70, size.height * 0.07, size.width * 0.70,
+        size.height * 0.07, size.width * 0.80, size.height * 0.10);
+    path_0.cubicTo(size.width * 0.87, size.height * 0.14, size.width * 0.88,
+        size.height * 0.17, size.width * 0.90, size.height * 0.20);
+    path_0.cubicTo(size.width * 0.96, size.height * 0.27, size.width * 0.97,
+        size.height * 0.36, size.width * 0.90, size.height * 0.50);
+    path_0.quadraticBezierTo(
+        size.width * 0.80, size.height * 0.63, size.width * 0.50, size.height);
+    path_0.close();
 
-    canvas.drawLine(Offset.zero, Offset.fromDirection(5), paint);
+    canvas.drawPath(path_0, paint);
   }
 
   @override
@@ -74,23 +81,13 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Stack(
-        children: [
-          CustomPaint(
-            painter: RingPainter(),
-            child: Container(
-              height: 20,
-              width: 20,
-            ),
-          ),
-          CustomPaint(
-            painter: HeartPainter(),
-            child: Container(
-              height: 20,
-              width: 20,
-            ),
-          ),
-        ],
+      child: CustomPaint(
+        painter: RingPainter(),
+        child: Container(
+          height: 20,
+          width: 20,
+        ),
+        foregroundPainter: HeartPainter(),
       ),
     );
   }
