@@ -13,14 +13,15 @@ class CocktailDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
+      color: Colors.black,
       child: SingleChildScrollView(
         child: Column(
           children: [
             Stack(
               children: [
               Container(
-                color: Color(0xFF0E0D13),
-                child: Image( image: AssetImage('assets/images/cocktail_7.png'))
+                width: double.infinity,
+                child: Image( image: NetworkImage('https://www.thecocktaildb.com/images/media/drink/3z6xdi1589574603.jpg')),
               ),
               SafeArea(
                 child: Stack(children: [
@@ -29,7 +30,6 @@ class CocktailDetailPage extends StatelessWidget {
                     padding: const EdgeInsets.all(30),
                       child: SvgPicture.asset('assets/images/icon_back.svg')
                   ),
-
                   Positioned(
                     top: 30,
                     right: 30,
