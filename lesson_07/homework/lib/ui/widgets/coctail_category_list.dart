@@ -1,7 +1,7 @@
 import 'package:cocktail/core/models.dart';
 import 'package:flutter/material.dart';
 
-import '../filter.service.dart';
+import '../filter_service.dart';
 
 class CoctailCategoryList extends StatelessWidget {
   final CocktailCategory activeCategory;

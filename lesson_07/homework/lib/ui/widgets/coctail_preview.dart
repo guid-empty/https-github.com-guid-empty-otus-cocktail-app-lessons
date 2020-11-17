@@ -2,7 +2,7 @@ import 'package:cocktail/core/models.dart';
 
 import 'package:flutter/material.dart';
 
-import '../common/image-loading-builder.dart';
+import '../common/image_loading_builder.dart';
 
 class CoctailPreview extends StatefulWidget {
   final CocktailDefinition coctail;

@@ -1,14 +1,14 @@
-import 'package:cocktail/ui/filter.service.dart';
-
 import 'package:cocktail/core/models.dart';
-import 'package:cocktail/ui/theme.dart';
+
 import 'package:flutter/material.dart';
 
-import 'classes/header-delegate.class.dart';
+import './classes/header_delegate.dart';
 
-import 'widgets/coctail-category-list.widget.dart';
-import 'widgets/coctail-preview.widget.dart';
-import 'widgets/custom-lodader.widget.dart';
+import './widgets/coctail_category_list.dart';
+import './widgets/coctail_preview.dart';
+import './widgets/custom_loader.dart';
+import './filter_service.dart';
+import './theme.dart';
 
 class CocktailsFilterScreen extends StatefulWidget {
   @override
