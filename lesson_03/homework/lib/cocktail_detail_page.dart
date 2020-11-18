@@ -3,6 +3,13 @@ import 'package:homework/models/models.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CocktailDetailPage extends StatelessWidget {
+  static const mainFont = 'SanFrancisco';
+  static const titleTextSize = 20.0;
+  static const subtitleTextSize = 16.0;
+  static const tagTextSize = 15.0;
+  static const defaultTextSize = 14.0;
+  static const indexTextSize = 13.0;
+
   const CocktailDetailPage(
     this.cocktail, {
     Key key,
@@ -49,12 +56,12 @@ class CocktailDetailPage extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children:[
-                    Text('Арбузный мохито', style: TextStyle(fontFamily: 'SanFrancisco', fontSize: 20, color: Colors.white), ),
+                    Text('Арбузный мохито', style: TextStyle(fontFamily: mainFont, fontSize: titleTextSize, color: Colors.white), ),
                     SvgPicture.asset('assets/images/icon_hart.svg')
                   ]),
                   Container(
                     margin: EdgeInsets.only(top: 10, bottom: 10),
-                    child: Text('Id:12864', style: TextStyle(fontFamily: 'SanFrancisco', fontSize: 13, color: Color(0xFF848396)), ),
+                    child: Text('Id:12864', style: TextStyle(fontFamily: mainFont, fontSize: indexTextSize, color: Color(0xFF848396)), ),
                   ),
 
                   _cocktailParamWidget('Категория коктейля'),
@@ -74,7 +81,7 @@ class CocktailDetailPage extends StatelessWidget {
                 children: [
                   Container(
                     margin: EdgeInsets.only(bottom: 20),
-                    child: Text('Ингредиенты:', style: TextStyle(fontFamily: 'SanFrancisco', fontSize: 16, color: Color(0xFFB1AFC6)), ),
+                    child: Text('Ингредиенты:', style: TextStyle(fontFamily: mainFont, fontSize: subtitleTextSize, color: Color(0xFFB1AFC6)), ),
                   ),
                   _ingredientWidget('Листья мяты', '4 шт'),
                   _ingredientWidget('Лайм', '½ шт'),
@@ -93,7 +100,7 @@ class CocktailDetailPage extends StatelessWidget {
                   children: [
                     Container(
                       margin: EdgeInsets.only(left: 15, bottom: 20),
-                      child: Text('Инструкция для приготовления', style: TextStyle(fontFamily: 'SanFrancisco', fontSize: 14, color: Color(0xFFB1AFC6)), ),
+                      child: Text('Инструкция для приготовления', style: TextStyle(fontFamily: mainFont, fontSize: subtitleTextSize, color: Color(0xFFB1AFC6)), ),
                     ),
                     _cookStageWidget('В большом бокале смешайте порванные листья мяты, разрезанный на кусочки лайм и сахар. Толкушкой хорошо раздавите, чтобы лайм пустил сок.'),
                     _cookStageWidget('Добавьте мелко нарезанную кубиками мякоть арбуза и снова слегка растолките.'),
@@ -137,13 +144,13 @@ class CocktailDetailPage extends StatelessWidget {
           color: Color(0xFF15151C),
           borderRadius: BorderRadius.all(Radius.circular(20))
       ),
-      child: Text(text, style: TextStyle(fontFamily: 'SanFrancisco', fontSize: 15, color: Colors.white), ),
+      child: Text(text, style: TextStyle(fontFamily: mainFont, fontSize: tagTextSize, color: Colors.white), ),
     );
 
   Widget _cocktailParamWidget(String text) =>
     Container(
       margin: EdgeInsets.only(top: 5, bottom: 5),
-      child: Text(text, style: TextStyle(fontFamily: 'SanFrancisco', fontSize: 14, color: Color(0xFFEAEAEA)), ),
+      child: Text(text, style: TextStyle(fontFamily: mainFont, fontSize: defaultTextSize, color: Color(0xFFEAEAEA)), ),
     );
 
   Widget _ingredientWidget(String name, String value) => Container(
@@ -151,8 +158,8 @@ class CocktailDetailPage extends StatelessWidget {
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children:[
-        Text(name, style: TextStyle(fontFamily: 'SanFrancisco', fontSize: 14, color: Colors.white, decoration: TextDecoration.underline), ),
-        Text(value, style: TextStyle(fontFamily: 'SanFrancisco', fontSize: 14, color: Colors.white), ),
+        Text(name, style: TextStyle(fontFamily: mainFont, fontSize: defaultTextSize, color: Colors.white, decoration: TextDecoration.underline), ),
+        Text(value, style: TextStyle(fontFamily: mainFont, fontSize: defaultTextSize, color: Colors.white), ),
       ])
   );
 
@@ -178,7 +185,7 @@ class CocktailDetailPage extends StatelessWidget {
           flex: 1,
           child: Container(
             width: double.infinity,
-            child: Text(text, style: TextStyle(fontFamily: 'SanFrancisco', fontSize: 14, color: Colors.white), ),
+            child: Text(text, style: TextStyle(fontFamily: mainFont, fontSize: defaultTextSize, color: Colors.white), ),
           ),
         ),
       ])
