@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MyHomePage(),
+      home: Heart(),
     );
   }
 }
@@ -72,12 +72,7 @@ class HeartPainter extends CustomPainter {
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
+class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -88,6 +83,26 @@ class _MyHomePageState extends State<MyHomePage> {
           width: 20,
         ),
         foregroundPainter: HeartPainter(),
+      ),
+    );
+  }
+}
+
+class Heart extends StatefulWidget {
+  @override
+  _HeartState createState() => _HeartState();
+}
+
+class _HeartState extends State<Heart> {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: CustomPaint(
+        painter: HeartPainter(),
+        child: Container(
+          height: 20,
+          width: 20,
+        ),
       ),
     );
   }
