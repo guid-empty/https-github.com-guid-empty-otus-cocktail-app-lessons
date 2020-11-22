@@ -103,7 +103,6 @@ class _CocktailDetailPageState extends State<CocktailDetailPage> {
                   onTap: () {
                     setState(() {
                       isSelected = !isSelected;
-                      print('set');
                     });
                   },
                 ),
