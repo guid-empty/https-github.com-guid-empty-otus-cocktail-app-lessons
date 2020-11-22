@@ -15,7 +15,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: //CocktailsFilterScreen()
-          Material(child: CocktailDetailPage(cocktail)),
+          Material(
+              child: CocktailDetailPage(
+        cocktail: cocktail,
+      )),
     );
   }
 }

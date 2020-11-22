@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
 
 import '../core/models.dart';
+import '../ui/favorite_painter.dart';
 
-class CocktailDetailPage extends StatelessWidget {
-  const CocktailDetailPage(
-    this.cocktail, {
+class CocktailDetailPage extends StatefulWidget {
+  const CocktailDetailPage({
+    this.cocktail,
     Key key,
   }) : super(key: key);
 
   final Cocktail cocktail;
 
+  @override
+  _CocktailDetailPageState createState() => _CocktailDetailPageState();
+}
+
+class _CocktailDetailPageState extends State<CocktailDetailPage> {
+  bool isSelected = false;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -39,7 +46,7 @@ class CocktailDetailPage extends StatelessWidget {
           child: Opacity(
             opacity: 0.8,
             child: Image(
-              image: NetworkImage(cocktail.drinkThumbUrl),
+              image: NetworkImage(widget.cocktail.drinkThumbUrl),
             ),
           ),
         ),
@@ -76,7 +83,7 @@ class CocktailDetailPage extends StatelessWidget {
               children: [
                 Flexible(
                   child: Text(
-                    cocktail.name,
+                    widget.cocktail.name,
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 20,
@@ -84,15 +91,27 @@ class CocktailDetailPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                const Icon(
-                  Icons.favorite,
-                  color: Colors.white,
+                GestureDetector(
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Heart(
+                        isSelected: isSelected,
+                      ),
+                    ],
+                  ),
+                  onTap: () {
+                    setState(() {
+                      isSelected = !isSelected;
+                      print('set');
+                    });
+                  },
                 ),
               ],
             ),
             const SpaceH20(),
             Text(
-              'id:${cocktail.id}',
+              'id:${widget.cocktail.id}',
               style: const TextStyle(
                 color: const Color(0xFF848396),
                 fontSize: 13,
@@ -102,15 +121,15 @@ class CocktailDetailPage extends StatelessWidget {
             const SpaceH25(),
             _buildValue('Категория коктейля'),
             const SpaceH20(),
-            _buildTitle(cocktail.category.value),
+            _buildTitle(widget.cocktail.category.value),
             const SpaceH20(),
             _buildValue('Тип коктейля'),
             const SpaceH20(),
-            _buildTitle(cocktail.cocktailType.value),
+            _buildTitle(widget.cocktail.cocktailType.value),
             const SpaceH20(),
             _buildValue('Тип стекла'),
             const SpaceH20(),
-            _buildTitle(cocktail.glassType.value),
+            _buildTitle(widget.cocktail.glassType.value),
             const SpaceH20(),
           ],
         ),
@@ -196,7 +215,7 @@ class CocktailDetailPage extends StatelessWidget {
             Column(
               children: [
                 Text(
-                  cocktail.instruction,
+                  widget.cocktail.instruction,
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 14,
@@ -271,7 +290,7 @@ class CocktailDetailPage extends StatelessWidget {
   List<Widget> _buildIngridientsRows() {
     List<Row> list = [];
 
-    for (var n in cocktail.ingredients) {
+    for (var n in widget.cocktail.ingredients) {
       list.add(
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

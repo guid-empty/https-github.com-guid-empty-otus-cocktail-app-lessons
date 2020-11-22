@@ -20,9 +20,9 @@ class RingPainter extends CustomPainter {
     Paint paint = new Paint()
       ..color = Colors.yellow[800]
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 10;
+      ..strokeWidth = 8;
 
-    canvas.drawCircle(Offset(100.0, 100.0), 25, paint);
+    canvas.drawCircle(Offset(25.0, 25.0), 25, paint);
   }
 
   @override
@@ -88,21 +88,31 @@ class MyHomePage extends StatelessWidget {
   }
 }
 
-class Heart extends StatefulWidget {
-  @override
-  _HeartState createState() => _HeartState();
-}
-
-class _HeartState extends State<Heart> {
+class Heart extends StatelessWidget {
+  Heart({this.isSelected});
+  final bool isSelected;
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return AnimatedContainer(
+      curve: Curves.bounceOut,
+      width: isSelected ? 30 : 20,
+      height: isSelected ? 30 : 20,
+      duration: Duration(milliseconds: 500),
       child: CustomPaint(
         painter: HeartPainter(),
-        child: Container(
-          height: 20,
-          width: 20,
-        ),
+      ),
+    );
+  }
+}
+
+class Ring extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return CustomPaint(
+      painter: RingPainter(),
+      child: Container(
+        height: 50,
+        width: 50,
       ),
     );
   }
