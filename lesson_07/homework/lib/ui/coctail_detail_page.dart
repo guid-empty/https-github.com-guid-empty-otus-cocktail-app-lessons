@@ -95,9 +95,8 @@ class _CocktailDetailPageState extends State<CocktailDetailPage> {
                   child: Stack(
                     alignment: Alignment.center,
                     children: [
-                      Heart(
-                        isSelected: isSelected,
-                      ),
+                      AnimatedHeart(),
+                      AnimatedRing(),
                     ],
                   ),
                   onTap: () {

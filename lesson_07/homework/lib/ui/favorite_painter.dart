@@ -9,16 +9,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: AnimatedRing(),
+      home: AnimatedHeart(),
     );
   }
 }
 
 class RingPainter extends CustomPainter {
   final Color ringColor;
-  final ringRadius;
+  final double ringRadius;
 
-  RingPainter(this.ringColor, this.ringRadius);
+  RingPainter({this.ringColor, this.ringRadius});
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint = new Paint()
@@ -40,7 +40,8 @@ class HeartPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     Paint paint = new Paint()
       ..color = Colors.red
-      ..style = PaintingStyle.fill;
+      ..style = PaintingStyle.fill
+      ..strokeWidth = 0.0;
 
     Path path_0 = Path();
 
@@ -81,18 +82,8 @@ class Heart extends StatelessWidget {
   final bool isSelected;
   @override
   Widget build(BuildContext context) {
-    return AnimatedContainer(
-      curve: Curves.bounceOut,
-      width: isSelected ? 30 : 20,
-      height: isSelected ? 30 : 20,
-      duration: Duration(milliseconds: 500),
-      child: CustomPaint(
-        painter: HeartPainter(),
-        child: AnimatedOpacity(
-            duration: Duration(milliseconds: 500),
-            opacity: isSelected ? 1 : 0,
-            child: Ring()),
-      ),
+    return CustomPaint(
+      painter: HeartPainter(),
     );
   }
 }
@@ -105,7 +96,10 @@ class Ring extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      painter: RingPainter(ringColor, ringRadius),
+      painter: RingPainter(
+        ringColor: ringColor,
+        ringRadius: ringRadius,
+      ),
     );
   }
 }
@@ -127,9 +121,11 @@ class _AnimatedRingState extends State<AnimatedRing>
       vsync: this,
       duration: Duration(seconds: 1),
     );
-    colorAnimation = ColorTween(begin: Colors.yellow[800], end: Colors.black54)
-        .animate(controller);
-    radiusAnimation = Tween(begin: 10.0, end: 25.0)
+    colorAnimation = ColorTween(
+      begin: Colors.yellow[800],
+      end: Color(0xFF1A1927),
+    ).animate(controller);
+    radiusAnimation = Tween(begin: 5.0, end: 30.0)
         .animate(CurvedAnimation(parent: controller, curve: Curves.bounceOut));
     super.initState();
   }
@@ -145,6 +141,46 @@ class _AnimatedRingState extends State<AnimatedRing>
             ringColor: colorAnimation.value,
             ringRadius: radiusAnimation.value,
           );
+        },
+      ),
+    );
+  }
+}
+
+class AnimatedHeart extends StatefulWidget {
+  @override
+  _AnimatedHeartState createState() => _AnimatedHeartState();
+}
+
+class _AnimatedHeartState extends State<AnimatedHeart>
+    with SingleTickerProviderStateMixin {
+  AnimationController controller;
+  Animation<double> opacityAnimation;
+  Animation<double> radiusAnimation;
+
+  @override
+  void initState() {
+    controller = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 1),
+    );
+    opacityAnimation = Tween(
+      begin: 0.1,
+      end: 1.0,
+    ).animate(controller);
+    radiusAnimation = Tween(begin: 10.0, end: 25.0)
+        .animate(CurvedAnimation(parent: controller, curve: Curves.bounceOut));
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    controller.forward();
+    return Center(
+      child: AnimatedBuilder(
+        animation: controller,
+        builder: (context, child) {
+          return Heart();
         },
       ),
     );
