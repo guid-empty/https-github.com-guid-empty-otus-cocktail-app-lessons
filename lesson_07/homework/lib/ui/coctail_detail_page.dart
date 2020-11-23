@@ -15,8 +15,42 @@ class CocktailDetailPage extends StatefulWidget {
   _CocktailDetailPageState createState() => _CocktailDetailPageState();
 }
 
-class _CocktailDetailPageState extends State<CocktailDetailPage> {
+class _CocktailDetailPageState extends State<CocktailDetailPage>
+    with SingleTickerProviderStateMixin {
   bool isSelected = false;
+  AnimationController controller;
+  Animation<double> sizeAnimation;
+  Animation<Color> colorAnimation;
+  Animation<double> radiusAnimation;
+  Animation<Color> colorRingAnimation;
+
+  @override
+  void initState() {
+    controller = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 1),
+    );
+    sizeAnimation = Tween(begin: 2.0, end: 20.0)
+        .animate(CurvedAnimation(parent: controller, curve: Curves.bounceOut));
+    colorAnimation = ColorTween(
+      begin: Colors.white24,
+      end: Colors.red,
+    ).animate(controller);
+    colorRingAnimation = ColorTween(
+      begin: Colors.yellow[900],
+      end: Color(0xFF1A1927),
+    ).animate(controller);
+    radiusAnimation = Tween(begin: 10.0, end: 30.0)
+        .animate(CurvedAnimation(parent: controller, curve: Curves.bounceOut));
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -93,15 +127,38 @@ class _CocktailDetailPageState extends State<CocktailDetailPage> {
                 ),
                 GestureDetector(
                   child: Stack(
-                    alignment: Alignment.center,
                     children: [
-                      AnimatedHeart(),
-                      AnimatedRing(),
+                      AnimatedBuilder(
+                        animation: controller,
+                        builder: (context, child) {
+                          return Container(
+                            height: isSelected ? sizeAnimation.value : 20,
+                            width: isSelected ? sizeAnimation.value : 20,
+                            child: Heart(
+                              heartColor: colorAnimation.value,
+                            ),
+                          );
+                        },
+                      ),
+                      AnimatedBuilder(
+                        animation: controller,
+                        builder: (context, child) {
+                          return Opacity(
+                            opacity: isSelected ? 1.0 : 0.0,
+                            child: Ring(
+                              ringColor: colorRingAnimation.value,
+                              ringRadius: radiusAnimation.value,
+                            ),
+                          );
+                        },
+                      ),
                     ],
                   ),
                   onTap: () {
                     setState(() {
                       isSelected = !isSelected;
+                      print(isSelected);
+                      isSelected ? controller.forward() : controller.reset();
                     });
                   },
                 ),

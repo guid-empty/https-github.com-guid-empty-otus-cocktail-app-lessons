@@ -1,19 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 
-void main() => runApp(
-      MyApp(),
-    );
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: AnimatedHeart(),
-    );
-  }
-}
-
 class RingPainter extends CustomPainter {
   final Color ringColor;
   final double ringRadius;
@@ -26,7 +13,7 @@ class RingPainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = 8;
 
-    canvas.drawCircle(Offset(10.0, 10.0), ringRadius, paint);
+    canvas.drawCircle(Offset(0.0, 0.0), ringRadius, paint);
   }
 
   @override
@@ -36,12 +23,15 @@ class RingPainter extends CustomPainter {
 }
 
 class HeartPainter extends CustomPainter {
+  final Color heartColor;
+  final double heartSize;
+
+  HeartPainter({this.heartColor, this.heartSize});
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint = new Paint()
-      ..color = Colors.red
-      ..style = PaintingStyle.fill
-      ..strokeWidth = 0.0;
+      ..color = heartColor
+      ..style = PaintingStyle.fill;
 
     Path path_0 = Path();
 
@@ -78,12 +68,14 @@ class HeartPainter extends CustomPainter {
 }
 
 class Heart extends StatelessWidget {
-  const Heart({this.isSelected});
-  final bool isSelected;
+  final Color heartColor;
+  final double heartSize;
+
+  const Heart({Key key, this.heartColor, this.heartSize});
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      painter: HeartPainter(),
+      painter: HeartPainter(heartColor: heartColor),
     );
   }
 }
@@ -99,89 +91,6 @@ class Ring extends StatelessWidget {
       painter: RingPainter(
         ringColor: ringColor,
         ringRadius: ringRadius,
-      ),
-    );
-  }
-}
-
-class AnimatedRing extends StatefulWidget {
-  @override
-  _AnimatedRingState createState() => _AnimatedRingState();
-}
-
-class _AnimatedRingState extends State<AnimatedRing>
-    with SingleTickerProviderStateMixin {
-  AnimationController controller;
-  Animation<Color> colorAnimation;
-  Animation<double> radiusAnimation;
-
-  @override
-  void initState() {
-    controller = AnimationController(
-      vsync: this,
-      duration: Duration(seconds: 1),
-    );
-    colorAnimation = ColorTween(
-      begin: Colors.yellow[800],
-      end: Color(0xFF1A1927),
-    ).animate(controller);
-    radiusAnimation = Tween(begin: 5.0, end: 30.0)
-        .animate(CurvedAnimation(parent: controller, curve: Curves.bounceOut));
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    controller.forward();
-    return Center(
-      child: AnimatedBuilder(
-        animation: controller,
-        builder: (context, child) {
-          return Ring(
-            ringColor: colorAnimation.value,
-            ringRadius: radiusAnimation.value,
-          );
-        },
-      ),
-    );
-  }
-}
-
-class AnimatedHeart extends StatefulWidget {
-  @override
-  _AnimatedHeartState createState() => _AnimatedHeartState();
-}
-
-class _AnimatedHeartState extends State<AnimatedHeart>
-    with SingleTickerProviderStateMixin {
-  AnimationController controller;
-  Animation<double> opacityAnimation;
-  Animation<double> radiusAnimation;
-
-  @override
-  void initState() {
-    controller = AnimationController(
-      vsync: this,
-      duration: Duration(seconds: 1),
-    );
-    opacityAnimation = Tween(
-      begin: 0.1,
-      end: 1.0,
-    ).animate(controller);
-    radiusAnimation = Tween(begin: 10.0, end: 25.0)
-        .animate(CurvedAnimation(parent: controller, curve: Curves.bounceOut));
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    controller.forward();
-    return Center(
-      child: AnimatedBuilder(
-        animation: controller,
-        builder: (context, child) {
-          return Heart();
-        },
       ),
     );
   }
