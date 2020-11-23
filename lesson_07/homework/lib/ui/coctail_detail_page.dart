@@ -125,43 +125,7 @@ class _CocktailDetailPageState extends State<CocktailDetailPage>
                     ),
                   ),
                 ),
-                GestureDetector(
-                  child: Stack(
-                    children: [
-                      AnimatedBuilder(
-                        animation: controller,
-                        builder: (context, child) {
-                          return Container(
-                            height: isSelected ? sizeAnimation.value : 20,
-                            width: isSelected ? sizeAnimation.value : 20,
-                            child: Heart(
-                              heartColor: colorAnimation.value,
-                            ),
-                          );
-                        },
-                      ),
-                      AnimatedBuilder(
-                        animation: controller,
-                        builder: (context, child) {
-                          return Opacity(
-                            opacity: isSelected ? 1.0 : 0.0,
-                            child: Ring(
-                              ringColor: colorRingAnimation.value,
-                              ringRadius: radiusAnimation.value,
-                            ),
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                  onTap: () {
-                    setState(() {
-                      isSelected = !isSelected;
-                      print(isSelected);
-                      isSelected ? controller.forward() : controller.reset();
-                    });
-                  },
-                ),
+                _buildFavoriteButton(),
               ],
             ),
             const SpaceH20(),
@@ -189,6 +153,46 @@ class _CocktailDetailPageState extends State<CocktailDetailPage>
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildFavoriteButton() {
+    return GestureDetector(
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          AnimatedBuilder(
+            animation: controller,
+            builder: (context, child) {
+              return Container(
+                height: isSelected ? sizeAnimation.value : 20,
+                width: isSelected ? sizeAnimation.value : 20,
+                child: Heart(
+                  heartColor: colorAnimation.value,
+                ),
+              );
+            },
+          ),
+          AnimatedBuilder(
+            animation: controller,
+            builder: (context, child) {
+              return Opacity(
+                opacity: isSelected ? 1.0 : 0.0,
+                child: Ring(
+                  ringColor: colorRingAnimation.value,
+                  ringRadius: radiusAnimation.value,
+                ),
+              );
+            },
+          ),
+        ],
+      ),
+      onTap: () {
+        setState(() {
+          isSelected = !isSelected;
+          isSelected ? controller.forward() : controller.reverse();
+        });
+      },
     );
   }
 
