@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5bb49cdf-314a-4b13-a298-dd066419563c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../../lesson_03/homework/lib/core/src/dto/cocktail_definition_dto.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lesson_03/homework/lib/core/src/dto/cocktail_definition_dto.g.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lesson_03/homework/lib/core/src/dto/cocktail_dto.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lesson_03/homework/lib/core/src/dto/cocktail_dto.g.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lesson_03/homework/lib/core/src/model/cocktail_definition.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lesson_03/homework/lib/core/src/repository/async_cocktail_repository.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lesson_03/homework/lib/custom_widgets/color/custom_colors.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lesson_03/homework/lib/custom_widgets/image_with_back_and_share_button.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lesson_03/homework/lib/events/category_filter_events.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lesson_03/homework/lib/ui/coctail_detail_page.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lesson_03/homework/lib/ui/custom_widgets/cocktail_card/cocktail_card.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lesson_03/homework/lib/ui/custom_widgets/custom_sliver/cocktail_header_sliver_delegate.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lesson_03/homework/lib/ui/custom_widgets/filter/filter_text_item.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lesson_03/homework/lib/ui/custom_widgets/search_row/search_row.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lesson_03/homework/lib/ui/filter_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lesson_03/homework/lib/models/src/repository/sync_cocktail_repository.dart" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dart File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/../.." value="elina_safaryanova_hw_07" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="1jYixIRkzuSwIdU8rGjKVfRsZ1a" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="android.project.structure.last.selected" value="SDK Location" />
+    <property name="android.project.structure.proportion" value="0.15" />
+    <property name="android.sdk.path" value="$USER_HOME$/Android/Sdk" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="io.flutter.reload.alreadyRun" value="true" />
+    <property name="last_opened_file_path" value="$USER_HOME$/ke-android-app" />
+    <property name="project.structure.last.edited" value="SDK Location" />
+    <property name="project.structure.proportion" value="0.17" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lib/ui/custom_widgets/filter" />
+      <recent name="$PROJECT_DIR$/lib/ui/custom_widgets" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter">
+      <option name="filePath" value="$PROJECT_DIR$/lib/main.dart" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5bb49cdf-314a-4b13-a298-dd066419563c" name="Default Changelist" comment="" />
+      <created>1603987670315</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1603987670315</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Add CocktailCard.dart">
+      <created>1603988322837</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1603988322837</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Add CocktailCard.dart">
+      <created>1603988374030</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1603988374030</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Add CocktailCard.dart">
+      <created>1603988817752</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1603988817752</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Add filter_page.dart, streamBuilder">
+      <created>1604007712893</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1604007712893</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Add customChildScroll">
+      <created>1604075887109</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1604075887109</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Add initialData">
+      <created>1604077142650</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1604077142650</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Add initialData">
+      <created>1604077713125</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1604077713125</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Add theme">
+      <created>1604078484358</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1604078484358</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Refactor">
+      <created>1604081085133</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1604081085133</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Work on errors">
+      <created>1604249282004</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1604249282005</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Add CocktailCard.dart" />
+    <MESSAGE value="Add filter_page.dart, streamBuilder" />
+    <MESSAGE value="Add customChildScroll" />
+    <MESSAGE value="Add initialData" />
+    <MESSAGE value="Add theme" />
+    <MESSAGE value="Refactor" />
+    <MESSAGE value="Work on errors" />
+    <option name="LAST_COMMIT_MESSAGE" value="Work on errors" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="801" y="271" width="374" height="562" key="#com.intellij.ide.util.MemberChooser" timestamp="1604077510750">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="801" y="271" width="374" height="562" key="#com.intellij.ide.util.MemberChooser/67.27.1853.1053@67.27.1853.1053" timestamp="1604077510750" />
+    <state x="167" y="125" width="1653" height="855" key="AVDManager" timestamp="1604240936318">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="167" y="125" width="1653" height="855" key="AVDManager/67.27.1853.1053@67.27.1853.1053" timestamp="1604240936318" />
+    <state x="532" y="102" width="912" height="901" key="CommitChangelistDialog2" timestamp="1604249281921">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="532" y="102" width="912" height="901" key="CommitChangelistDialog2/67.27.1853.1053@67.27.1853.1053" timestamp="1604249281921" />
+    <state x="776" y="310" width="424" height="484" key="FileChooserDialogImpl" timestamp="1604302456512">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="776" y="310" width="424" height="484" key="FileChooserDialogImpl/67.27.1853.1053@67.27.1853.1053" timestamp="1604302456512" />
+    <state width="1807" height="193" key="GridCell.Tab.0.bottom" timestamp="1604302459535">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="1807" height="193" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1604302459535" />
+    <state width="1807" height="193" key="GridCell.Tab.0.center" timestamp="1604302459535">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="1807" height="193" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1604302459535" />
+    <state width="1807" height="193" key="GridCell.Tab.0.left" timestamp="1604302459535">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="1807" height="193" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1604302459535" />
+    <state width="1807" height="193" key="GridCell.Tab.0.right" timestamp="1604302459535">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state width="1807" height="193" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1604302459535" />
+    <state x="482" y="187" key="SettingsEditor" timestamp="1603987882366">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="482" y="187" key="SettingsEditor/67.27.1853.1053@67.27.1853.1053" timestamp="1603987882366" />
+    <state x="167" y="125" width="1653" height="855" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1604246589776">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="167" y="125" width="1653" height="855" key="com.intellij.history.integration.ui.views.FileHistoryDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1604246589776" />
+    <state x="683" y="291" width="621" height="522" key="find.popup" timestamp="1604079724624">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="683" y="291" width="621" height="522" key="find.popup/67.27.1853.1053@67.27.1853.1053" timestamp="1604079724624" />
+  </component>
+</project>

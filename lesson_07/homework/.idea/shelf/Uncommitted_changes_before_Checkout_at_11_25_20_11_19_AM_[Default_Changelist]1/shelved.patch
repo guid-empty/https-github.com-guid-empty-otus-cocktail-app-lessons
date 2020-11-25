@@ -1,0 +1,142 @@
+Index: ../../lesson_03/homework/lib/custom_widgets/cocktail_rating_bar/cocktail_rating_bar.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- ../../lesson_03/homework/lib/custom_widgets/cocktail_rating_bar/cocktail_rating_bar.dart	(date 1606290425000)
++++ ../../lesson_03/homework/lib/custom_widgets/cocktail_rating_bar/cocktail_rating_bar.dart	(date 1606290425000)
+@@ -0,0 +1,26 @@
++import 'package:flutter/cupertino.dart';
++import 'package:homework/custom_widgets/color/custom_colors.dart';
++
++import 'cocktail_rating_star.dart';
++
++class CocktailRatingBar extends StatelessWidget {
++  final int rating;
++
++  CocktailRatingBar({this.rating});
++
++  @override
++  Widget build(BuildContext context) {
++    return Container(
++      color: CustomColors.ingredients,
++      child: Padding(
++        padding: const EdgeInsets.all(32.0),
++        child: Row(
++          mainAxisAlignment: MainAxisAlignment.spaceAround,
++          crossAxisAlignment: CrossAxisAlignment.center,
++          children: List.generate(
++              5, (index) => CocktailRatingStar(isFilled: index < 3)),
++        ),
++      ),
++    );
++  }
++}
+Index: ../../lesson_03/homework/lib/custom_widgets/cocktail_rating_bar/cocktail_rating_star.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- ../../lesson_03/homework/lib/custom_widgets/cocktail_rating_bar/cocktail_rating_star.dart	(date 1606290425000)
++++ ../../lesson_03/homework/lib/custom_widgets/cocktail_rating_bar/cocktail_rating_star.dart	(date 1606290425000)
+@@ -0,0 +1,31 @@
++import 'package:flutter/cupertino.dart';
++import 'package:flutter/material.dart';
++import 'package:homework/custom_widgets/color/custom_colors.dart';
++
++class CocktailRatingStar extends StatelessWidget {
++  final bool isFilled;
++
++  CocktailRatingStar({this.isFilled});
++
++  @override
++  Widget build(BuildContext context) {
++    return Container(
++      width: 48,
++      height: 48,
++      decoration: BoxDecoration(
++          shape: BoxShape.circle, color: CustomColors.rating_container),
++      child: Padding(
++        padding: const EdgeInsets.all(8),
++        child: getIcon(),
++      ),
++    );
++  }
++
++  Widget getIcon() {
++    if (isFilled) {
++      return Icon(Icons.star, color: Colors.white);
++    } else {
++      return Icon(Icons.star, color: CustomColors.ingredients);
++    }
++  }
++}
+Index: ../../lesson_03/homework/lib/custom_widgets/cocktail_instruction/cocktail_instruction.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- ../../lesson_03/homework/lib/custom_widgets/cocktail_instruction/cocktail_instruction.dart	(date 1606290425000)
++++ ../../lesson_03/homework/lib/custom_widgets/cocktail_instruction/cocktail_instruction.dart	(date 1606290425000)
+@@ -0,0 +1,61 @@
++import 'dart:ui';
++
++import 'package:flutter/cupertino.dart';
++import 'package:flutter/material.dart';
++import 'package:homework/custom_widgets/color/custom_colors.dart';
++
++class CocktailInstruction extends StatelessWidget {
++  final String cocktailInstruction;
++
++  CocktailInstruction({this.cocktailInstruction});
++
++  @override
++  Widget build(BuildContext context) {
++    var width = MediaQuery.of(context).size.width;
++    return Container(
++      color: CustomColors.instruction,
++      width: width,
++      child: Padding(
++        padding: const EdgeInsets.all(16.0),
++        child: Column(
++          crossAxisAlignment: CrossAxisAlignment.start,
++          children: [
++            Padding(
++              padding: const EdgeInsets.only(left: 16.0),
++              child: Text('Инструкция для приготовления',
++                  style: Theme.of(context).textTheme.headline5),
++            ),
++            ...cocktailInstruction
++                .split('\n')
++                .map((step) =>
++                    _getCustomText(step, Theme.of(context).textTheme.headline5))
++                .toList(growable: false)
++          ],
++        ),
++      ),
++    );
++  }
++
++  Widget _getCustomText(String step, TextStyle style) {
++    return Padding(
++      padding: const EdgeInsets.only(top: 16.0),
++      child: Row(
++        mainAxisAlignment: MainAxisAlignment.start,
++        crossAxisAlignment: CrossAxisAlignment.start,
++        children: [
++          Container(
++            margin: EdgeInsets.only(top: 6, right: 12),
++            width: 4,
++            height: 4,
++            decoration:
++                BoxDecoration(color: Colors.white, shape: BoxShape.circle),
++          ),
++          Expanded(
++            child: Text("${step.replaceFirst("-", "").trim()}",
++                textAlign: TextAlign.left, style: style),
++          )
++        ],
++      ),
++    );
++  }
++}
