@@ -29,30 +29,33 @@ class ImageWithBackAndShareButtons extends StatelessWidget {
             ),
           ),
         ),
-        SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButton(
-                  icon: Icon(
-                    Icons.arrow_back,
-                    color: Colors.white,
+        Material(
+          color: Colors.transparent,
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                    icon: Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      print('back pressed');
+                    },
                   ),
-                  onPressed: () {
-                    print('back pressed');
-                  },
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.share,
-                    color: Colors.white,
-                  ),
-                )
-              ],
+                  IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.share,
+                      color: Colors.white,
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         )

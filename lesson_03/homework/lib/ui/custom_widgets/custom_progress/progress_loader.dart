@@ -23,12 +23,10 @@ class ProgressBarPainter extends CustomPainter {
     final center = Offset(size.width / 2, size.height / 2);
     final paint = Paint()..color = color;
 
-    final allSteps = _steps;
-
-    for (var i = 0; i < allSteps; i++) {
+    for (var i = 0; i < _steps; i++) {
       final currentAngle = _angleStep * (i + (_steps * rotation).toInt());
 
-      final currentRadius = maxPaintRadius * (i / allSteps);
+      final currentRadius = maxPaintRadius * (i / _steps);
       final offset = Offset(center.dx + mainCircleRadius * cos(currentAngle),
           center.dy + mainCircleRadius * sin(currentAngle));
       canvas.drawCircle(offset, currentRadius, paint);
@@ -42,7 +40,7 @@ class ProgressBarPainter extends CustomPainter {
 class ProgressLoader extends StatefulWidget {
   final Color color;
 
-  const ProgressLoader({Key key, this.color: Colors.white}) : super(key: key);
+  const ProgressLoader({Key key, this.color = Colors.white}) : super(key: key);
 
   @override
   _ProgressLoaderState createState() => _ProgressLoaderState();
@@ -73,8 +71,8 @@ class _ProgressLoaderState extends State<ProgressLoader>
       animation: _controller,
       builder: (_, Widget childWidget) {
         return Container(
-          height: 40,
-          width: 40,
+          height: 45,
+          width: 45,
           child: CustomPaint(
             child: childWidget,
             painter: ProgressBarPainter(

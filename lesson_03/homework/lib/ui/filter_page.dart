@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:homework/events/category_filter_events.dart';
-import 'package:homework/ui/custom_widgets/progress_loader.dart';
+import 'package:homework/ui/custom_widgets/custom_progress/progress_loader.dart';
 
 import 'colors/custom_colors.dart';
 import 'custom_widgets/cocktail_card/cocktail_card.dart';

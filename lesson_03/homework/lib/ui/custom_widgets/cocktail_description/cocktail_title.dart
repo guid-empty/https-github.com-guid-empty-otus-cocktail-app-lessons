@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:homework/ui/custom_widgets/favorite_transition.dart';
 
 class CocktailTitle extends StatelessWidget {
   final String cocktailTitle;
@@ -23,16 +24,17 @@ class CocktailTitle extends StatelessWidget {
   }
 
   Widget _getIsFavoriteIcon() {
-    if (isFavorite) {
-      return IconButton(
-        icon: Icon(Icons.favorite, color: Colors.white),
-        onPressed: () {},
-      );
-    } else {
-      return IconButton(
-        icon: Icon(Icons.favorite_border, color: Colors.white),
-        onPressed: () {},
-      );
-    }
+    return BouncingHeart();
+    // if (isFavorite) {
+    //   return IconButton(
+    //     icon: Icon(Icons.favorite, color: Colors.white),
+    //     onPressed: () {},
+    //   );
+    // } else {
+    //   return IconButton(
+    //     icon: Icon(Icons.favorite_border, color: Colors.white),
+    //     onPressed: () {},
+    //   );
+    // }
   }
 }

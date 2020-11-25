@@ -74,8 +74,8 @@ class AsyncCocktailRepository {
     return result;
   }
 
-  Future<Iterable<CocktailDefinition>> fetchCocktailsByCocktailCategory(CocktailCategory category) async {
-    var result = <CocktailDefinition>[];
+  Future<Iterable<CocktailDto>> fetchCocktailsByCocktailCategory(CocktailCategory category) async {
+    var result = <CocktailDto>[];
 
     var client = http.Client();
     try {
@@ -90,15 +90,11 @@ class AsyncCocktailRepository {
         final jsonResponse = convert.jsonDecode(response.body);
         var drinks = jsonResponse['drinks'] as Iterable<dynamic>;
 
-        final dtos = drinks.cast<Map<String, dynamic>>().map((json) => CocktailDefinitionDto.fromJson(json));
+        // final dtos = drinks.cast<Map<String, dynamic>>().map((json) => CocktailDefinitionDto.fromJson(json));
+        final dtos = drinks.cast<Map<String, dynamic>>().map((json) => CocktailDto.fromJson(json));
 
         for (final dto in dtos) {
-          result.add(CocktailDefinition(
-            id: dto.idDrink,
-            isFavourite: true,
-            name: dto.strDrink,
-            drinkThumbUrl: dto.strDrinkThumb,
-          ));
+          result.add(dto);
         }
       } else {
         throw HttpException('Request failed with status: ${response.statusCode}');

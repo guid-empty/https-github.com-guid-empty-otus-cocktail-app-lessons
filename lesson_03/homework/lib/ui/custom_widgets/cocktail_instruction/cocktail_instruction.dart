@@ -12,6 +12,7 @@ class CocktailInstruction extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
+    if(cocktailInstruction == null) return Container();
     return Container(
       color: CustomColors.instruction,
       width: width,
