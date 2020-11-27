@@ -33,7 +33,6 @@ class CocktailGridItem extends StatelessWidget {
             position: DecorationPosition.foreground,
             child: GestureDetector(
               onTap: () async {
-                print('to CoctailDetailScreen');
                 Cocktail cocktail = await AsyncCocktailRepository()
                     .fetchCocktailDetails(cocktailDefinition.id);
 
