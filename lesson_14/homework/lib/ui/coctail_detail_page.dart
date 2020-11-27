@@ -23,15 +23,17 @@ class _CocktailDetailPageState extends State<CocktailDetailPage> {
   bool isSelected = false;
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          _buildImageFrame(),
-          _buildDescriptionFrame(),
-          _buildIngridientsFrame(),
-          _buildInstructionFrame(),
-          _buildStarsFrame(),
-        ],
+    return Material(
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            _buildImageFrame(),
+            _buildDescriptionFrame(),
+            _buildIngridientsFrame(),
+            _buildInstructionFrame(),
+            _buildStarsFrame(),
+          ],
+        ),
       ),
     );
   }

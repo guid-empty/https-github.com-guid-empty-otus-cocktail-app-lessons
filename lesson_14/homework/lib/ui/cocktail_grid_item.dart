@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:homework/core/src/model/cocktail_definition.dart';
+import 'package:homework/core/src/repository/async_cocktail_repository.dart';
+import 'package:homework/core/src/model/cocktail.dart';
+
+import 'package:homework/ui/coctail_detail_page.dart';
 
 class CocktailGridItem extends StatelessWidget {
-  const CocktailGridItem(this.cocktailDefinition,
-      {Key key})
-      : super(key: key);
+  CocktailGridItem(this.cocktailDefinition, {Key key}) : super(key: key);
 
   static const double aspectRatio = 170 / 215;
 
@@ -20,17 +22,30 @@ class CocktailGridItem extends StatelessWidget {
         children: [
           DecoratedBox(
             decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                stops: [0.44,0.94],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [Color.fromRGBO(14, 13, 19, 0),Color(0xFF0E0D13)]
-              )
-            ),
+                gradient: LinearGradient(
+                    stops: [0.44, 0.94],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Color.fromRGBO(14, 13, 19, 0),
+                      Color(0xFF0E0D13)
+                    ])),
             position: DecorationPosition.foreground,
-            child: Image.network(
-              cocktailDefinition.drinkThumbUrl ?? '',
-              fit: BoxFit.cover,
+            child: GestureDetector(
+              onTap: () async {
+                print('to CoctailDetailScreen');
+                Cocktail cocktail = await AsyncCocktailRepository()
+                    .fetchCocktailDetails(cocktailDefinition.id);
+
+                Route route = MaterialPageRoute(
+                    builder: (context) =>
+                        CocktailDetailPage(cocktail: cocktail));
+                Navigator.push(context, route);
+              },
+              child: Image.network(
+                cocktailDefinition.drinkThumbUrl ?? '',
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           Padding(
