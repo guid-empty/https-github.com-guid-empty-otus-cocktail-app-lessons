@@ -15,13 +15,10 @@ class CocktailGridItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
-        var cocktail = await AsyncCocktailRepository()
-            .fetchCocktailDetails(cocktailDefinition.id);
-
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => CocktailDetailPage(cocktail)));
+                builder: (context) => CocktailDetailPage(cocktailDefinition.id, cocktailDefinition.drinkThumbUrl)));
       },
       child: ClipRRect(
         borderRadius: BorderRadius.circular(8),
