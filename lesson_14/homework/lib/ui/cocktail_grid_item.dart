@@ -4,6 +4,7 @@ import 'package:homework/core/src/repository/async_cocktail_repository.dart';
 import 'package:homework/core/src/model/cocktail.dart';
 
 import 'package:homework/ui/coctail_detail_page.dart';
+import 'package:homework/ui/progress_loader.dart';
 
 class CocktailGridItem extends StatelessWidget {
   CocktailGridItem(this.cocktailDefinition, {Key key}) : super(key: key);
@@ -35,6 +36,7 @@ class CocktailGridItem extends StatelessWidget {
               onTap: () async {
                 Cocktail cocktail = await AsyncCocktailRepository()
                     .fetchCocktailDetails(cocktailDefinition.id);
+                ProgressLoader();
 
                 Route route = MaterialPageRoute(
                     builder: (context) =>
