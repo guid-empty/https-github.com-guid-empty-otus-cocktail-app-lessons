@@ -36,7 +36,7 @@ class CocktailGridItem extends StatelessWidget {
               onTap: () async {
                 Cocktail cocktail = await AsyncCocktailRepository()
                     .fetchCocktailDetails(cocktailDefinition.id);
-                ProgressLoader();
+                Center(child: ProgressLoader());
 
                 Route route = MaterialPageRoute(
                     builder: (context) =>
