@@ -34,7 +34,7 @@ class _CocktailDetailPageState extends State<CocktailDetailPage>
       vsync: this,
       duration: Duration(seconds: 1),
     );
-    sizeAnimation = Tween(begin: 2.0, end: 20.0)
+    sizeAnimation = Tween(begin: 20.0, end: 23.0)
         .animate(CurvedAnimation(parent: controller, curve: Curves.bounceOut));
     colorAnimation = ColorTween(
       begin: Colors.white24,
@@ -167,30 +167,16 @@ class _CocktailDetailPageState extends State<CocktailDetailPage>
       child: Stack(
         alignment: Alignment.center,
         children: [
-          AnimatedBuilder(
-            animation: controller,
-            builder: (context, child) {
-              return Container(
-                height: isSelected ? sizeAnimation.value : 20,
-                width: isSelected ? sizeAnimation.value : 20,
-                child: Heart(
-                  heartColor: colorAnimation.value,
-                ),
-              );
-            },
-          ),
-          AnimatedBuilder(
-            animation: controller,
-            builder: (context, child) {
-              return Opacity(
-                opacity: isSelected ? 1.0 : 0.0,
-                child: Ring(
-                  ringColor: colorRingAnimation.value,
-                  ringRadius: radiusAnimation.value,
-                ),
-              );
-            },
-          ),
+          HeartAnimatedBuilder(
+              controller: controller,
+              isSelected: isSelected,
+              sizeAnimation: sizeAnimation,
+              colorAnimation: colorAnimation),
+          RingAnimatedBuilder(
+              controller: controller,
+              isSelected: isSelected,
+              colorRingAnimation: colorRingAnimation,
+              radiusAnimation: radiusAnimation),
         ],
       ),
       onTap: () {
@@ -387,6 +373,68 @@ class _CocktailDetailPageState extends State<CocktailDetailPage>
       );
     }
     return list;
+  }
+}
+
+class RingAnimatedBuilder extends StatelessWidget {
+  const RingAnimatedBuilder({
+    Key key,
+    @required this.controller,
+    @required this.isSelected,
+    @required this.colorRingAnimation,
+    @required this.radiusAnimation,
+  }) : super(key: key);
+
+  final AnimationController controller;
+  final bool isSelected;
+  final Animation<Color> colorRingAnimation;
+  final Animation<double> radiusAnimation;
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: controller,
+      builder: (context, child) {
+        return Opacity(
+          opacity: isSelected ? 1.0 : 0.0,
+          child: Ring(
+            ringColor: colorRingAnimation.value,
+            ringRadius: radiusAnimation.value,
+          ),
+        );
+      },
+    );
+  }
+}
+
+class HeartAnimatedBuilder extends StatelessWidget {
+  const HeartAnimatedBuilder({
+    Key key,
+    @required this.controller,
+    @required this.isSelected,
+    @required this.sizeAnimation,
+    @required this.colorAnimation,
+  }) : super(key: key);
+
+  final AnimationController controller;
+  final bool isSelected;
+  final Animation<double> sizeAnimation;
+  final Animation<Color> colorAnimation;
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: controller,
+      builder: (context, child) {
+        return Container(
+          height: isSelected ? sizeAnimation.value : 20,
+          width: isSelected ? sizeAnimation.value : 20,
+          child: Heart(
+            heartColor: colorAnimation.value,
+          ),
+        );
+      },
+    );
   }
 }
 
