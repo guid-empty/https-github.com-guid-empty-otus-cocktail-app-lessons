@@ -34,14 +34,18 @@ class CocktailGridItem extends StatelessWidget {
             position: DecorationPosition.foreground,
             child: GestureDetector(
               onTap: () async {
-                Cocktail cocktail = await AsyncCocktailRepository()
-                    .fetchCocktailDetails(cocktailDefinition.id);
-                Center(child: ProgressLoader());
+                print('tap');
+                try {
+                  Cocktail cocktail = await AsyncCocktailRepository()
+                      .fetchCocktailDetails(cocktailDefinition.id);
 
-                Route route = MaterialPageRoute(
-                    builder: (context) =>
-                        CocktailDetailPage(cocktail: cocktail));
-                Navigator.push(context, route);
+                  Route route = MaterialPageRoute(
+                      builder: (context) =>
+                          CocktailDetailPage(cocktail: cocktail));
+                  Navigator.push(context, route);
+                } catch (e) {
+                  _buildShowErrorDialog(context, e);
+                }
               },
               child: Image.network(
                 cocktailDefinition.drinkThumbUrl ?? '',
@@ -60,6 +64,18 @@ class CocktailGridItem extends StatelessWidget {
                 ]),
           )
         ],
+      ),
+    );
+  }
+
+  Future _buildShowErrorDialog(BuildContext context, e) {
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        content: Text(
+          'Error: $e',
+          style: TextStyle(color: Colors.black),
+        ),
       ),
     );
   }
