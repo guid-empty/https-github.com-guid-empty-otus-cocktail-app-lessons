@@ -18,7 +18,7 @@ class AsyncCocktailRepository {
 
     var client = http.Client();
     try {
-      final url = 'https://11the-cocktail-db.p.rapidapi.com/lookup.php?i=$id';
+      final url = 'https://the-cocktail-db.p.rapidapi.com/lookup.php?i=$id';
       var response = await http.get(url, headers: _headers);
       if (response.statusCode == 200) {
         final jsonResponse = convert.jsonDecode(response.body);

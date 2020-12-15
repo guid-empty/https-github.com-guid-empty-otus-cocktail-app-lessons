@@ -34,8 +34,8 @@ class CocktailGridItem extends StatelessWidget {
             position: DecorationPosition.foreground,
             child: GestureDetector(
               onTap: () async {
-                print('tap');
                 try {
+                  _showProgressBar(context);
                   Cocktail cocktail = await AsyncCocktailRepository()
                       .fetchCocktailDetails(cocktailDefinition.id);
 
@@ -79,4 +79,12 @@ class CocktailGridItem extends StatelessWidget {
       ),
     );
   }
+}
+
+_showProgressBar(context) {
+  Widget content = Center(child: ProgressLoader());
+  showDialog(
+    context: context,
+    builder: (context) => content,
+  );
 }
