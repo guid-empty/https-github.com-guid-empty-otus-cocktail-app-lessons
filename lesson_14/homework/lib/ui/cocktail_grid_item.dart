@@ -34,17 +34,18 @@ class CocktailGridItem extends StatelessWidget {
             position: DecorationPosition.foreground,
             child: GestureDetector(
               onTap: () async {
+                _showProgressBar(context);
                 try {
-                  _showProgressBar(context);
                   Cocktail cocktail = await AsyncCocktailRepository()
                       .fetchCocktailDetails(cocktailDefinition.id);
 
                   Route route = MaterialPageRoute(
                       builder: (context) =>
                           CocktailDetailPage(cocktail: cocktail));
+                  Navigator.pop(context);
                   Navigator.push(context, route);
                 } catch (e) {
-                  _buildShowErrorDialog(context, e);
+                  _showErrorDialog(context, e);
                 }
               },
               child: Image.network(
@@ -68,23 +69,35 @@ class CocktailGridItem extends StatelessWidget {
     );
   }
 
-  Future _buildShowErrorDialog(BuildContext context, e) {
+  void _showProgressBar(context) {
+    const Widget content = Center(
+      child: ProgressLoader(),
+    );
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) => content,
+    );
+  }
+
+  Future _showErrorDialog(BuildContext context, e) {
     return showDialog(
       context: context,
       builder: (context) => AlertDialog(
         content: Text(
           'Error: $e',
-          style: TextStyle(color: Colors.black),
+          style: Theme.of(context).textTheme.headline6,
         ),
       ),
-    );
+    ).then((value) => Navigator.pop(context));
   }
 }
 
-_showProgressBar(context) {
-  Widget content = Center(child: ProgressLoader());
-  showDialog(
-    context: context,
-    builder: (context) => content,
-  );
+class ProgressCircle extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: ProgressLoader(),
+    );
+  }
 }

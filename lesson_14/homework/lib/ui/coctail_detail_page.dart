@@ -90,12 +90,17 @@ class _CocktailDetailPageState extends State<CocktailDetailPage>
             ),
           ),
         ),
-        const Positioned(
+        Positioned(
           top: 54,
           left: 24,
-          child: const Icon(
-            Icons.arrow_back,
-            color: Colors.white,
+          child: GestureDetector(
+            child: const Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
+            onTap: () {
+              Navigator.pop(context);
+            },
           ),
         ),
         const Positioned(
