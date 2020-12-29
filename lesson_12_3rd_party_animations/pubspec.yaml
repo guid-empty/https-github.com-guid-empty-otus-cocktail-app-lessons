@@ -1,0 +1,32 @@
+name: lesson_12_3rd_party_animations
+description: Flutter Animations. Low-level animation. 3th-party animations.
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.0
+  lottie: ^0.7.0+1
+  json_annotation: ^3.0.1
+  http: ^0.12.2
+  rive: ^0.6.2
+  flare_flutter: ^2.0.6
+  smart_flare: ^0.2.9+1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  device_preview: ^0.4.8
+  build_runner: ^1.10.1
+  json_serializable: ^3.4.1
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/lottie/
+    - assets/rive/
+    - assets/flare/
+    - assets/images/
