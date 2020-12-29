@@ -1,0 +1,22 @@
+PODS:
+  - Flutter (1.0.0)
+  - lesson_20_example (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - lesson_20_example (from `.symlinks/plugins/lesson_20_example/ios`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  lesson_20_example:
+    :path: ".symlinks/plugins/lesson_20_example/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  lesson_20_example: b6192bc6ee16ef1a80c25da8baee004de5d78897
+
+PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
+
+COCOAPODS: 1.10.0
