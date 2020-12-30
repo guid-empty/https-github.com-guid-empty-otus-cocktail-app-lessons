@@ -1,4 +1,9 @@
+import 'package:cocktail_app/core/src/model/cocktail_category.dart';
+import 'package:cocktail_app/core/src/model/cocktail_definition.dart';
+import 'package:cocktail_app/main.dart';
 import 'package:cocktail_app/ui/aplication/application_scaffold.dart';
+import 'package:cocktail_app/ui/pages/categories_fitler_bar_delegate.dart';
+import 'package:cocktail_app/ui/pages/cocktail_grid_item.dart';
 import 'package:flutter/material.dart';
 
 ///
@@ -21,11 +26,19 @@ import 'package:flutter/material.dart';
 /// В этом экране используется точно такая же  верстка, как и на экране фильтрации (то есть можно переиспользовать экран выдачи результатов по категориям)
 ///
 class FavouriteCocktailsPage extends StatefulWidget {
+  final CocktailCategory selectedCategory = CocktailCategory.cocktail;
   @override
-  _FavouriteCocktailsPageState createState() => _FavouriteCocktailsPageState();
+  _FavouriteCocktailsPageState createState() =>
+      _FavouriteCocktailsPageState(selectedCategory);
 }
 
 class _FavouriteCocktailsPageState extends State<FavouriteCocktailsPage> {
+  CocktailCategory selectedCategory = CocktailCategory.cocktail;
+  final ValueNotifier<CocktailCategory> _categoryNotifier;
+
+  _FavouriteCocktailsPageState(this.selectedCategory)
+      : _categoryNotifier = ValueNotifier<CocktailCategory>(selectedCategory);
+
   @override
   Widget build(BuildContext context) {
     return ApplicationScaffold(
@@ -35,9 +48,59 @@ class _FavouriteCocktailsPageState extends State<FavouriteCocktailsPage> {
     );
   }
 
-  Widget _buildFavoriteCocktailItems(BuildContext context) => Center(
-          child: Text(
-        'todo: add code here',
-        style: Theme.of(context).textTheme.caption,
-      ));
+  Widget _buildFavoriteCocktailItems(BuildContext context) =>
+      ValueListenableBuilder(
+        valueListenable: _categoryNotifier,
+        builder: (ctx, value, child) {
+          return CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(child: SizedBox(height: 21)),
+              SliverPersistentHeader(
+                delegate: CategoriesFilterBarDelegate(
+                  CocktailCategory.values,
+                  onCategorySelected: (category) {
+                    _categoryNotifier.value = category;
+                  },
+                  selectedCategory: _categoryNotifier.value,
+                ),
+                floating: true,
+              ),
+              SliverToBoxAdapter(child: SizedBox(height: 24)),
+              _buildCocktailItems(context),
+            ],
+          );
+        },
+      );
+
+  Widget _buildCocktailItems(BuildContext context) {
+    return FutureBuilder<Iterable<CocktailDefinition>>(
+        ////////////////////////////////////////////////////////////////////////////////////////
+        future: favoriteRepository.fetchFavouritesCocktails(),
+        ///////////////////////////////////////////////////////////////////////////////////////
+        builder: (ctx, snapshot) {
+          if (snapshot.hasError) {
+            return SliverFillRemaining(
+                child: Center(child: Text(snapshot.error.toString())));
+          }
+
+          if (snapshot.hasData) {
+            return SliverPadding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              sliver: SliverGrid(
+                  delegate: SliverChildBuilderDelegate((ctx, index) {
+                    return CocktailGridItem(snapshot.data.elementAt(index),
+                        selectedCategory: _categoryNotifier.value);
+                  }, childCount: snapshot.data.length),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      childAspectRatio: CocktailGridItem.aspectRatio,
+                      crossAxisSpacing: 6,
+                      mainAxisSpacing: 6,
+                      crossAxisCount: 2)),
+            );
+          }
+
+          //  todo set loader
+          return SliverFillRemaining(child: const SizedBox());
+        });
+  }
 }

@@ -1,3 +1,4 @@
+import 'package:cocktail_app/ui/pages/details/cocktail_description/coctail_isfavorite.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -36,22 +37,8 @@ class CocktailTitle extends StatelessWidget {
           cocktailTitle ?? '',
           style: Theme.of(context).textTheme.headline3,
         ),
-        _getIsFavoriteIcon()
+        IsFavorite(),
       ],
     );
-  }
-
-  Widget _getIsFavoriteIcon() {
-    if (isFavorite) {
-      return IconButton(
-        icon: Icon(Icons.favorite, color: Colors.white),
-        onPressed: () {},
-      );
-    } else {
-      return IconButton(
-        icon: Icon(Icons.favorite_border, color: Colors.white),
-        onPressed: () {},
-      );
-    }
   }
 }

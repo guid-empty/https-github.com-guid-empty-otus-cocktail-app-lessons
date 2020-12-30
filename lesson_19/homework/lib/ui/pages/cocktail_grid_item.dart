@@ -1,5 +1,6 @@
 import 'package:cocktail_app/core/models.dart';
 import 'package:cocktail_app/ui/pages/cocktail_details_loader_page.dart';
+import 'package:cocktail_app/ui/pages/details/cocktail_description/coctail_isfavorite.dart';
 import 'package:cocktail_app/ui/style/custom_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +11,9 @@ class CocktailGridItem extends StatelessWidget {
 
   final CocktailCategory selectedCategory;
 
-  const CocktailGridItem(this.cocktailDefinition, {Key key, this.selectedCategory}) : super(key: key);
+  const CocktailGridItem(this.cocktailDefinition,
+      {Key key, this.selectedCategory})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +21,8 @@ class CocktailGridItem extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute<void>(
-            builder: (context) => CocktailDetailsLoaderPageWidget(cocktailId: cocktailDefinition.id),
+            builder: (context) => CocktailDetailsLoaderPageWidget(
+                cocktailId: cocktailDefinition.id),
           ),
         );
       },
@@ -34,7 +38,10 @@ class CocktailGridItem extends StatelessWidget {
                       stops: [0.44, 0.94],
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      colors: [Color.fromRGBO(14, 13, 19, 0), Color(0xFF0E0D13)])),
+                      colors: [
+                        Color.fromRGBO(14, 13, 19, 0),
+                        Color(0xFF0E0D13)
+                      ])),
               position: DecorationPosition.foreground,
               child: Image.network(
                 cocktailDefinition.drinkThumbUrl ?? '',
@@ -47,14 +54,22 @@ class CocktailGridItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(cocktailDefinition.name ?? '', style: Theme.of(context).textTheme.bodyText1),
-                  Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, mainAxisSize: MainAxisSize.max, children: [
-                    Chip(
-                      backgroundColor: CustomColors.black,
-                      label: Text(selectedCategory.name, style: Theme.of(context).textTheme.caption),
-                    ),
-                    _getIsFavoriteIcon(cocktailDefinition.isFavourite),
-                  ]),
+                  Text(cocktailDefinition.name ?? '',
+                      style: Theme.of(context).textTheme.bodyText1),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Chip(
+                          backgroundColor: CustomColors.black,
+                          label: Text(selectedCategory.name,
+                              style: Theme.of(context).textTheme.caption),
+                        ),
+                        IsFavorite(
+                          isFavorite: true,
+                        ),
+                        //_getIsFavoriteIcon(cocktailDefinition.isFavourite),
+                      ]),
                 ],
               ),
             )
@@ -64,17 +79,17 @@ class CocktailGridItem extends StatelessWidget {
     );
   }
 
-  Widget _getIsFavoriteIcon(bool isFavourite) {
-    if (isFavourite) {
-      return IconButton(
-        icon: Icon(Icons.favorite, color: Colors.white),
-        onPressed: () {},
-      );
-    } else {
-      return IconButton(
-        icon: Icon(Icons.favorite_border, color: Colors.white),
-        onPressed: () {},
-      );
-    }
-  }
+  // Widget _getIsFavoriteIcon(bool isFavourite) {
+  //   if (isFavourite) {
+  //     return IconButton(
+  //       icon: Icon(Icons.favorite, color: Colors.white),
+  //       onPressed: () {},
+  //     );
+  //   } else {
+  //     return IconButton(
+  //       icon: Icon(Icons.favorite_border, color: Colors.white),
+  //       onPressed: () {},
+  //     );
+  //   }
+  // }
 }
