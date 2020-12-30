@@ -1,4 +1,10 @@
-import 'package:flutter/foundation.dart';
+import 'package:hive/hive.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+import 'cocktail.dart';
+
+part 'cocktail_definition.freezed.dart';
+part 'cocktail_definition.g.dart';
 
 ///
 /// Cocktail Model Definition based on response from
@@ -16,16 +22,25 @@ import 'package:flutter/foundation.dart';
 ///   "idDrink": "15328"
 ///   }
 ///
-class CocktailDefinition {
-  final String id;
-  final String name;
-  final String drinkThumbUrl;
-  final bool isFavourite;
+const cocktailDefinitionHiveType = 0;
 
-  CocktailDefinition({
-    @required this.id,
-    @required this.name,
-    @required this.drinkThumbUrl,
-    @required this.isFavourite,
-  });
+@freezed
+abstract class CocktailDefinition with _$CocktailDefinition {
+  @HiveType(typeId: cocktailDefinitionHiveType, adapterName: 'CocktailDefinitionAdapter')
+  const factory CocktailDefinition(
+      {@HiveField(0) String id,
+      @HiveField(1) String name,
+      @HiveField(2) String drinkThumbUrl,
+      @HiveField(3) bool isFavourite}) = CocktailDefinitionValue;
+
+  factory CocktailDefinition.fromJson(Map<String, dynamic> json) => _$CocktailDefinitionFromJson(json);
+
+  factory CocktailDefinition.fromCocktail(Cocktail cocktail) {
+    return CocktailDefinition(
+      id: cocktail.id,
+      name: cocktail.name,
+      drinkThumbUrl: cocktail.drinkThumbUrl,
+      isFavourite: cocktail.isFavourite,
+    );
+  }
 }

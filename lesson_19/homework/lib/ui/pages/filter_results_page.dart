@@ -1,9 +1,9 @@
 import 'package:cocktail_app/core/models.dart';
-import 'package:cocktail_app/main.dart';
 import 'package:cocktail_app/ui/aplication/application_scaffold.dart';
 import 'package:cocktail_app/ui/pages/categories_fitler_bar_delegate.dart';
 import 'package:cocktail_app/ui/pages/cocktail_grid_item.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class FilterResultsPageWidget extends StatefulWidget {
   final CocktailCategory selectedCategory;
@@ -53,7 +53,7 @@ class _FilterResultsPageWidgetState extends State<FilterResultsPageWidget> {
 
   Widget _buildCocktailItems(BuildContext context) {
     return FutureBuilder<Iterable<CocktailDefinition>>(
-        future: repository.fetchCocktailsByCocktailCategory(_categoryNotifier.value),
+        future: context.read<AsyncCocktailRepository>().fetchCocktailsByCocktailCategory(_categoryNotifier.value),
         builder: (ctx, snapshot) {
           if (snapshot.hasError) {
             return SliverFillRemaining(child: Center(child: Text(snapshot.error.toString())));
@@ -64,7 +64,7 @@ class _FilterResultsPageWidgetState extends State<FilterResultsPageWidget> {
               padding: const EdgeInsets.symmetric(horizontal: 24),
               sliver: SliverGrid(
                   delegate: SliverChildBuilderDelegate((ctx, index) {
-                    return CocktailGridItem(snapshot.data.elementAt(index), selectedCategory: _categoryNotifier.value);
+                    return CocktailGridItem(snapshot.data.elementAt(index), category: _categoryNotifier.value);
                   }, childCount: snapshot.data.length),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       childAspectRatio: CocktailGridItem.aspectRatio,

@@ -57,19 +57,14 @@ class _RandomCocktailPageWidgetState extends State<RandomCocktailPageWidget> {
 
           if (snapshot.hasData) {
             final cocktail = snapshot.data;
-            final cocktailDefinition = CocktailDefinition(
-              id: cocktail.id,
-              name: cocktail.name,
-              drinkThumbUrl: cocktail.drinkThumbUrl,
-              isFavourite: cocktail.isFavourite,
-            );
+            final cocktailDefinition = CocktailDefinition.fromCocktail(cocktail);
 
             return SliverPadding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
               sliver: SliverGrid(
                 delegate: SliverChildBuilderDelegate(
                   (ctx, index) {
-                    return CocktailGridItem(cocktailDefinition, selectedCategory: cocktail.category);
+                    return CocktailGridItem(cocktailDefinition, category: cocktail.category);
                   },
                   childCount: 1,
                 ),

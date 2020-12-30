@@ -8,9 +8,9 @@ class CocktailGridItem extends StatelessWidget {
 
   final CocktailDefinition cocktailDefinition;
 
-  final CocktailCategory selectedCategory;
+  final CocktailCategory category;
 
-  const CocktailGridItem(this.cocktailDefinition, {Key key, this.selectedCategory}) : super(key: key);
+  const CocktailGridItem(this.cocktailDefinition, {Key key, this.category}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -49,10 +49,12 @@ class CocktailGridItem extends StatelessWidget {
                 children: [
                   Text(cocktailDefinition.name ?? '', style: Theme.of(context).textTheme.bodyText1),
                   Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, mainAxisSize: MainAxisSize.max, children: [
-                    Chip(
-                      backgroundColor: CustomColors.black,
-                      label: Text(selectedCategory.name, style: Theme.of(context).textTheme.caption),
-                    ),
+                    category == null
+                        ? Container()
+                        : Chip(
+                            backgroundColor: CustomColors.black,
+                            label: Text(category.name, style: Theme.of(context).textTheme.caption),
+                          ),
                     _getIsFavoriteIcon(cocktailDefinition.isFavourite),
                   ]),
                 ],

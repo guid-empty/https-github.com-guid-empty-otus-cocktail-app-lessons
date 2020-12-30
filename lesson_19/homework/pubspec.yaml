@@ -14,6 +14,13 @@ dependencies:
   http: ^0.12.2
   cupertino_icons: ^1.0.0
   flutter_svg: ^0.18.1
+  mobx: ^1.2.1+4
+  flutter_mobx: ^1.1.0+2
+  built_collection: ^4.3.2
+  provider: ^4.3.2+2
+  logger: ^0.9.4
+  hive: ^1.4.4+1
+  path_provider: ^1.6.24
 
 dev_dependencies:
   flutter_test:
@@ -21,6 +28,9 @@ dev_dependencies:
   pedantic: ^1.9.0
   build_runner: ^1.10.1
   json_serializable: ^3.4.1
+  mobx_codegen: ^1.1.2
+  freezed: ^0.12.3
+  hive_generator: ^0.8.2
 
 flutter:
   uses-material-design: true

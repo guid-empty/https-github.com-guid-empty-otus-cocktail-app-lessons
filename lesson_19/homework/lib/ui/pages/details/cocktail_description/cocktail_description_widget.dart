@@ -22,7 +22,6 @@ class CocktailDescriptionWidget extends StatelessWidget {
           children: [
             CocktailTitle(
               cocktailTitle: cocktail.name,
-              isFavorite: cocktail.isFavourite,
             ),
             Padding(
               padding: const EdgeInsets.only(top: 10.0),
