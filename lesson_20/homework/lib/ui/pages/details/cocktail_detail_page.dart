@@ -16,7 +16,7 @@ class CocktailDetailPage extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          CocktailPreview(imageUrl: cocktail.drinkThumbUrl),
+          CocktailPreview(cocktail: cocktail),
           CocktailDescriptionWidget(cocktail: cocktail),
           CocktailIngredients(cocktailIngredients: cocktail.ingredients),
           CocktailInstruction(cocktailInstruction: cocktail.instruction),
