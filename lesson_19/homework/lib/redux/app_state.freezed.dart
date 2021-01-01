@@ -15,10 +15,13 @@ class _$AppStateTearOff {
 
 // ignore: unused_element
   _AppState call(
-      {CategoriesState categoriesState, CocktailsState cocktailsState}) {
+      {CategoriesState categoriesState,
+      CocktailsState cocktailsState,
+      FavoritesState favoritesState}) {
     return _AppState(
       categoriesState: categoriesState,
       cocktailsState: cocktailsState,
+      favoritesState: favoritesState,
     );
   }
 }
@@ -31,6 +34,7 @@ const $AppState = _$AppStateTearOff();
 mixin _$AppState {
   CategoriesState get categoriesState;
   CocktailsState get cocktailsState;
+  FavoritesState get favoritesState;
 
   $AppStateCopyWith<AppState> get copyWith;
 }
@@ -39,10 +43,14 @@ mixin _$AppState {
 abstract class $AppStateCopyWith<$Res> {
   factory $AppStateCopyWith(AppState value, $Res Function(AppState) then) =
       _$AppStateCopyWithImpl<$Res>;
-  $Res call({CategoriesState categoriesState, CocktailsState cocktailsState});
+  $Res call(
+      {CategoriesState categoriesState,
+      CocktailsState cocktailsState,
+      FavoritesState favoritesState});
 
   $CategoriesStateCopyWith<$Res> get categoriesState;
   $CocktailsStateCopyWith<$Res> get cocktailsState;
+  $FavoritesStateCopyWith<$Res> get favoritesState;
 }
 
 /// @nodoc
@@ -57,6 +65,7 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
   $Res call({
     Object categoriesState = freezed,
     Object cocktailsState = freezed,
+    Object favoritesState = freezed,
   }) {
     return _then(_value.copyWith(
       categoriesState: categoriesState == freezed
@@ -65,6 +74,9 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
       cocktailsState: cocktailsState == freezed
           ? _value.cocktailsState
           : cocktailsState as CocktailsState,
+      favoritesState: favoritesState == freezed
+          ? _value.favoritesState
+          : favoritesState as FavoritesState,
     ));
   }
 
@@ -87,6 +99,16 @@ class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
       return _then(_value.copyWith(cocktailsState: value));
     });
   }
+
+  @override
+  $FavoritesStateCopyWith<$Res> get favoritesState {
+    if (_value.favoritesState == null) {
+      return null;
+    }
+    return $FavoritesStateCopyWith<$Res>(_value.favoritesState, (value) {
+      return _then(_value.copyWith(favoritesState: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -94,12 +116,17 @@ abstract class _$AppStateCopyWith<$Res> implements $AppStateCopyWith<$Res> {
   factory _$AppStateCopyWith(_AppState value, $Res Function(_AppState) then) =
       __$AppStateCopyWithImpl<$Res>;
   @override
-  $Res call({CategoriesState categoriesState, CocktailsState cocktailsState});
+  $Res call(
+      {CategoriesState categoriesState,
+      CocktailsState cocktailsState,
+      FavoritesState favoritesState});
 
   @override
   $CategoriesStateCopyWith<$Res> get categoriesState;
   @override
   $CocktailsStateCopyWith<$Res> get cocktailsState;
+  @override
+  $FavoritesStateCopyWith<$Res> get favoritesState;
 }
 
 /// @nodoc
@@ -115,6 +142,7 @@ class __$AppStateCopyWithImpl<$Res> extends _$AppStateCopyWithImpl<$Res>
   $Res call({
     Object categoriesState = freezed,
     Object cocktailsState = freezed,
+    Object favoritesState = freezed,
   }) {
     return _then(_AppState(
       categoriesState: categoriesState == freezed
@@ -123,22 +151,28 @@ class __$AppStateCopyWithImpl<$Res> extends _$AppStateCopyWithImpl<$Res>
       cocktailsState: cocktailsState == freezed
           ? _value.cocktailsState
           : cocktailsState as CocktailsState,
+      favoritesState: favoritesState == freezed
+          ? _value.favoritesState
+          : favoritesState as FavoritesState,
     ));
   }
 }
 
 /// @nodoc
 class _$_AppState implements _AppState {
-  const _$_AppState({this.categoriesState, this.cocktailsState});
+  const _$_AppState(
+      {this.categoriesState, this.cocktailsState, this.favoritesState});
 
   @override
   final CategoriesState categoriesState;
   @override
   final CocktailsState cocktailsState;
+  @override
+  final FavoritesState favoritesState;
 
   @override
   String toString() {
-    return 'AppState(categoriesState: $categoriesState, cocktailsState: $cocktailsState)';
+    return 'AppState(categoriesState: $categoriesState, cocktailsState: $cocktailsState, favoritesState: $favoritesState)';
   }
 
   @override
@@ -150,14 +184,18 @@ class _$_AppState implements _AppState {
                     .equals(other.categoriesState, categoriesState)) &&
             (identical(other.cocktailsState, cocktailsState) ||
                 const DeepCollectionEquality()
-                    .equals(other.cocktailsState, cocktailsState)));
+                    .equals(other.cocktailsState, cocktailsState)) &&
+            (identical(other.favoritesState, favoritesState) ||
+                const DeepCollectionEquality()
+                    .equals(other.favoritesState, favoritesState)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(categoriesState) ^
-      const DeepCollectionEquality().hash(cocktailsState);
+      const DeepCollectionEquality().hash(cocktailsState) ^
+      const DeepCollectionEquality().hash(favoritesState);
 
   @override
   _$AppStateCopyWith<_AppState> get copyWith =>
@@ -167,12 +205,15 @@ class _$_AppState implements _AppState {
 abstract class _AppState implements AppState {
   const factory _AppState(
       {CategoriesState categoriesState,
-      CocktailsState cocktailsState}) = _$_AppState;
+      CocktailsState cocktailsState,
+      FavoritesState favoritesState}) = _$_AppState;
 
   @override
   CategoriesState get categoriesState;
   @override
   CocktailsState get cocktailsState;
+  @override
+  FavoritesState get favoritesState;
   @override
   _$AppStateCopyWith<_AppState> get copyWith;
 }

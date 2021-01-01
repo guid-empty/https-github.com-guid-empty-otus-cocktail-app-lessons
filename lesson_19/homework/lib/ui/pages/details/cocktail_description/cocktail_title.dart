@@ -1,30 +1,20 @@
+import 'package:cocktail_app/core/models.dart';
+import 'package:cocktail_app/redux/app_state.dart';
+import 'package:cocktail_app/redux/favorites/favorites_view_model.dart';
+import 'package:cocktail_app/redux/favorites/thunk/on_add_to_favorite.dart';
+import 'package:cocktail_app/redux/favorites/thunk/on_remove_from_favorites.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-///
-/// TODO:
-///        - Склонировать соотвествующий github репозиторий с заготовкой проекта для этого урока (для соот-щего подхода к управлению состоянием приложения - redux, bloc mobx версии) (https://github.com/guid-empty/otus-cocktail-app-lessons)
-///        - Внести изменения в классы описания состояний для экрана FavouriteCocktailsPage (будут помечены /// todo)
-///        - Открыть класс экрана FavouriteCocktailsPage
-///        - Внести изменения в код экрана, выделив логику для получения состояния используя один из ранее рассмотренных подходов к state management
-///        - Внести изменения в экран CocktailDetailPage (CocktailTitle) для управления состояния isFavourite текущей модели (коктейль должен появиться или удалиться в списке избранного в соот-щем блоке состояния приложения)
-///        - Убедиться, что изменения состояния isFavourite для конкретного коктейля отражается в поведении экрана FavouriteCocktailsPage (появляется новый избранный коктейль, удаляется ранее убранный из favourites)
-///
-/// На усмотрение студента:
-///        - Можно выполнить любую декомпозицию класса FavouriteCocktailsPage для внесения изменений в управление состоянием (рефакторинг)
-///        - Можно выполнить любую декомпозицию класса CocktailDetailPage (CocktailTitle) для внесения изменений в управление состоянием (рефакторинг)
-///        - Можно выполнить любую декомпозицию в самих классах управления состоянием приложения (store, block etc)
-///        - Можно выполнить рефакторинг кнопки isFavourite, выделив ее в отдельный виджет и используя на обоих экранах
-/// Мокап экрана Избранное (FavouriteCocktailsPage):
-/// https://www.figma.com/file/UKHKopXpDy02I232c9mdwZ/%D0%9A%D0%BE%D0%BA%D1%82%D0%B5%D0%B9%D0%BB%D0%B8?node-id=24%3A441
-///
-/// В этом экране используется точно такая же  верстка, как и на экране фильтрации (то есть можно переиспользовать экран выдачи результатов по категориям)
-///
+import 'package:redux/redux.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+
 class CocktailTitle extends StatelessWidget {
+  final CocktailDefinition definition;
   final String cocktailTitle;
   final bool isFavorite;
 
-  CocktailTitle({this.cocktailTitle, this.isFavorite});
+  CocktailTitle({this.cocktailTitle, this.isFavorite, this.definition});
 
   @override
   Widget build(BuildContext context) {
@@ -36,22 +26,34 @@ class CocktailTitle extends StatelessWidget {
           cocktailTitle ?? '',
           style: Theme.of(context).textTheme.headline3,
         ),
-        _getIsFavoriteIcon()
-      ],
+        _getIsFavoriteIcon(context)
+      ]
     );
   }
 
-  Widget _getIsFavoriteIcon() {
-    if (isFavorite) {
-      return IconButton(
-        icon: Icon(Icons.favorite, color: Colors.white),
-        onPressed: () {},
-      );
-    } else {
-      return IconButton(
-        icon: Icon(Icons.favorite_border, color: Colors.white),
-        onPressed: () {},
-      );
-    }
+  Widget _getIsFavoriteIcon(BuildContext context) {
+    final appStore = StoreProvider.of<AppState>(context);
+    print(appStore.state.favoritesState.favoritesMap);
+    return StoreConnector<AppState, FavoritesViewModel>(
+        converter: (Store<AppState> store) {
+          return store.state.favoritesState.isFavorites(definition.id)
+              ? FavoritesViewModel.favorite()
+              : FavoritesViewModel.not();
+        },
+        builder: (context, viewModel) => viewModel.when(
+            favorite: () => IconButton(
+              icon: Icon(Icons.favorite, color: Colors.white),
+              onPressed: () {
+                appStore.dispatch(OnRemoveFromFavorites(definition));
+              },
+            ),
+            not: () => IconButton(
+              icon: Icon(Icons.favorite_border, color: Colors.white),
+              onPressed: () {
+                appStore.dispatch(OnAddToFavorites(definition));
+              },
+            )
+        )
+    );
   }
 }
