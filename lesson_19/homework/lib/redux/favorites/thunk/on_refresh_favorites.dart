@@ -3,7 +3,7 @@ import 'package:cocktail_app/redux/app_state.dart';
 import 'package:cocktail_app/redux/base_thunks.dart';
 import 'package:cocktail_app/redux/favorites/favorites_actions.dart';
 import 'package:cocktail_app/repositories/db_repository.dart';
-import 'package:redux/src/store.dart';
+import 'package:redux/redux.dart';
 
 class OnRefreshFavorites extends BaseFavoritesThunk {
 

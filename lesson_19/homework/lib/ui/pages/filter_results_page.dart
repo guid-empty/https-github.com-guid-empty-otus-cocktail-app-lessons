@@ -1,5 +1,4 @@
 import 'package:cocktail_app/core/models.dart';
-import 'package:cocktail_app/main.dart';
 import 'package:cocktail_app/redux/app_state.dart';
 import 'package:cocktail_app/redux/categories/categories_view_model.dart';
 import 'package:cocktail_app/redux/categories/thunks/on_selected_category.dart';
