@@ -90,9 +90,7 @@ class _FavouriteCocktailsPageState extends State<FavouriteCocktailsPage> {
       },
       builder: (context, vm) => vm.when(
           loading: () => SliverToBoxAdapter(
-            child: Center(
-              child: Text("No favorite cocktails\nin category", style: TextStyle(color: Colors.white))
-            )
+            child: Container()
           ),
           success: (cocktails, category) {
             return _buildItems(cocktails, category);
