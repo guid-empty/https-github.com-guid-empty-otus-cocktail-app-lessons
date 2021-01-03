@@ -1,38 +1,48 @@
+import 'dart:convert';
+import 'dart:io';
+import 'package:cocktail_app/core/models.dart';
 import 'package:cocktail_app/core/src/model/cocktail_definition.dart';
+import 'package:path_provider/path_provider.dart';
 
 class FavouriteCocktailRepository {
-  Future<Iterable<CocktailDefinition>> fetchFavouritesCocktails() async {
-    var result = <CocktailDefinition>[];
+  File _file;
 
-    return result;
+  Future<Iterable<CocktailDefinition>> getAll() async {
+    return _getCurrent().then(
+      (value) {
+        return value.values.map((it) => CocktailDefinition.fromJson(it));
+      },
+    );
+  }
+
+  Future setUp() async {
+    Directory directory = await getApplicationDocumentsDirectory();
+    _file = File(directory.path + '/coctails.json');
+
+    if (!_file.existsSync()) {
+      _file.create();
+      _file.writeAsString('{}');
+    }
+  }
+
+  Future add(String key, CocktailDefinition value) async {
+    setUp();
+
+    final data = await _getCurrent();
+    data[key] = value;
+    return _file.writeAsString(json.encode(data));
+  }
+
+  Future remove(String key) async {
+    setUp();
+
+    final data = await _getCurrent();
+    data.remove(key);
+    return _file.writeAsString(json.encode(data));
+  }
+
+  Future<Map> _getCurrent() async {
+    final currentDataString = await _file?.readAsString();
+    return json.decode(currentDataString) as Map;
   }
 }
-
-// final url =
-//     'https://the-cocktail-db.p.rapidapi.com/filter.php?c=${category.value}';
-// var response = await http.get(
-//   url,
-//   headers: {
-//     'x-rapidapi-key': 'e5b7f97a78msh3b1ba27c40d8ccdp105034jsn34e2da32d50b',
-//   },
-// );
-// if (response.statusCode == 200) {
-//   final jsonResponse = convert.jsonDecode(response.body);
-//   var drinks = jsonResponse['drinks'] as Iterable<dynamic>;
-
-//   final dtos = drinks
-//       .cast<Map<String, dynamic>>()
-//       .map((json) => CocktailDefinitionDto.fromJson(json));
-
-//   for (final dto in dtos) {
-//     result.add(CocktailDefinition(
-//       id: dto.idDrink,
-//       isFavourite: false,
-//       /*  TODO: is Favorite field fetching  */
-//       name: dto.strDrink,
-//       drinkThumbUrl: dto.strDrinkThumb,
-//     ));
-//   }
-// } else {
-//   throw HttpException('Request failed with status: ${response.statusCode}');
-// }

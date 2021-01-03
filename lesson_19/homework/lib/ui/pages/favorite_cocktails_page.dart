@@ -75,7 +75,8 @@ class _FavouriteCocktailsPageState extends State<FavouriteCocktailsPage> {
   Widget _buildCocktailItems(BuildContext context) {
     return FutureBuilder<Iterable<CocktailDefinition>>(
         ////////////////////////////////////////////////////////////////////////////////////////
-        future: favoriteRepository.fetchFavouritesCocktails(),
+
+        future: favoriteRepository.getAll(),
         ///////////////////////////////////////////////////////////////////////////////////////
         builder: (ctx, snapshot) {
           if (snapshot.hasError) {

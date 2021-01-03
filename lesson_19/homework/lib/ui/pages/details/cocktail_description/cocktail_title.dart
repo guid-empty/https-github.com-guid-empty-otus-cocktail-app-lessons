@@ -1,6 +1,9 @@
+import 'package:cocktail_app/core/models.dart';
+import 'package:cocktail_app/cubit/favorites_cubit.dart';
 import 'package:cocktail_app/ui/pages/details/cocktail_description/coctail_isfavorite.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 ///
 /// TODO:
@@ -22,10 +25,9 @@ import 'package:flutter/material.dart';
 /// В этом экране используется точно такая же  верстка, как и на экране фильтрации (то есть можно переиспользовать экран выдачи результатов по категориям)
 ///
 class CocktailTitle extends StatelessWidget {
-  final String cocktailTitle;
-  final bool isFavorite;
+  final CocktailDefinition cocktailDefinition;
 
-  CocktailTitle({this.cocktailTitle, this.isFavorite});
+  const CocktailTitle({Key key, this.cocktailDefinition}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +36,10 @@ class CocktailTitle extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          cocktailTitle ?? '',
+          cocktailDefinition.name ?? '',
           style: Theme.of(context).textTheme.headline3,
         ),
-        IsFavorite(),
+        IsFavorite(cocktailDefinition),
       ],
     );
   }

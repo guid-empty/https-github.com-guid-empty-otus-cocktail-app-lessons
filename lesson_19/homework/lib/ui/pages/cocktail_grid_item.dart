@@ -65,10 +65,7 @@ class CocktailGridItem extends StatelessWidget {
                           label: Text(selectedCategory.name,
                               style: Theme.of(context).textTheme.caption),
                         ),
-                        IsFavorite(
-                          isFavorite: true,
-                        ),
-                        //_getIsFavoriteIcon(cocktailDefinition.isFavourite),
+                        IsFavorite(cocktailDefinition),
                       ]),
                 ],
               ),
@@ -78,18 +75,4 @@ class CocktailGridItem extends StatelessWidget {
       ),
     );
   }
-
-  // Widget _getIsFavoriteIcon(bool isFavourite) {
-  //   if (isFavourite) {
-  //     return IconButton(
-  //       icon: Icon(Icons.favorite, color: Colors.white),
-  //       onPressed: () {},
-  //     );
-  //   } else {
-  //     return IconButton(
-  //       icon: Icon(Icons.favorite_border, color: Colors.white),
-  //       onPressed: () {},
-  //     );
-  //   }
-  // }
 }
