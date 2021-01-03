@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d16656bf-af21-46c0-b1e4-c1f2b921d53e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/lesson_15/lesson/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/lesson_15/lesson/android/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lesson_15/lesson/android/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/lesson_15/lesson/android/gradle.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lesson_15/lesson/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lesson_15/lesson/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lesson_15/lesson/lib/persistence/file/file_repository.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lesson_15/lesson/lib/persistence/file/file_repository.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lesson_15/lesson/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/lesson_15/lesson/pubspec.yaml" afterDir="false" />
-    </list>
+    <list default="true" id="d16656bf-af21-46c0-b1e4-c1f2b921d53e" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -57,9 +51,9 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="167" y="125" width="1653" height="855" key="AVDManager/67.27.1853.1053@67.27.1853.1053" timestamp="1606665723144" />
-    <state x="776" y="310" width="424" height="484" key="FileChooserDialogImpl" timestamp="1606665721738">
+    <state x="776" y="310" width="424" height="484" key="FileChooserDialogImpl" timestamp="1609703818205">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state x="776" y="310" width="424" height="484" key="FileChooserDialogImpl/67.27.1853.1053@67.27.1853.1053" timestamp="1606665721738" />
+    <state x="776" y="310" width="424" height="484" key="FileChooserDialogImpl/67.27.1853.1053@67.27.1853.1053" timestamp="1609703818205" />
   </component>
 </project>
