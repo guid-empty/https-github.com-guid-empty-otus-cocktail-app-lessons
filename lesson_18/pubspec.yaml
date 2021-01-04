@@ -1,0 +1,31 @@
+name: lesson_18
+description: A new Flutter project.
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.10.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  flutter_redux: ^0.6.0
+  flutter_redux_dev_tools: ^0.4.0
+  redux_thunk: ^0.3.0
+  freezed_annotation: ^0.12.0
+  ###
+  json_annotation: ^3.0.1
+  http: ^0.12.2
+  provider: ^4.3.2+2
+  path_provider: ^1.6.24
+  shared_preferences: any
+
+dev_dependencies:
+  freezed: ^0.12.3
+  build_runner: ^1.10.1
+  pedantic: ^1.9.0
+  json_serializable: ^3.4.1
+
+flutter:
+  uses-material-design: true
