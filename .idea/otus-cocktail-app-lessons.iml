@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/demo/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/demo/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_01/cocktail_app_models/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_01/cocktail_app_models/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_01/cocktail_app_models_consumer/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_01/cocktail_app_models_consumer/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_02/ex01_hello_world/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_02/ex01_hello_world/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_03/homework/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_03/homework/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_03/lesson/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_03/lesson/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_04/cocktail_db_http_using/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_04/cocktail_db_http_using/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_04/examples/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_04/examples/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_05/lesson_05/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_05/lesson_05/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_06/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_06/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_07/homework/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_07/homework/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_07/lesson/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_07/lesson/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_08/lesson/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_08/lesson/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_09/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_09/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_10/lesson_10_animations/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_10/lesson_10_animations/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_11_explicit_animations/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_11_explicit_animations/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_12_3rd_party_animations/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_12_3rd_party_animations/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_13/lesson/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_13/lesson/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_14/homework/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_14/homework/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_14/lesson/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_14/lesson/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_15/lesson/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_15/lesson/build" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
