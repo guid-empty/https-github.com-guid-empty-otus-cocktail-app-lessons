@@ -20,6 +20,7 @@ dependencies:
   provider: ^4.3.2+2
   path_provider: ^1.6.24
   shared_preferences: any
+  share: ^0.6.5+4
 
 dev_dependencies:
   flutter_test:

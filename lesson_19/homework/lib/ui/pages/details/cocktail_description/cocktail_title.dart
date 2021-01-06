@@ -3,8 +3,6 @@ import 'package:cocktail_app/ui/pages/details/favorite_button/favorite_button.da
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-///
-/// TODO:
 class CocktailTitle extends StatelessWidget {
   final CocktailDefinition cocktail;
 
