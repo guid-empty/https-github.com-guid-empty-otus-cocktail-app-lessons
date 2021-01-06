@@ -1,10 +1,15 @@
+import 'dart:math';
+
 import 'package:cocktail_app/core/src/model/cocktail_category.dart';
 import 'package:cocktail_app/core/src/model/cocktail_definition.dart';
+import 'package:cocktail_app/cubit/favorites_cubit.dart';
+import 'package:cocktail_app/cubit/favorites_state.dart';
 import 'package:cocktail_app/main.dart';
 import 'package:cocktail_app/ui/aplication/application_scaffold.dart';
 import 'package:cocktail_app/ui/pages/categories_fitler_bar_delegate.dart';
 import 'package:cocktail_app/ui/pages/cocktail_grid_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 ///
 /// TODO:
@@ -25,83 +30,50 @@ import 'package:flutter/material.dart';
 ///
 /// В этом экране используется точно такая же  верстка, как и на экране фильтрации (то есть можно переиспользовать экран выдачи результатов по категориям)
 ///
-class FavouriteCocktailsPage extends StatefulWidget {
-  final CocktailCategory selectedCategory = CocktailCategory.cocktail;
-  @override
-  _FavouriteCocktailsPageState createState() =>
-      _FavouriteCocktailsPageState(selectedCategory);
-}
 
-class _FavouriteCocktailsPageState extends State<FavouriteCocktailsPage> {
-  CocktailCategory selectedCategory = CocktailCategory.cocktail;
-  final ValueNotifier<CocktailCategory> _categoryNotifier;
-
-  _FavouriteCocktailsPageState(this.selectedCategory)
-      : _categoryNotifier = ValueNotifier<CocktailCategory>(selectedCategory);
-
+class FavouriteCocktailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final _cubit = BlocProvider.of<FavoritesCubit>(context);
+    _cubit.fetchFavouritesCocktails();
     return ApplicationScaffold(
       title: 'Избранное',
       currentSelectedNavBarItem: 2,
-      child: _buildFavoriteCocktailItems(context),
+      child: _buildCocktailItems(context),
     );
   }
 
-  Widget _buildFavoriteCocktailItems(BuildContext context) =>
-      ValueListenableBuilder(
-        valueListenable: _categoryNotifier,
-        builder: (ctx, value, child) {
-          return CustomScrollView(
-            slivers: [
-              SliverToBoxAdapter(child: SizedBox(height: 21)),
-              SliverPersistentHeader(
-                delegate: CategoriesFilterBarDelegate(
-                  CocktailCategory.values,
-                  onCategorySelected: (category) {
-                    _categoryNotifier.value = category;
-                  },
-                  selectedCategory: _categoryNotifier.value,
-                ),
-                floating: true,
-              ),
-              SliverToBoxAdapter(child: SizedBox(height: 24)),
-              _buildCocktailItems(context),
-            ],
-          );
-        },
-      );
-
   Widget _buildCocktailItems(BuildContext context) {
-    return FutureBuilder<Iterable<CocktailDefinition>>(
-        ////////////////////////////////////////////////////////////////////////////////////////
-
-        future: favoriteRepository.getAll(),
-        ///////////////////////////////////////////////////////////////////////////////////////
-        builder: (ctx, snapshot) {
-          if (snapshot.hasError) {
-            return SliverFillRemaining(
-                child: Center(child: Text(snapshot.error.toString())));
-          }
-
-          if (snapshot.hasData) {
-            return SliverPadding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              sliver: SliverGrid(
-                  delegate: SliverChildBuilderDelegate((ctx, index) {
-                    return CocktailGridItem(snapshot.data.elementAt(index),
-                        selectedCategory: _categoryNotifier.value);
-                  }, childCount: snapshot.data.length),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      childAspectRatio: CocktailGridItem.aspectRatio,
-                      crossAxisSpacing: 6,
-                      mainAxisSpacing: 6,
-                      crossAxisCount: 2)),
+    return BlocBuilder<FavoritesCubit, FavoritesState>(
+        builder: (context, state) {
+      if (state is CocktailsLoadSuccess) {
+        return GridView.builder(
+          padding: const EdgeInsets.all(8.0),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              childAspectRatio: CocktailGridItem.aspectRatio,
+              crossAxisSpacing: 6,
+              mainAxisSpacing: 6,
+              crossAxisCount: 2),
+          itemCount: state.cocktails.length,
+          itemBuilder: (context, index) {
+            return CocktailGridItem(
+              state.cocktails.elementAt(index),
             );
-          }
+          },
+        );
+      }
+      if (state is CocktailsLoadInProgress)
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      if (state is CocktailsLoadFailure)
+        return Container(
+          child: Center(child: Text(state.errorMessage)),
+        );
 
-          //  todo set loader
-          return SliverFillRemaining(child: const SizedBox());
-        });
+      return Container(
+        child: Center(child: Text('Ничего не добавлено')),
+      );
+    });
   }
 }

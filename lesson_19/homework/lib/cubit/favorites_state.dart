@@ -23,8 +23,9 @@ class CocktailsInitial extends FavoritesState {}
 
 class CocktailsLoadSuccess extends FavoritesState {
   CocktailsLoadSuccess({this.cocktails});
+  Iterable<CocktailDefinition> cocktails;
 
-  final UnmodifiableListView<CocktailDefinition> cocktails;
+  //final UnmodifiableListView<CocktailDefinition> cocktails;
 }
 
 class CocktailsLoadInProgress extends FavoritesState {}

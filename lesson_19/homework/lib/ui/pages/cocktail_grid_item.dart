@@ -12,7 +12,7 @@ class CocktailGridItem extends StatelessWidget {
   final CocktailCategory selectedCategory;
 
   const CocktailGridItem(this.cocktailDefinition,
-      {Key key, this.selectedCategory})
+      {Key key, this.selectedCategory = CocktailCategory.cocktail})
       : super(key: key);
 
   @override

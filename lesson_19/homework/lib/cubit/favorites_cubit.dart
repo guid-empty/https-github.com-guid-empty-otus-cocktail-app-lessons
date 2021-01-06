@@ -8,8 +8,9 @@ class FavoritesCubit extends Cubit<FavoritesState> {
 
   final FavouriteCocktailRepository cocktailRepository;
 
-  Future<void> fetchCocktails() async {
-    emit(CocktailsLoadInProgress());
+  Future<void> fetchFavouritesCocktails() async {
+    cocktailRepository.setUp();
+    //emit(CocktailsLoadInProgress());
     try {
       final cocktails = await cocktailRepository.getAll();
       emit(CocktailsLoadSuccess(cocktails: cocktails));
@@ -23,8 +24,8 @@ class FavoritesCubit extends Cubit<FavoritesState> {
       CocktailDefinition cocktailDefinition) async {
     emit(CocktailsLoadInProgress());
     try {
-      final cocktails = await cocktailRepository.add(
-          cocktailDefinition.id, cocktailDefinition);
+      cocktailRepository.add(cocktailDefinition.id, cocktailDefinition);
+      final cocktails = await cocktailRepository.getAll();
       emit(CocktailsLoadSuccess(cocktails: cocktails));
     } catch (e) {
       print(e);
@@ -36,8 +37,8 @@ class FavoritesCubit extends Cubit<FavoritesState> {
       CocktailDefinition cocktailDefinition) async {
     emit(CocktailsLoadInProgress());
     try {
-      final cocktails = await cocktailRepository.remove(cocktailDefinition.id);
-      emit(CocktailsLoadSuccess(cocktails: cocktails));
+      //final cocktails = await cocktailRepository.remove(cocktailDefinition.id);
+      // emit(CocktailsLoadSuccess(cocktails: cocktails));
     } catch (e) {
       print(e);
       emit(CocktailsLoadFailure(e.toString()));

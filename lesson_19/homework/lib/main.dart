@@ -1,8 +1,10 @@
 import 'package:cocktail_app/core/models.dart';
 import 'package:cocktail_app/core/src/repository/favourite_cocktail_repository.dart';
+import 'package:cocktail_app/cubit/favorites_cubit.dart';
 import 'package:cocktail_app/ui/pages/random_cocktail_page.dart';
 import 'package:cocktail_app/ui/style/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
   runApp(CocktailOfDayApp());
@@ -16,14 +18,19 @@ class CocktailOfDayApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      darkTheme: mainThemeData,
-      themeMode: ThemeMode.dark,
-      initialRoute: CocktailOfDayApp.defaultRoute,
-      routes: {
-        CocktailOfDayApp.defaultRoute: (context) =>
-            RandomCocktailPageWidget(repository),
+    return BlocProvider(
+      create: (BuildContext context) {
+        return FavoritesCubit(favoriteRepository);
       },
+      child: MaterialApp(
+        darkTheme: mainThemeData,
+        themeMode: ThemeMode.dark,
+        initialRoute: CocktailOfDayApp.defaultRoute,
+        routes: {
+          CocktailOfDayApp.defaultRoute: (context) =>
+              RandomCocktailPageWidget(repository),
+        },
+      ),
     );
   }
 }
