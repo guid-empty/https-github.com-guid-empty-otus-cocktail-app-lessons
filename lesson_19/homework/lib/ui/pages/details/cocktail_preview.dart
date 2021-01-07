@@ -22,10 +22,10 @@ class CocktailPreview extends StatelessWidget {
             child: Container(
               color: Colors.transparent,
               foregroundDecoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                      colors: [CustomColors.gradient_first, CustomColors.gradient_second],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter)),
+                  gradient: const LinearGradient(colors: [
+                CustomColors.gradient_first,
+                CustomColors.gradient_second
+              ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
             ),
           ),
         ),

@@ -22,7 +22,9 @@ class CocktailGridItem extends StatelessWidget {
         Navigator.of(context).push(
           MaterialPageRoute<void>(
             builder: (context) => CocktailDetailsLoaderPageWidget(
-                cocktailId: cocktailDefinition.id),
+              cocktailId: cocktailDefinition.id,
+              cocktailDefinition: cocktailDefinition,
+            ),
           ),
         );
       },
@@ -65,7 +67,10 @@ class CocktailGridItem extends StatelessWidget {
                           label: Text(selectedCategory.name,
                               style: Theme.of(context).textTheme.caption),
                         ),
-                        IsFavorite(cocktailDefinition),
+                        Flexible(
+                          child: IsFavorite(
+                              cocktailDefinition: cocktailDefinition),
+                        ),
                       ]),
                 ],
               ),

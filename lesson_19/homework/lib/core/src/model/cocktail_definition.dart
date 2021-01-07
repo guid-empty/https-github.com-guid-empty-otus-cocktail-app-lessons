@@ -20,7 +20,7 @@ class CocktailDefinition {
   final String id;
   final String name;
   final String drinkThumbUrl;
-  final bool isFavourite;
+  bool isFavourite;
 
   CocktailDefinition({
     @required this.id,

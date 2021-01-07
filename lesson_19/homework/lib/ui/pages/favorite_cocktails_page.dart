@@ -1,12 +1,6 @@
-import 'dart:math';
-
-import 'package:cocktail_app/core/src/model/cocktail_category.dart';
-import 'package:cocktail_app/core/src/model/cocktail_definition.dart';
 import 'package:cocktail_app/cubit/favorites_cubit.dart';
 import 'package:cocktail_app/cubit/favorites_state.dart';
-import 'package:cocktail_app/main.dart';
 import 'package:cocktail_app/ui/aplication/application_scaffold.dart';
-import 'package:cocktail_app/ui/pages/categories_fitler_bar_delegate.dart';
 import 'package:cocktail_app/ui/pages/cocktail_grid_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

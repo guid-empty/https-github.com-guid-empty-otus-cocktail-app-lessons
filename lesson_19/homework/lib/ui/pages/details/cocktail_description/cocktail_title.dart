@@ -1,9 +1,7 @@
 import 'package:cocktail_app/core/models.dart';
-import 'package:cocktail_app/cubit/favorites_cubit.dart';
 import 'package:cocktail_app/ui/pages/details/cocktail_description/coctail_isfavorite.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 ///
 /// TODO:
@@ -35,11 +33,13 @@ class CocktailTitle extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          cocktailDefinition.name ?? '',
-          style: Theme.of(context).textTheme.headline3,
+        Flexible(
+          child: Text(
+            cocktailDefinition.name ?? '',
+            style: Theme.of(context).textTheme.headline3,
+          ),
         ),
-        IsFavorite(cocktailDefinition),
+        IsFavorite(cocktailDefinition: cocktailDefinition),
       ],
     );
   }

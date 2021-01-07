@@ -37,8 +37,10 @@ class FavoritesCubit extends Cubit<FavoritesState> {
       CocktailDefinition cocktailDefinition) async {
     emit(CocktailsLoadInProgress());
     try {
-      //final cocktails = await cocktailRepository.remove(cocktailDefinition.id);
-      // emit(CocktailsLoadSuccess(cocktails: cocktails));
+      await cocktailRepository.remove(
+          cocktailDefinition.id, cocktailDefinition);
+      final cocktails = await cocktailRepository.getAll();
+      emit(CocktailsLoadSuccess(cocktails: cocktails));
     } catch (e) {
       print(e);
       emit(CocktailsLoadFailure(e.toString()));
