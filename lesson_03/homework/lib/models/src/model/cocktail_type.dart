@@ -2,11 +2,18 @@
 /// curl https://the-cocktail-db.p.rapidapi.com/list.php\?a\=list
 ///
 class CocktailType {
-  static const CocktailType alcoholic = CocktailType._('alcoholic', 'Alcoholic');
-  static const CocktailType nonAlcoholic = CocktailType._('nonAlcoholic', 'Non alcoholic');
-  static const CocktailType optionalAlcohol = CocktailType._('optionalAlcohol', 'Optional alcohol');
+  static const CocktailType alcoholic =
+      CocktailType._('alcoholic', 'Alcoholic');
+  static const CocktailType nonAlcoholic =
+      CocktailType._('nonAlcoholic', 'Non alcoholic');
+  static const CocktailType optionalAlcohol =
+      CocktailType._('optionalAlcohol', 'Optional alcohol');
 
-  static const Iterable<CocktailType> values = [alcoholic, nonAlcoholic, optionalAlcohol];
+  static const Iterable<CocktailType> values = [
+    alcoholic,
+    nonAlcoholic,
+    optionalAlcohol
+  ];
 
   final String value;
   final String name;
@@ -18,7 +25,10 @@ class CocktailType {
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) || other is CocktailType && runtimeType == other.runtimeType && value == other.value;
+      identical(this, other) ||
+      other is CocktailType &&
+          runtimeType == other.runtimeType &&
+          value == other.value;
 
   @override
   String toString() => 'CocktailType{value: $value, name: $name}';
@@ -27,6 +37,7 @@ class CocktailType {
   /// Show toString() method using in debug session
   ///
 
-  static CocktailType parse(String raw) =>
-      values.firstWhere((element) => element.value.toLowerCase() == raw.toLowerCase(), orElse: () => null);
+  static CocktailType parse(String raw) => values.firstWhere(
+      (element) => element.value.toLowerCase() == raw.toLowerCase(),
+      orElse: () => null);
 }
