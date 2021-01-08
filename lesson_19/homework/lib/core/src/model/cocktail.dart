@@ -76,7 +76,7 @@ class Cocktail {
   final CocktailType cocktailType;
   final Iterable<IngredientDefinition> ingredients;
   final String drinkThumbUrl;
-  final bool isFavourite;
+  bool isFavourite;
 
   Cocktail({
     @required this.id,
@@ -93,5 +93,13 @@ class Cocktail {
   @override
   String toString() {
     return 'Cocktail{id: $id, name: $name, instruction: $instruction, category: $category, glassType: $glassType, cocktailType: $cocktailType, ingredients: $ingredients, drinkThumbUrl: $drinkThumbUrl, isFavourite: $isFavourite}';
+  }
+
+  void setFav() {
+    isFavourite = true;
+  }
+
+  void setUnfav() {
+    isFavourite = false;
   }
 }

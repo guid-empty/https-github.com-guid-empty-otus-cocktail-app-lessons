@@ -4,6 +4,8 @@ import 'package:cocktail_app/ui/pages/categories_fitler_bar_delegate.dart';
 import 'package:cocktail_app/ui/pages/cocktail_grid_item.dart';
 import 'package:cocktail_app/ui/pages/filter_results_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:cocktail_app/stores/cocktail_store.dart';
 
 class RandomCocktailPageWidget extends StatefulWidget {
   final AsyncCocktailRepository repository;
@@ -11,12 +13,17 @@ class RandomCocktailPageWidget extends StatefulWidget {
   const RandomCocktailPageWidget(this.repository, {Key key}) : super(key: key);
 
   @override
-  _RandomCocktailPageWidgetState createState() => _RandomCocktailPageWidgetState();
+  _RandomCocktailPageWidgetState createState() =>
+      _RandomCocktailPageWidgetState();
 }
 
 class _RandomCocktailPageWidgetState extends State<RandomCocktailPageWidget> {
   @override
   Widget build(BuildContext context) {
+    //обращение к стору, созданному на уровне приложения
+    final store = Provider.of<CocktailStore>(context);
+    store.getFromStorage();
+
     return ApplicationScaffold(
       title: 'Коктейль дня',
       currentSelectedNavBarItem: 0,
@@ -29,7 +36,8 @@ class _RandomCocktailPageWidgetState extends State<RandomCocktailPageWidget> {
               onCategorySelected: (category) {
                 Navigator.of(context).push(
                   MaterialPageRoute<void>(
-                    builder: (context) => FilterResultsPageWidget(selectedCategory: category),
+                    builder: (context) =>
+                        FilterResultsPageWidget(selectedCategory: category),
                   ),
                 );
               },
@@ -69,7 +77,8 @@ class _RandomCocktailPageWidgetState extends State<RandomCocktailPageWidget> {
               sliver: SliverGrid(
                 delegate: SliverChildBuilderDelegate(
                   (ctx, index) {
-                    return CocktailGridItem(cocktailDefinition, selectedCategory: cocktail.category);
+                    return CocktailGridItem(cocktailDefinition,
+                        selectedCategory: cocktail.category);
                   },
                   childCount: 1,
                 ),
