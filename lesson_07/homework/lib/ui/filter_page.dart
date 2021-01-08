@@ -11,9 +11,9 @@
 // 8. Делаем fork от репозитория и сдаем через PR
 // 9. Помним про декомпозицию кода по методам и классам.
 
-import 'file:///C:/Data/FlutterProjects/otus-cocktail-app-lessons/lesson_07/homework/lib/core/src/ui/search_field.dart';
 import 'package:cocktail/core/src/ui/categories_list.dart';
 import 'package:cocktail/core/src/ui/cocktails_grid_view.dart';
+import 'package:cocktail/core/src/ui/search_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
