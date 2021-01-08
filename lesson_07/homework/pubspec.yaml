@@ -10,7 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   json_annotation: ^3.0.1
-
+  liquid_progress_indicator: ^0.3.2
 flutter:
   uses-material-design: true
 
