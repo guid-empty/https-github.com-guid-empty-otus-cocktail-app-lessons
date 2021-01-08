@@ -9,14 +9,18 @@ import 'package:flutter/material.dart';
 class CocktailDetailPage extends StatelessWidget {
   final Cocktail cocktail;
 
-  const CocktailDetailPage(this.cocktail, {Key key}) : super(key: key);
+  const CocktailDetailPage({this.cocktail, Cocktail data, Key key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         children: [
-          CocktailPreview(imageUrl: cocktail.drinkThumbUrl),
+          CocktailPreview(
+            imageUrl: cocktail.drinkThumbUrl,
+            cocktail: cocktail,
+          ),
           CocktailDescriptionWidget(cocktail: cocktail),
           CocktailIngredients(cocktailIngredients: cocktail.ingredients),
           CocktailInstruction(cocktailInstruction: cocktail.instruction),
