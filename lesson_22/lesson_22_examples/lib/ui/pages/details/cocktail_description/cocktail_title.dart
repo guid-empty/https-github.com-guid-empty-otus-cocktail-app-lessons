@@ -21,7 +21,7 @@ class CocktailTitle extends StatelessWidget {
           _getIsFavoriteIcon()
         ],
       );
-
+//TODO написать тест на покрытие кнопки isFavourite - состояние ВИзбранном, Не В Избранном
   Widget _getIsFavoriteIcon() => Semantics(
       label: 'Favorite Icon button',
       hint: 'Press to favorite',
