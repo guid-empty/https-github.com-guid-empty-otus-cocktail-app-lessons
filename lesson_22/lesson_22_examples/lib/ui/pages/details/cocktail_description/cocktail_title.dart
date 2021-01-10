@@ -29,7 +29,10 @@ class CocktailTitle extends StatelessWidget {
       // onTap: () { setState(() { _counter++; }); }
       child: isFavorite
           ? IconButton(
-              icon: Icon(Icons.favorite, color: Colors.white),
+              icon: Icon(
+                Icons.favorite,
+                color: Colors.white,
+              ),
               onPressed: () {},
             )
           : IconButton(

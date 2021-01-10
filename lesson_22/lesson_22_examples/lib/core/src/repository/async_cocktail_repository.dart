@@ -21,7 +21,7 @@ class AsyncCocktailRepository {
   };
 
   Future<Cocktail> fetchCocktailDetails(String id) async {
-    var result;
+    Cocktail result;
 
     final url = 'https://the-cocktail-db.p.rapidapi.com/lookup.php?i=$id';
     var response = await http.get(url, headers: _headers);
