@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cocktail_app/src/continue_to_cover_test_classes/fetch_cocktails_test.dart';
 @TestOn('vm')
+// ignore: invalid_annotation_target
 @Timeout(Duration(seconds: 10))
 import 'package:test/test.dart';
 import 'package:cocktail_app/src/continue_to_cover_test_classes/utilites/http_service.dart';
@@ -15,8 +16,8 @@ void main() {
     httpServiceMock = HttpServiceMock();
   });
 
-  group('Success', () {
-    test('True if http service is answered with Ok', () async {
+  group('Fetch cocktails repository', () {
+    test('Success', () async {
       when(httpServiceMock.get(any))
           .thenAnswer((realInvocation) => Future.value(HttpResponse.ok));
       fetchCocktailsTestHelper = FetchCocktailsTestHelper(httpServiceMock);

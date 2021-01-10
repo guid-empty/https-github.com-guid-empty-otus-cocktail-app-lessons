@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/golden_test_example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/golden_test_example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/golden_test_example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/golden_test_example/lesson_20_example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/golden_test_example/lesson_20_example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/golden_test_example/lesson_20_example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/golden_test_example/lesson_20_example/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/golden_test_example/lesson_20_example/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/golden_test_example/lesson_20_example/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_22_examples/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_22_examples/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_22_examples/build" />
+      <excludeFolder url="file://$MODULE_DIR$/package-simple/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/package-simple/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/package-simple/build" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Dart SDK" level="project" />
+    <orderEntry type="library" name="Dart Packages" level="project" />
+  </component>
+</module>

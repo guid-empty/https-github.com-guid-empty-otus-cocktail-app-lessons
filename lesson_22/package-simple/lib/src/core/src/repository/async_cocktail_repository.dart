@@ -15,7 +15,7 @@ import 'package:http/http.dart' as http;
 class AsyncCocktailRepository {
   static const String _apiKey = 'e5b7f97a78msh3b1ba27c40d8ccdp105034jsn34e2da32d50b';
 
-  static const Map<String, String> _headers = const {
+  static const Map<String, String> _headers = {
     'x-rapidapi-key': _apiKey,
   };
 
@@ -29,7 +29,7 @@ class AsyncCocktailRepository {
       var drinks = jsonResponse['drinks'] as Iterable<dynamic>;
 
       final dtos = drinks.cast<Map<String, dynamic>>().map((json) => CocktailDto.fromJson(json));
-      if (dtos.length > 0) {
+      if (dtos.isNotEmpty) {
         result = _createCocktailFromDto(dtos.first);
       }
     } else {
@@ -140,7 +140,7 @@ class AsyncCocktailRepository {
       var drinks = jsonResponse['drinks'] as Iterable<dynamic>;
 
       final dtos = drinks.cast<Map<String, dynamic>>().map((json) => CocktailDto.fromJson(json));
-      if (dtos.length > 0) {
+      if (dtos.isNotEmpty) {
         result = _createCocktailFromDto(dtos.first);
       }
     } else {
