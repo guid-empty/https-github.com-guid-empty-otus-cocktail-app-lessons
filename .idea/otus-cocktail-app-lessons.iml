@@ -45,6 +45,36 @@
       <excludeFolder url="file://$MODULE_DIR$/lesson_14/lesson/build" />
       <excludeFolder url="file://$MODULE_DIR$/lesson_15/lesson/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/lesson_15/lesson/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_16/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_16/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_17/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_17/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_18/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_18/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_19/calculator/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_19/calculator/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_19/currency_v1/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_19/currency_v1/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_19/currency_v2/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_19/currency_v2/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_19/homework/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_19/homework/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_20/homework/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_20/homework/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_20/lesson_20_example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_20/lesson_20_example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_20/lesson_20_example/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_20/lesson_20_example/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_22/golden_test_example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_22/golden_test_example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_22/golden_test_example/lesson_20_example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_22/golden_test_example/lesson_20_example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_22/golden_test_example/lesson_20_example/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_22/golden_test_example/lesson_20_example/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_22/lesson_22_examples/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_22/lesson_22_examples/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_22/package-simple/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_22/package-simple/build" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

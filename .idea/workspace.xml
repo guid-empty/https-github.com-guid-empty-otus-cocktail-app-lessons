@@ -19,7 +19,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="safaryanova_elina_homework_12" />
+        <entry key="$PROJECT_DIR$" value="safaryanova_elina_homework_20" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -33,7 +33,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lesson_14/homework" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lesson_22" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="SvnConfiguration">
@@ -57,9 +57,9 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="167" y="125" width="1653" height="855" key="AVDManager/67.27.1853.1053@67.27.1853.1053" timestamp="1606665723144" />
-    <state x="776" y="310" width="424" height="484" key="FileChooserDialogImpl" timestamp="1606665721738">
+    <state x="776" y="310" width="424" height="484" key="FileChooserDialogImpl" timestamp="1610303739360">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state x="776" y="310" width="424" height="484" key="FileChooserDialogImpl/67.27.1853.1053@67.27.1853.1053" timestamp="1606665721738" />
+    <state x="776" y="310" width="424" height="484" key="FileChooserDialogImpl/67.27.1853.1053@67.27.1853.1053" timestamp="1610303739360" />
   </component>
 </project>
