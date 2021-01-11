@@ -10,6 +10,7 @@ import 'package:cocktail_app/core/src/model/cocktail_type.dart';
 import 'package:cocktail_app/core/src/model/glass_type.dart';
 import 'package:cocktail_app/core/src/model/ingredient.dart';
 import 'package:cocktail_app/core/src/model/ingredient_definition.dart';
+import 'package:cocktail_app/ui/state/local_cocktail_def_repo.dart';
 import 'package:http/http.dart' as http;
 
 class AsyncCocktailRepository {
@@ -55,15 +56,7 @@ class AsyncCocktailRepository {
 
       final dtos = drinks.cast<Map<String, dynamic>>().map((json) => CocktailDefinitionDto.fromJson(json));
 
-      for (final dto in dtos) {
-        result.add(CocktailDefinition(
-          id: dto.idDrink,
-          isFavourite: false,
-          /*  TODO: is Favorite field fetching  */
-          name: dto.strDrink,
-          drinkThumbUrl: dto.strDrinkThumb,
-        ));
-      }
+      LocalCocktailDefinitionsRepository.createCocktailDefinitionsFromDTO(dtos, result);
     } else {
       throw HttpException('Request failed with status: ${response.statusCode}');
     }
@@ -87,15 +80,7 @@ class AsyncCocktailRepository {
 
       final dtos = drinks.cast<Map<String, dynamic>>().map((json) => CocktailDefinitionDto.fromJson(json));
 
-      for (final dto in dtos) {
-        result.add(CocktailDefinition(
-          id: dto.idDrink,
-          isFavourite: false,
-          /*  TODO: is Favorite field fetching  */
-          name: dto.strDrink,
-          drinkThumbUrl: dto.strDrinkThumb,
-        ));
-      }
+      LocalCocktailDefinitionsRepository.createCocktailDefinitionsFromDTO(dtos, result);
     } else {
       throw HttpException('Request failed with status: ${response.statusCode}');
     }

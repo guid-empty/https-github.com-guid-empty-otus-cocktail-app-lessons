@@ -64,7 +64,7 @@ class _FilterResultsPageWidgetState extends State<FilterResultsPageWidget> {
               padding: const EdgeInsets.symmetric(horizontal: 24),
               sliver: SliverGrid(
                   delegate: SliverChildBuilderDelegate((ctx, index) {
-                    return CocktailGridItem(snapshot.data.elementAt(index), selectedCategory: _categoryNotifier.value);
+                    return CocktailGridItem(snapshot.data.elementAt(index));
                   }, childCount: snapshot.data.length),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       childAspectRatio: CocktailGridItem.aspectRatio,

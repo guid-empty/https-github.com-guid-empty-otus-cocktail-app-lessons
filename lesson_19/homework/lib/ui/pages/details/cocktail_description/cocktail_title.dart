@@ -1,5 +1,6 @@
 import 'package:cocktail_app/core/src/model/cocktail.dart';
 import 'package:cocktail_app/ui/state/fav_store.dart';
+import 'package:cocktail_app/ui/state/local_cocktail_def_repo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -46,25 +47,28 @@ class CocktailTitle extends StatelessWidget {
 
   Widget _getIsFavoriteIcon(BuildContext context) {
     var store = Provider.of<FavStore>(context);
-    return Observer(
-        builder: (_) {
-          bool isFavorite = store.favouriteCocktails.containsKey(cocktail.id);
-          return _choseFavIcon(isFavorite, store);
-        }
-    );
+    return Observer(builder: (_) {
+      return _generateFavIcon(store);
+    });
   }
 
-
-  IconButton _choseFavIcon(bool isFavorite, FavStore store) {
+  IconButton _generateFavIcon(FavStore store) {
+    bool isFavorite = store.isFavourite(cocktail.id);
     if (isFavorite) {
       return IconButton(
         icon: Icon(Icons.favorite, color: Colors.white),
-        onPressed: () => store.removeFromFavourites(cocktail),
+        onPressed: () {
+          var cdef = LocalCocktailDefinitionsRepository.createCocktailDefinitionFromCocktail(cocktail);
+          store.removeFromFavourites(cdef);
+        },
       );
     } else {
       return IconButton(
         icon: Icon(Icons.favorite_border, color: Colors.white),
-        onPressed: () => store.addToFavourites(cocktail),
+        onPressed: () {
+          var cdef = LocalCocktailDefinitionsRepository.createCocktailDefinitionFromCocktail(cocktail);
+          store.addToFavourites(cdef);
+        },
       );
     }
   }

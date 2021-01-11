@@ -12,18 +12,18 @@ mixin _$FavStore on _FavStore, Store {
   final _$_FavStoreActionController = ActionController(name: '_FavStore');
 
   @override
-  void loadFavourites() {
+  void _loadFavourites() {
     final _$actionInfo = _$_FavStoreActionController.startAction(
         name: '_FavStore.loadFavourites');
     try {
-      return super.loadFavourites();
+      return super._loadFavourites();
     } finally {
       _$_FavStoreActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void addToFavourites(Cocktail cocktail) {
+  void addToFavourites(CocktailDefinition cocktail) {
     final _$actionInfo = _$_FavStoreActionController.startAction(
         name: '_FavStore.addToFavourites');
     try {
@@ -34,7 +34,7 @@ mixin _$FavStore on _FavStore, Store {
   }
 
   @override
-  void removeFromFavourites(Cocktail cocktail) {
+  void removeFromFavourites(CocktailDefinition cocktail) {
     final _$actionInfo = _$_FavStoreActionController.startAction(
         name: '_FavStore.removeFromFavourites');
     try {

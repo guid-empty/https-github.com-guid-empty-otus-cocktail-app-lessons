@@ -1,3 +1,4 @@
+import 'package:cocktail_app/core/models.dart';
 import 'package:flutter/foundation.dart';
 
 ///
@@ -20,12 +21,12 @@ class CocktailDefinition {
   final String id;
   final String name;
   final String drinkThumbUrl;
-  final bool isFavourite;
+  final CocktailCategory category;
 
   CocktailDefinition({
     @required this.id,
     @required this.name,
     @required this.drinkThumbUrl,
-    @required this.isFavourite,
+    @required this.category,
   });
 }

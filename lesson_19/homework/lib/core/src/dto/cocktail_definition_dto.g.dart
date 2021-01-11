@@ -12,5 +12,15 @@ CocktailDefinitionDto _$CocktailDefinitionDtoFromJson(
     json['strDrink'] as String,
     json['strDrinkThumb'] as String,
     json['idDrink'] as String,
+    json['strCategory'] as String,
   );
 }
+
+Map<String, dynamic> _$CocktailDefinitionDtoToJson(
+        CocktailDefinitionDto instance) =>
+    <String, dynamic>{
+      'strDrink': instance.strDrink,
+      'strDrinkThumb': instance.strDrinkThumb,
+      'idDrink': instance.idDrink,
+      'strCategory': instance.strCategory,
+    };

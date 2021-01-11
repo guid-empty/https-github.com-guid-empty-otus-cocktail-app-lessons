@@ -1,38 +1,45 @@
 import 'package:cocktail_app/core/models.dart';
+import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 
+import 'local_cocktail_def_repo.dart';
+
 part 'fav_store.g.dart';
+
 class FavStore = _FavStore with _$FavStore;
 
-abstract class _FavStore with Store{
-  ObservableMap<String, Cocktail> favouriteCocktails = ObservableMap();
+abstract class _FavStore with Store {
+  ObservableMap<String, CocktailDefinition> favouriteCocktails = ObservableMap();
+  LocalCocktailDefinitionsRepository repository = LocalCocktailDefinitionsRepository();
 
-  @action
-  void loadFavourites(){
-    //todo init from file
+  init() async {
+    Map<String, CocktailDefinition> res = await repository.load();
+    favouriteCocktails.addAll(res);
+    print("loaded: $favouriteCocktails");
   }
 
-  void init(){
-    autorun((_) {
-      persistFavourites();
-    });
+  void _persist() {
+    repository.persist(favouriteCocktails);
+    print("persisted: $favouriteCocktails");
   }
 
   @action
-  void addToFavourites(Cocktail cocktail){
+  void addToFavourites(CocktailDefinition cocktail) {
     favouriteCocktails[cocktail.id] = cocktail;
+    _persist();
   }
 
-  // bool isFavourite(CocktailDefinition cocktail){
-  //   return favouriteCocktails.containsKey(cocktail.id);
-  // }
+  bool isFavourite(String id) {
+    return favouriteCocktails.containsKey(id);
+  }
 
   @action
-  void removeFromFavourites(Cocktail cocktail){
+  void removeFromFavourites(CocktailDefinition cocktail) {
     favouriteCocktails.remove(cocktail.id);
+    _persist();
   }
 
-  void persistFavourites() {
-    //todo persist to file
+  void _loadFavourites() {
+    print("load favourites: $favouriteCocktails");
   }
 }

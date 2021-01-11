@@ -3,6 +3,7 @@ import 'package:cocktail_app/ui/aplication/application_scaffold.dart';
 import 'package:cocktail_app/ui/pages/categories_fitler_bar_delegate.dart';
 import 'package:cocktail_app/ui/pages/cocktail_grid_item.dart';
 import 'package:cocktail_app/ui/pages/filter_results_page.dart';
+import 'package:cocktail_app/ui/state/local_cocktail_def_repo.dart';
 import 'package:flutter/material.dart';
 
 class RandomCocktailPageWidget extends StatefulWidget {
@@ -57,19 +58,14 @@ class _RandomCocktailPageWidgetState extends State<RandomCocktailPageWidget> {
 
           if (snapshot.hasData) {
             final cocktail = snapshot.data;
-            final cocktailDefinition = CocktailDefinition(
-              id: cocktail.id,
-              name: cocktail.name,
-              drinkThumbUrl: cocktail.drinkThumbUrl,
-              isFavourite: cocktail.isFavourite,
-            );
+            CocktailDefinition cocktailDefinition = LocalCocktailDefinitionsRepository.createCocktailDefinitionFromCocktail(cocktail);
 
             return SliverPadding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
               sliver: SliverGrid(
                 delegate: SliverChildBuilderDelegate(
                   (ctx, index) {
-                    return CocktailGridItem(cocktailDefinition, selectedCategory: cocktail.category);
+                    return CocktailGridItem(cocktailDefinition);
                   },
                   childCount: 1,
                 ),
