@@ -7,6 +7,8 @@ import 'package:cocktail_app/ui/pages/categories_fitler_bar_delegate.dart';
 import 'package:cocktail_app/ui/pages/cocktail_grid_item.dart';
 import 'package:flutter/material.dart';
 
+import 'favorite_page.dart';
+
 class FilterResultsPageWidget extends StatefulWidget {
   final CocktailCategory selectedCategory;
 
@@ -41,16 +43,7 @@ class _FilterResultsPageWidgetState extends State<FilterResultsPageWidget> {
     return CustomScrollView(
           slivers: [
             SliverToBoxAdapter(child: SizedBox(height: 21)),
-            SliverPersistentHeader(
-              delegate: CategoriesFilterBarDelegate(
-                CocktailCategory.values,
-                onCategorySelected: (category) {
-                  _categoryNotifier.value = category;
-                },
-                selectedCategory: _categoryNotifier.value,
-              ),
-              floating: true,
-            ),
+            FavoritePageWidget.buildSliverPersistentHeader(_categoryNotifier),
             SliverToBoxAdapter(child: SizedBox(height: 24)),
             _buildCocktailItems(context)
           ],
@@ -66,18 +59,7 @@ class _FilterResultsPageWidgetState extends State<FilterResultsPageWidget> {
           }
 
           if (snapshot.hasData) {
-            return SliverPadding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              sliver: SliverGrid(
-                  delegate: SliverChildBuilderDelegate((ctx, index) {
-                    return CocktailGridItem(snapshot.data.elementAt(index));
-                  }, childCount: snapshot.data.length),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      childAspectRatio: CocktailGridItem.aspectRatio,
-                      crossAxisSpacing: 6,
-                      mainAxisSpacing: 6,
-                      crossAxisCount: 2)),
-            );
+            return FavoritePageWidget.buildSliverPadding(snapshot.data);
           }
 
           //  todo set loader

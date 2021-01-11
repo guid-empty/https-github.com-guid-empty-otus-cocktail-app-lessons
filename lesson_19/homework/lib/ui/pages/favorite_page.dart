@@ -1,4 +1,3 @@
-
 import 'package:cocktail_app/core/models.dart';
 import 'package:cocktail_app/ui/aplication/application_scaffold.dart';
 import 'package:cocktail_app/ui/pages/categories_fitler_bar_delegate.dart';
@@ -15,6 +14,34 @@ class FavoritePageWidget extends StatefulWidget {
 
   @override
   _FavoritePageWidgetState createState() => _FavoritePageWidgetState(selectedCategory);
+
+  static SliverPersistentHeader buildSliverPersistentHeader(ValueNotifier<CocktailCategory> _categoryNotifier) {
+    return SliverPersistentHeader(
+      delegate: CategoriesFilterBarDelegate(
+        CocktailCategory.values,
+        onCategorySelected: (category) {
+          _categoryNotifier.value = category;
+        },
+        selectedCategory: _categoryNotifier.value,
+      ),
+      floating: true,
+    );
+  }
+
+  static SliverPadding buildSliverPadding(Iterable<CocktailDefinition> cocktails) {
+    return SliverPadding(
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      sliver: SliverGrid(
+          delegate: SliverChildBuilderDelegate((ctx, index) {
+            return CocktailGridItem(cocktails.elementAt(index));
+          }, childCount: cocktails.length),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              childAspectRatio: CocktailGridItem.aspectRatio,
+              crossAxisSpacing: 6,
+              mainAxisSpacing: 6,
+              crossAxisCount: 2)),
+    );
+  }
 }
 
 class _FavoritePageWidgetState extends State<FavoritePageWidget> {
@@ -42,16 +69,7 @@ class _FavoritePageWidgetState extends State<FavoritePageWidget> {
     return CustomScrollView(
       slivers: [
         SliverToBoxAdapter(child: SizedBox(height: 21)),
-        SliverPersistentHeader(
-          delegate: CategoriesFilterBarDelegate(
-            CocktailCategory.values,
-            onCategorySelected: (category) {
-              _categoryNotifier.value = category;
-            },
-            selectedCategory: _categoryNotifier.value,
-          ),
-          floating: true,
-        ),
+        FavoritePageWidget.buildSliverPersistentHeader(_categoryNotifier),
         SliverToBoxAdapter(child: SizedBox(height: 24)),
         _buildCocktailItems(context)
       ],
@@ -61,18 +79,7 @@ class _FavoritePageWidgetState extends State<FavoritePageWidget> {
   Widget _buildCocktailItems(BuildContext context) {
     return Observer(builder: (context) {
       var cocktails = fetchCocktails(context);
-      return SliverPadding(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        sliver: SliverGrid(
-            delegate: SliverChildBuilderDelegate((ctx, index) {
-              return CocktailGridItem(cocktails.elementAt(index));
-            }, childCount: cocktails.length),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: CocktailGridItem.aspectRatio,
-                crossAxisSpacing: 6,
-                mainAxisSpacing: 6,
-                crossAxisCount: 2)),
-      );
+      return FavoritePageWidget.buildSliverPadding(cocktails);
     });
   }
 

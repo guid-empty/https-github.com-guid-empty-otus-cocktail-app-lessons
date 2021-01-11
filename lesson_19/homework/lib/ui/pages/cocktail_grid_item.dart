@@ -51,12 +51,9 @@ class CocktailGridItem extends StatelessWidget {
                   Text(cocktailDefinition.name ?? '', style: Theme.of(context).textTheme.bodyText1),
                   Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, mainAxisSize: MainAxisSize.max, children: [
                     Chip(
-                      backgroundColor: CustomColors.black,
-                      label: Text(cocktailDefinition.category.name, style: Theme.of(context).textTheme.caption),
-                    ),
-                    Observer(
-                        builder: (context) => _getIsFavoriteIcon(context)
-                    ),
+                        backgroundColor: CustomColors.black,
+                        label: Text(cocktailDefinition.category.name, style: Theme.of(context).textTheme.caption)),
+                    Observer(builder: (context) => _getIsFavoriteIcon(context)),
                   ]),
                 ],
               ),
