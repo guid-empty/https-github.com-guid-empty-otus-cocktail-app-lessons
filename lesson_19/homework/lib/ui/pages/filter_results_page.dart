@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cocktail_app/core/models.dart';
 import 'package:cocktail_app/main.dart';
 import 'package:cocktail_app/ui/aplication/application_scaffold.dart';
@@ -29,31 +31,35 @@ class _FilterResultsPageWidgetState extends State<FilterResultsPageWidget> {
       child: ValueListenableBuilder(
         valueListenable: _categoryNotifier,
         builder: (ctx, value, child) {
-          return CustomScrollView(
-            slivers: [
-              SliverToBoxAdapter(child: SizedBox(height: 21)),
-              SliverPersistentHeader(
-                delegate: CategoriesFilterBarDelegate(
-                  CocktailCategory.values,
-                  onCategorySelected: (category) {
-                    _categoryNotifier.value = category;
-                  },
-                  selectedCategory: _categoryNotifier.value,
-                ),
-                floating: true,
-              ),
-              SliverToBoxAdapter(child: SizedBox(height: 24)),
-              _buildCocktailItems(context)
-            ],
-          );
+          return buildCustomScrollView(context);
         },
       ),
     );
   }
 
+  CustomScrollView buildCustomScrollView(BuildContext context) {
+    return CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(child: SizedBox(height: 21)),
+            SliverPersistentHeader(
+              delegate: CategoriesFilterBarDelegate(
+                CocktailCategory.values,
+                onCategorySelected: (category) {
+                  _categoryNotifier.value = category;
+                },
+                selectedCategory: _categoryNotifier.value,
+              ),
+              floating: true,
+            ),
+            SliverToBoxAdapter(child: SizedBox(height: 24)),
+            _buildCocktailItems(context)
+          ],
+        );
+  }
+
   Widget _buildCocktailItems(BuildContext context) {
     return FutureBuilder<Iterable<CocktailDefinition>>(
-        future: repository.fetchCocktailsByCocktailCategory(_categoryNotifier.value),
+        future: fetchCocktails(context),
         builder: (ctx, snapshot) {
           if (snapshot.hasError) {
             return SliverFillRemaining(child: Center(child: Text(snapshot.error.toString())));
@@ -77,5 +83,9 @@ class _FilterResultsPageWidgetState extends State<FilterResultsPageWidget> {
           //  todo set loader
           return SliverFillRemaining(child: const SizedBox());
         });
+  }
+
+  Future<Iterable<CocktailDefinition>> fetchCocktails(BuildContext context) {
+      return repository.fetchCocktailsByCocktailCategory(_categoryNotifier.value);
   }
 }

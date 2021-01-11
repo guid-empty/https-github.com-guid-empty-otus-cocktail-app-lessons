@@ -47,7 +47,7 @@ class LocalCocktailDefinitionsRepository{
           id: dto.idDrink,
           name: dto.strDrink,
           drinkThumbUrl: dto.strDrinkThumb,
-          category: CocktailCategory.parse(dto.strCategory)
+          category: dto.strCategory == null ? null : CocktailCategory.parseByName(dto.strCategory)
       ));
     }
   }
@@ -71,6 +71,6 @@ class LocalCocktailDefinitionsRepository{
   }
 
   CocktailDefinition fromDTO(CocktailDefinitionDto dto) {
-    return CocktailDefinition(id: dto.idDrink, name: dto.strDrink, drinkThumbUrl: dto.strDrinkThumb, category: CocktailCategory.parse(dto.strCategory));
+    return CocktailDefinition(id: dto.idDrink, name: dto.strDrink, drinkThumbUrl: dto.strDrinkThumb, category: CocktailCategory.parseByName(dto.strCategory));
   }
 }

@@ -1,4 +1,4 @@
-import 'package:cocktail_app/ui/pages/favorite_cocktails_page.dart';
+import 'package:cocktail_app/ui/pages/favorite_page.dart';
 import 'package:cocktail_app/ui/style/custom_colors.dart';
 import 'package:cocktail_app/ui/style/svg_icons.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +46,7 @@ class _ApplicationNavigationBarState extends State<ApplicationNavigationBar> wit
             if (index == 2 && _tabController.previousIndex != _tabController.index) {
               Navigator.of(context).push(
                 MaterialPageRoute<void>(
-                  builder: (context) => FavouriteCocktailsPage(),
+                  builder: (context) => FavoritePageWidget(selectedCategory: null),
                 ),
               );
             } else {

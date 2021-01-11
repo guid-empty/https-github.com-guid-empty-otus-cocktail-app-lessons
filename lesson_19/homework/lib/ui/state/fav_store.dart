@@ -1,5 +1,4 @@
 import 'package:cocktail_app/core/models.dart';
-import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 
 import 'local_cocktail_def_repo.dart';
@@ -15,12 +14,12 @@ abstract class _FavStore with Store {
   init() async {
     Map<String, CocktailDefinition> res = await repository.load();
     favouriteCocktails.addAll(res);
-    print("loaded: $favouriteCocktails");
+    // print("loaded: $favouriteCocktails");
   }
 
   void _persist() {
     repository.persist(favouriteCocktails);
-    print("persisted: $favouriteCocktails");
+    // print("persisted: $favouriteCocktails");
   }
 
   @action
@@ -37,9 +36,5 @@ abstract class _FavStore with Store {
   void removeFromFavourites(CocktailDefinition cocktail) {
     favouriteCocktails.remove(cocktail.id);
     _persist();
-  }
-
-  void _loadFavourites() {
-    print("load favourites: $favouriteCocktails");
   }
 }

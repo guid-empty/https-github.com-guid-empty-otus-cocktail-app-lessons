@@ -32,14 +32,19 @@ class CocktailTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var maxTextWidth = MediaQuery.of(context).size.width - 115;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          cocktail.name ?? '',
-          style: Theme.of(context).textTheme.headline3,
-        ),
+        ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: maxTextWidth),
+            child: Text(
+              cocktail.name ?? '',
+              style: Theme.of(context).textTheme.headline3,
+              overflow: TextOverflow.clip,
+              maxLines: 2,
+            )),
         _getIsFavoriteIcon(context)
       ],
     );
@@ -56,7 +61,7 @@ class CocktailTitle extends StatelessWidget {
     bool isFavorite = store.isFavourite(cocktail.id);
     if (isFavorite) {
       return IconButton(
-        icon: Icon(Icons.favorite, color: Colors.white),
+        icon: Icon(Icons.favorite, size: 24,color: Colors.white),
         onPressed: () {
           var cdef = LocalCocktailDefinitionsRepository.createCocktailDefinitionFromCocktail(cocktail);
           store.removeFromFavourites(cdef);
@@ -64,7 +69,7 @@ class CocktailTitle extends StatelessWidget {
       );
     } else {
       return IconButton(
-        icon: Icon(Icons.favorite_border, color: Colors.white),
+        icon: Icon(Icons.favorite_border, size: 24, color: Colors.white),
         onPressed: () {
           var cdef = LocalCocktailDefinitionsRepository.createCocktailDefinitionFromCocktail(cocktail);
           store.addToFavourites(cdef);

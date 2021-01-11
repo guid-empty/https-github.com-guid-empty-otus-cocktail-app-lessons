@@ -31,7 +31,7 @@ class CocktailCategory {
   final String value;
   final String name;
 
-  const CocktailCategory._(this.name, this.value);
+  const CocktailCategory._(this.value, this.name);
 
   @override
   int get hashCode => value.hashCode;
@@ -43,6 +43,9 @@ class CocktailCategory {
   @override
   String toString() => 'CocktailCategory{value: $value, name: $name}';
 
-  static CocktailCategory parse(String raw) =>
+  static CocktailCategory parseByValue(String raw) =>
       values.firstWhere((element) => element.value.toLowerCase() == raw.toLowerCase(), orElse: () => null);
+
+  static CocktailCategory parseByName(String raw) =>
+      values.firstWhere((element) => element.name.toLowerCase() == raw.toLowerCase(), orElse: () => null);
 }

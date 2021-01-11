@@ -21,7 +21,7 @@ class CocktailDefinition {
   final String id;
   final String name;
   final String drinkThumbUrl;
-  final CocktailCategory category;
+  CocktailCategory category;
 
   CocktailDefinition({
     @required this.id,
