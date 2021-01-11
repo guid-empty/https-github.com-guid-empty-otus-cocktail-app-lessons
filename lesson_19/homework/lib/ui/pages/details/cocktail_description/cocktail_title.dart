@@ -1,5 +1,9 @@
+import 'package:cocktail_app/core/src/model/cocktail.dart';
+import 'package:cocktail_app/ui/state/fav_store.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:provider/provider.dart';
 
 ///
 /// TODO:
@@ -21,10 +25,9 @@ import 'package:flutter/material.dart';
 /// В этом экране используется точно такая же  верстка, как и на экране фильтрации (то есть можно переиспользовать экран выдачи результатов по категориям)
 ///
 class CocktailTitle extends StatelessWidget {
-  final String cocktailTitle;
-  final bool isFavorite;
+  final Cocktail cocktail;
 
-  CocktailTitle({this.cocktailTitle, this.isFavorite});
+  CocktailTitle({this.cocktail});
 
   @override
   Widget build(BuildContext context) {
@@ -33,24 +36,35 @@ class CocktailTitle extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          cocktailTitle ?? '',
+          cocktail.name ?? '',
           style: Theme.of(context).textTheme.headline3,
         ),
-        _getIsFavoriteIcon()
+        _getIsFavoriteIcon(context)
       ],
     );
   }
 
-  Widget _getIsFavoriteIcon() {
+  Widget _getIsFavoriteIcon(BuildContext context) {
+    var store = Provider.of<FavStore>(context);
+    return Observer(
+        builder: (_) {
+          bool isFavorite = store.favouriteCocktails.containsKey(cocktail.id);
+          return _choseFavIcon(isFavorite, store);
+        }
+    );
+  }
+
+
+  IconButton _choseFavIcon(bool isFavorite, FavStore store) {
     if (isFavorite) {
       return IconButton(
         icon: Icon(Icons.favorite, color: Colors.white),
-        onPressed: () {},
+        onPressed: () => store.removeFromFavourites(cocktail),
       );
     } else {
       return IconButton(
         icon: Icon(Icons.favorite_border, color: Colors.white),
-        onPressed: () {},
+        onPressed: () => store.addToFavourites(cocktail),
       );
     }
   }

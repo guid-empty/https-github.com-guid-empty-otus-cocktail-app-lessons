@@ -1,7 +1,10 @@
 import 'package:cocktail_app/core/src/model/cocktail.dart';
+import 'package:cocktail_app/ui/state/fav_store.dart';
 import 'package:cocktail_app/ui/style/custom_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:provider/provider.dart';
 
 import 'cocktail_characteristic_text.dart';
 import 'cocktail_title.dart';
@@ -13,6 +16,7 @@ class CocktailDescriptionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var store = Provider.of<FavStore>(context);
     return Container(
       color: CustomColors.ingredients,
       child: Padding(
@@ -21,8 +25,7 @@ class CocktailDescriptionWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CocktailTitle(
-              cocktailTitle: cocktail.name,
-              isFavorite: cocktail.isFavourite,
+              cocktail: cocktail,
             ),
             Padding(
               padding: const EdgeInsets.only(top: 10.0),
