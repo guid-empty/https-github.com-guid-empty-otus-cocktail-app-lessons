@@ -1,7 +1,11 @@
-import 'package:cocktail_app/ui/pages/favorite_cocktails_page.dart';
+import 'package:cocktail_app/ui/pages/favorite_page.dart';
+import 'package:cocktail_app/ui/pages/filter_results_page.dart';
+import 'package:cocktail_app/ui/pages/random_cocktail_page.dart';
 import 'package:cocktail_app/ui/style/custom_colors.dart';
 import 'package:cocktail_app/ui/style/svg_icons.dart';
 import 'package:flutter/material.dart';
+
+import '../../main.dart';
 
 const appNavigationHeight = 73.0;
 
@@ -43,13 +47,22 @@ class _ApplicationNavigationBarState extends State<ApplicationNavigationBar> wit
                 text: 'Профиль'),
           ],
           onTap: (index) {
-            if (index == 2 && _tabController.previousIndex != _tabController.index) {
+            if(_tabController.previousIndex == _tabController.index) return;
+            if (index == 0) {
               Navigator.of(context).push(
                 MaterialPageRoute<void>(
-                  builder: (context) => FavouriteCocktailsPage(),
+                  builder: (context) =>  RandomCocktailPageWidget(repository),
                 ),
               );
-            } else {
+            }
+            else if (index == 2) {
+              Navigator.of(context).push(
+                MaterialPageRoute<void>(
+                  builder: (context) => FavoritePageWidget(selectedCategory: null),
+                ),
+              );
+            }
+            else {
               setState(() {
                 _currentSelectedItem = index;
               });

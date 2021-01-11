@@ -10,6 +10,7 @@ import 'package:cocktail_app/core/src/model/cocktail_type.dart';
 import 'package:cocktail_app/core/src/model/glass_type.dart';
 import 'package:cocktail_app/core/src/model/ingredient.dart';
 import 'package:cocktail_app/core/src/model/ingredient_definition.dart';
+import 'package:cocktail_app/ui/state/local_cocktail_def_repo.dart';
 import 'package:http/http.dart' as http;
 
 class AsyncCocktailRepository {
@@ -51,19 +52,15 @@ class AsyncCocktailRepository {
     );
     if (response.statusCode == 200) {
       final jsonResponse = convert.jsonDecode(response.body);
+      if(jsonResponse['drinks'] is String){
+        return List();
+      }
       var drinks = jsonResponse['drinks'] as Iterable<dynamic>;
 
       final dtos = drinks.cast<Map<String, dynamic>>().map((json) => CocktailDefinitionDto.fromJson(json));
 
-      for (final dto in dtos) {
-        result.add(CocktailDefinition(
-          id: dto.idDrink,
-          isFavourite: false,
-          /*  TODO: is Favorite field fetching  */
-          name: dto.strDrink,
-          drinkThumbUrl: dto.strDrinkThumb,
-        ));
-      }
+      LocalCocktailDefinitionsRepository.createCocktailDefinitionsFromDTO(dtos, result);
+      result.forEach((element) {element.category = category;});
     } else {
       throw HttpException('Request failed with status: ${response.statusCode}');
     }
@@ -87,15 +84,7 @@ class AsyncCocktailRepository {
 
       final dtos = drinks.cast<Map<String, dynamic>>().map((json) => CocktailDefinitionDto.fromJson(json));
 
-      for (final dto in dtos) {
-        result.add(CocktailDefinition(
-          id: dto.idDrink,
-          isFavourite: false,
-          /*  TODO: is Favorite field fetching  */
-          name: dto.strDrink,
-          drinkThumbUrl: dto.strDrinkThumb,
-        ));
-      }
+      LocalCocktailDefinitionsRepository.createCocktailDefinitionsFromDTO(dtos, result);
     } else {
       throw HttpException('Request failed with status: ${response.statusCode}');
     }
@@ -157,7 +146,7 @@ class AsyncCocktailRepository {
   Cocktail _createCocktailFromDto(CocktailDto dto) {
     final glass = GlassType.parse(dto.strGlass);
     final cocktailType = CocktailType.parse(dto.strAlcoholic);
-    final category = CocktailCategory.parse(dto.strCategory);
+    final category = CocktailCategory.parseByName(dto.strCategory);
 
     var ingredients = <IngredientDefinition>[];
 
@@ -169,8 +158,6 @@ class AsyncCocktailRepository {
       cocktailType: cocktailType,
       glassType: glass,
       instruction: dto.strInstructions,
-      isFavourite: false,
-      /*  TODO: is Favorite field fetching  */
       name: dto.strDrink,
       ingredients: ingredients,
       drinkThumbUrl: dto.strDrinkThumb,

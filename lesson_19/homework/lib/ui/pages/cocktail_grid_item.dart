@@ -1,16 +1,17 @@
 import 'package:cocktail_app/core/models.dart';
 import 'package:cocktail_app/ui/pages/cocktail_details_loader_page.dart';
+import 'package:cocktail_app/ui/state/fav_store.dart';
 import 'package:cocktail_app/ui/style/custom_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:provider/provider.dart';
 
 class CocktailGridItem extends StatelessWidget {
   static const double aspectRatio = 170 / 215;
 
   final CocktailDefinition cocktailDefinition;
 
-  final CocktailCategory selectedCategory;
-
-  const CocktailGridItem(this.cocktailDefinition, {Key key, this.selectedCategory}) : super(key: key);
+  const CocktailGridItem(this.cocktailDefinition, {Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -50,10 +51,9 @@ class CocktailGridItem extends StatelessWidget {
                   Text(cocktailDefinition.name ?? '', style: Theme.of(context).textTheme.bodyText1),
                   Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, mainAxisSize: MainAxisSize.max, children: [
                     Chip(
-                      backgroundColor: CustomColors.black,
-                      label: Text(selectedCategory.name, style: Theme.of(context).textTheme.caption),
-                    ),
-                    _getIsFavoriteIcon(cocktailDefinition.isFavourite),
+                        backgroundColor: CustomColors.black,
+                        label: Text(cocktailDefinition.category.name, style: Theme.of(context).textTheme.caption)),
+                    Observer(builder: (context) => _getIsFavoriteIcon(context)),
                   ]),
                 ],
               ),
@@ -64,7 +64,8 @@ class CocktailGridItem extends StatelessWidget {
     );
   }
 
-  Widget _getIsFavoriteIcon(bool isFavourite) {
+  Widget _getIsFavoriteIcon(BuildContext context) {
+    bool isFavourite = Provider.of<FavStore>(context).isFavourite(cocktailDefinition.id);
     if (isFavourite) {
       return IconButton(
         icon: Icon(Icons.favorite, color: Colors.white),

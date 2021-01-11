@@ -1,5 +1,10 @@
+import 'package:cocktail_app/core/src/model/cocktail.dart';
+import 'package:cocktail_app/ui/state/fav_store.dart';
+import 'package:cocktail_app/ui/state/local_cocktail_def_repo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:provider/provider.dart';
 
 ///
 /// TODO:
@@ -21,36 +26,54 @@ import 'package:flutter/material.dart';
 /// В этом экране используется точно такая же  верстка, как и на экране фильтрации (то есть можно переиспользовать экран выдачи результатов по категориям)
 ///
 class CocktailTitle extends StatelessWidget {
-  final String cocktailTitle;
-  final bool isFavorite;
+  final Cocktail cocktail;
 
-  CocktailTitle({this.cocktailTitle, this.isFavorite});
+  CocktailTitle({this.cocktail});
 
   @override
   Widget build(BuildContext context) {
+    var maxTextWidth = MediaQuery.of(context).size.width - 115;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          cocktailTitle ?? '',
-          style: Theme.of(context).textTheme.headline3,
-        ),
-        _getIsFavoriteIcon()
+        ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: maxTextWidth),
+            child: Text(
+              cocktail.name ?? '',
+              style: Theme.of(context).textTheme.headline3,
+              overflow: TextOverflow.clip,
+              maxLines: 2,
+            )),
+        _getIsFavoriteIcon(context)
       ],
     );
   }
 
-  Widget _getIsFavoriteIcon() {
+  Widget _getIsFavoriteIcon(BuildContext context) {
+    var store = Provider.of<FavStore>(context);
+    return Observer(builder: (_) {
+      return _generateFavIcon(store);
+    });
+  }
+
+  IconButton _generateFavIcon(FavStore store) {
+    bool isFavorite = store.isFavourite(cocktail.id);
     if (isFavorite) {
       return IconButton(
-        icon: Icon(Icons.favorite, color: Colors.white),
-        onPressed: () {},
+        icon: Icon(Icons.favorite, size: 24,color: Colors.white),
+        onPressed: () {
+          var cdef = LocalCocktailDefinitionsRepository.createCocktailDefinitionFromCocktail(cocktail);
+          store.removeFromFavourites(cdef);
+        },
       );
     } else {
       return IconButton(
-        icon: Icon(Icons.favorite_border, color: Colors.white),
-        onPressed: () {},
+        icon: Icon(Icons.favorite_border, size: 24, color: Colors.white),
+        onPressed: () {
+          var cdef = LocalCocktailDefinitionsRepository.createCocktailDefinitionFromCocktail(cocktail);
+          store.addToFavourites(cdef);
+        },
       );
     }
   }

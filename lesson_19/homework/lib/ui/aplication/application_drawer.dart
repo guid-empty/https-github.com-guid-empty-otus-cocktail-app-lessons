@@ -1,4 +1,4 @@
-import 'package:cocktail_app/ui/pages/favorite_cocktails_page.dart';
+import 'package:cocktail_app/ui/pages/favorite_page.dart';
 import 'package:cocktail_app/ui/style/custom_colors.dart';
 import 'package:cocktail_app/ui/style/svg_icons.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +53,7 @@ class ApplicationDrawer extends StatelessWidget {
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute<void>(
-                    builder: (context) => FavouriteCocktailsPage(),
+                    builder: (context) => FavoritePageWidget(selectedCategory: null),
                   ),
                 );
               },
