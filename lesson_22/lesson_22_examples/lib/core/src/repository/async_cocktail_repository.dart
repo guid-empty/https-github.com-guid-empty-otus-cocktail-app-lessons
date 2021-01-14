@@ -20,9 +20,15 @@ class AsyncCocktailRepository {
     'x-rapidapi-key': _apiKey,
   };
 
+  http.Client client;
+
+  AsyncCocktailRepository(http.Client client) {
+    this.client = client;
+  }
+
   Future<Cocktail> fetchCocktailDetails(
     String id,
-    http.Client client,
+    // http.Client client,
   ) async {
     Cocktail result;
 

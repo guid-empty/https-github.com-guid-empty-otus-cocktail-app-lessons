@@ -2,7 +2,6 @@ import 'package:cocktail_app/core/models.dart';
 import 'package:cocktail_app/main.dart';
 import 'package:cocktail_app/ui/pages/details/cocktail_detail_page.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 class CocktailDetailsLoaderPageWidget extends StatefulWidget {
   final String cocktailId;
@@ -23,8 +22,7 @@ class _CocktailDetailsLoaderPageWidgetState
 
   Widget _buildCocktailDetailsPage(BuildContext context) =>
       FutureBuilder<Cocktail>(
-          future:
-              repository.fetchCocktailDetails(widget.cocktailId, http.Client()),
+          future: repository.fetchCocktailDetails(widget.cocktailId),
           builder: (ctx, snapshot) {
             if (snapshot.hasData) {
               return CocktailDetailPage(snapshot.data);
