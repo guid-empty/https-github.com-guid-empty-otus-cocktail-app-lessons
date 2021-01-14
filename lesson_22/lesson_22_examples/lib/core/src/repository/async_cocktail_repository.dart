@@ -13,22 +13,34 @@ import 'package:cocktail_app/core/src/model/ingredient_definition.dart';
 import 'package:http/http.dart' as http;
 
 class AsyncCocktailRepository {
-  static const String _apiKey = 'e5b7f97a78msh3b1ba27c40d8ccdp105034jsn34e2da32d50b';
+  static const String _apiKey =
+      'e5b7f97a78msh3b1ba27c40d8ccdp105034jsn34e2da32d50b';
 
   static const Map<String, String> _headers = const {
     'x-rapidapi-key': _apiKey,
   };
 
-  Future<Cocktail> fetchCocktailDetails(String id) async {
+  http.Client client;
+
+  AsyncCocktailRepository(http.Client client) {
+    this.client = client;
+  }
+
+  Future<Cocktail> fetchCocktailDetails(
+    String id,
+    // http.Client client,
+  ) async {
     Cocktail result;
 
     final url = 'https://the-cocktail-db.p.rapidapi.com/lookup.php?i=$id';
-    var response = await http.get(url, headers: _headers);
+    var response = await client.get(url, headers: _headers);
     if (response.statusCode == 200) {
       final jsonResponse = convert.jsonDecode(response.body);
       var drinks = jsonResponse['drinks'] as Iterable<dynamic>;
 
-      final dtos = drinks.cast<Map<String, dynamic>>().map((json) => CocktailDto.fromJson(json));
+      final dtos = drinks
+          .cast<Map<String, dynamic>>()
+          .map((json) => CocktailDto.fromJson(json));
       if (dtos.length > 0) {
         result = _createCocktailFromDto(dtos.first);
       }
@@ -39,10 +51,12 @@ class AsyncCocktailRepository {
     return result;
   }
 
-  Future<Iterable<CocktailDefinition>> fetchCocktailsByCocktailCategory(CocktailCategory category) async {
+  Future<Iterable<CocktailDefinition>> fetchCocktailsByCocktailCategory(
+      CocktailCategory category) async {
     var result = <CocktailDefinition>[];
 
-    final url = 'https://the-cocktail-db.p.rapidapi.com/filter.php?c=${category.value}';
+    final url =
+        'https://the-cocktail-db.p.rapidapi.com/filter.php?c=${category.value}';
     var response = await http.get(
       url,
       headers: {
@@ -53,7 +67,9 @@ class AsyncCocktailRepository {
       final jsonResponse = convert.jsonDecode(response.body);
       var drinks = jsonResponse['drinks'] as Iterable<dynamic>;
 
-      final dtos = drinks.cast<Map<String, dynamic>>().map((json) => CocktailDefinitionDto.fromJson(json));
+      final dtos = drinks
+          .cast<Map<String, dynamic>>()
+          .map((json) => CocktailDefinitionDto.fromJson(json));
 
       for (final dto in dtos) {
         result.add(CocktailDefinition(
@@ -71,10 +87,12 @@ class AsyncCocktailRepository {
     return result;
   }
 
-  Future<Iterable<CocktailDefinition>> fetchCocktailsByCocktailType(CocktailType cocktailType) async {
+  Future<Iterable<CocktailDefinition>> fetchCocktailsByCocktailType(
+      CocktailType cocktailType) async {
     var result = <CocktailDefinition>[];
 
-    final url = 'https://the-cocktail-db.p.rapidapi.com/filter.php?a=${cocktailType.value}';
+    final url =
+        'https://the-cocktail-db.p.rapidapi.com/filter.php?a=${cocktailType.value}';
     var response = await http.get(
       url,
       headers: {
@@ -85,7 +103,9 @@ class AsyncCocktailRepository {
       final jsonResponse = convert.jsonDecode(response.body);
       var drinks = jsonResponse['drinks'] as Iterable<dynamic>;
 
-      final dtos = drinks.cast<Map<String, dynamic>>().map((json) => CocktailDefinitionDto.fromJson(json));
+      final dtos = drinks
+          .cast<Map<String, dynamic>>()
+          .map((json) => CocktailDefinitionDto.fromJson(json));
 
       for (final dto in dtos) {
         result.add(CocktailDefinition(
@@ -117,7 +137,9 @@ class AsyncCocktailRepository {
       final jsonResponse = convert.jsonDecode(response.body);
       var drinks = jsonResponse['drinks'] as Iterable<dynamic>;
 
-      final dtos = drinks.cast<Map<String, dynamic>>().map((json) => CocktailDto.fromJson(json));
+      final dtos = drinks
+          .cast<Map<String, dynamic>>()
+          .map((json) => CocktailDto.fromJson(json));
 
       for (final dto in dtos) {
         final cocktail = _createCocktailFromDto(dto);
@@ -139,7 +161,9 @@ class AsyncCocktailRepository {
       final jsonResponse = convert.jsonDecode(response.body);
       var drinks = jsonResponse['drinks'] as Iterable<dynamic>;
 
-      final dtos = drinks.cast<Map<String, dynamic>>().map((json) => CocktailDto.fromJson(json));
+      final dtos = drinks
+          .cast<Map<String, dynamic>>()
+          .map((json) => CocktailDto.fromJson(json));
       if (dtos.length > 0) {
         result = _createCocktailFromDto(dtos.first);
       }
@@ -161,7 +185,8 @@ class AsyncCocktailRepository {
 
     var ingredients = <IngredientDefinition>[];
 
-    _getIngredients(dto).forEach((key, value) => ingredients.add(IngredientDefinition(key, value)));
+    _getIngredients(dto).forEach(
+        (key, value) => ingredients.add(IngredientDefinition(key, value)));
 
     return Cocktail(
       id: dto.idDrink,

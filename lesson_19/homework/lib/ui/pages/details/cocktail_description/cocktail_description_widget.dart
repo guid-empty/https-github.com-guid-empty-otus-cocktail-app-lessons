@@ -21,8 +21,7 @@ class CocktailDescriptionWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CocktailTitle(
-              cocktailTitle: cocktail.name,
-              isFavorite: cocktail.isFavourite,
+              cocktail: cocktail,
             ),
             Padding(
               padding: const EdgeInsets.only(top: 10.0),
@@ -32,10 +31,14 @@ class CocktailDescriptionWidget extends StatelessWidget {
               ),
             ),
             CocktailCharacteristicText(
-                characteristicName: 'Категория коктейля', characteristicValue: cocktail.category.value),
+                characteristicName: 'Категория коктейля',
+                characteristicValue: cocktail.category.value),
             CocktailCharacteristicText(
-                characteristicName: 'Тип коктейля', characteristicValue: cocktail.cocktailType.value),
-            CocktailCharacteristicText(characteristicName: 'Тип стекла', characteristicValue: cocktail.glassType.value),
+                characteristicName: 'Тип коктейля',
+                characteristicValue: cocktail.cocktailType.value),
+            CocktailCharacteristicText(
+                characteristicName: 'Тип стекла',
+                characteristicValue: cocktail.glassType.value),
           ],
         ),
       ),
