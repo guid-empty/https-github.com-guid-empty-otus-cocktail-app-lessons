@@ -1,11 +1,14 @@
+import 'package:cocktail_app/helpers/share_helper.dart';
 import 'package:cocktail_app/ui/style/custom_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:share/share.dart';
 
 class CocktailPreview extends StatelessWidget {
   final String imageUrl;
+  final String description;
 
-  CocktailPreview({this.imageUrl});
+  CocktailPreview({this.imageUrl, this.description});
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +20,7 @@ class CocktailPreview extends StatelessWidget {
         ),
         Positioned(
           bottom: 0,
+          width: 50,
           child: AspectRatio(
             aspectRatio: 375 / 172,
             child: Container(
@@ -44,17 +48,20 @@ class CocktailPreview extends StatelessWidget {
                   onPressed: () => Navigator.of(context).pop(),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    String imageFilePath = await saveImageToFile(imageUrl);
+                    Share.shareFiles([imageFilePath], subject: "Look at this cocktail", text: description);
+                  },
                   icon: Icon(
                     Icons.share,
                     color: Colors.white,
-                  ),
+                  )
                 )
-              ],
-            ),
-          ),
+              ]
+            )
+          )
         )
-      ],
+      ]
     );
   }
 }
