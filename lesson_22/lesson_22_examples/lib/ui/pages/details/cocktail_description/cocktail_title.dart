@@ -23,7 +23,7 @@ class CocktailTitle extends StatelessWidget {
       );
 
   Widget _getIsFavoriteIcon() => Semantics(
-      label: 'Favorite Icon button',
+      label: ApplicationSemantics.cocktailFavouriteIconLabel,
       hint: 'Press to favorite',
       value: '$isFavorite',
       // onTap: () { setState(() { _counter++; }); }

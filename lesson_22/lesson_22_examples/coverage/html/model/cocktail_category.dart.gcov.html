@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - lcov.info - model/cocktail_category.dart</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+      <table width="100%" border=0 cellspacing=0 cellpadding=0>
+        <tr><td class="title">LCOV - code coverage report</td></tr>
+        <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+        <tr>
+          <td width="100%">
+            <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">model</a> - cocktail_category.dart<span style="font-size: 80%;"> (source / <a href="cocktail_category.dart.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">lcov.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntry">9</td>
+            <td class="headerCovTableEntryLo">33.3 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2021-01-16 21:43:55</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntryHi">-</td>
+          </tr>
+              <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+            </table>
+          </td>
+        </tr>
+
+        <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+      </table>
+
+      <table cellpadding=0 cellspacing=0 border=0>
+        <tr>
+          <td><br></td>
+        </tr>
+        <tr>
+          <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : ///</a>
+<span class="lineNum">       2 </span>            : /// curl https://the-cocktail-db.p.rapidapi.com/list.php\?c\=list
+<span class="lineNum">       3 </span>            : ///
+<span class="lineNum">       4 </span>            : class CocktailCategory {
+<span class="lineNum">       5 </span>            :   static const CocktailCategory ordinaryDrink = CocktailCategory._('ordinaryDrink', 'Ordinary Drink');
+<span class="lineNum">       6 </span>            :   static const CocktailCategory cocktail = CocktailCategory._('cocktail', 'Cocktail');
+<span class="lineNum">       7 </span>            :   static const CocktailCategory milkFloatShake = CocktailCategory._('milkFloatShake', 'Milk / Float / Shake');
+<span class="lineNum">       8 </span>            :   static const CocktailCategory unknown = CocktailCategory._('unknown', 'Other/Unknown');
+<span class="lineNum">       9 </span>            :   static const CocktailCategory cocoa = CocktailCategory._('cocoa', 'Cocoa');
+<span class="lineNum">      10 </span>            :   static const CocktailCategory shot = CocktailCategory._('shot', 'Shot');
+<span class="lineNum">      11 </span>            :   static const CocktailCategory coffeeTea = CocktailCategory._('coffeeTea', 'Coffee / Tea');
+<span class="lineNum">      12 </span>            :   static const CocktailCategory homemadeLiqueur = CocktailCategory._('homemadeLiqueur', 'Homemade Liqueur');
+<span class="lineNum">      13 </span>            :   static const CocktailCategory punchPartyDrink = CocktailCategory._('punchPartyDrink', 'Punch / Party Drink');
+<span class="lineNum">      14 </span>            :   static const CocktailCategory beer = CocktailCategory._('beer', 'Beer');
+<span class="lineNum">      15 </span>            :   static const CocktailCategory softDrinkSoda = CocktailCategory._('softDrinkSoda', 'Soft Drink / Soda');
+<span class="lineNum">      16 </span>            : 
+<span class="lineNum">      17 </span>            :   static const Iterable&lt;CocktailCategory&gt; values = [
+<span class="lineNum">      18 </span>            :     ordinaryDrink,
+<span class="lineNum">      19 </span>            :     cocktail,
+<span class="lineNum">      20 </span>            :     milkFloatShake,
+<span class="lineNum">      21 </span>            :     unknown,
+<span class="lineNum">      22 </span>            :     cocoa,
+<span class="lineNum">      23 </span>            :     shot,
+<span class="lineNum">      24 </span>            :     coffeeTea,
+<span class="lineNum">      25 </span>            :     homemadeLiqueur,
+<span class="lineNum">      26 </span>            :     punchPartyDrink,
+<span class="lineNum">      27 </span>            :     beer,
+<span class="lineNum">      28 </span>            :     softDrinkSoda,
+<span class="lineNum">      29 </span>            :   ];
+<span class="lineNum">      30 </span>            : 
+<span class="lineNum">      31 </span>            :   final String value;
+<span class="lineNum">      32 </span>            :   final String name;
+<span class="lineNum">      33 </span>            : 
+<span class="lineNum">      34 </span><span class="lineNoCov">          0 :   const CocktailCategory._(this.name, this.value);</span>
+<span class="lineNum">      35 </span>            : 
+<span class="lineNum">      36 </span><span class="lineNoCov">          0 :   @override</span>
+<span class="lineNum">      37 </span><span class="lineNoCov">          0 :   int get hashCode =&gt; value.hashCode;</span>
+<span class="lineNum">      38 </span>            : 
+<span class="lineNum">      39 </span><span class="lineCov">          1 :   @override</span>
+<span class="lineNum">      40 </span>            :   bool operator ==(Object other) =&gt;
+<span class="lineNum">      41 </span><span class="lineNoCov">          0 :       identical(this, other) || other is CocktailCategory &amp;&amp; runtimeType == other.runtimeType &amp;&amp; value == other.value;</span>
+<span class="lineNum">      42 </span>            : 
+<span class="lineNum">      43 </span><span class="lineNoCov">          0 :   @override</span>
+<span class="lineNum">      44 </span><span class="lineNoCov">          0 :   String toString() =&gt; 'CocktailCategory{value: $value, name: $name}';</span>
+<span class="lineNum">      45 </span>            : 
+<span class="lineNum">      46 </span><span class="lineCov">          1 :   static CocktailCategory parse(String raw) =&gt;</span>
+<span class="lineNum">      47 </span><span class="lineCov">          6 :       values.firstWhere((element) =&gt; element.value.toLowerCase() == raw.toLowerCase(), orElse: () =&gt; null);</span>
+<span class="lineNum">      48 </span>            : }
+    </pre>
+          </td>
+        </tr>
+      </table>
+      <br>
+
+      <table width="100%" border=0 cellspacing=0 cellpadding=0>
+        <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
+      </table>
+      <br>
+
+</body>
+</html>
