@@ -5,6 +5,8 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
+import 'package:cocktail_app/core/models.dart';
+import 'package:cocktail_app/repositories/db_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -12,8 +14,13 @@ import 'package:cocktail_app/main.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+    DatabaseRepository _dbRepository = DatabaseRepository();
+    await _dbRepository.initDb();
+
+    Map<String, CocktailDefinition> _favorites = await _dbRepository.getAllFavorites();
+
     // Build our app and trigger a frame.
-    await tester.pumpWidget(CocktailOfDayApp());
+    await tester.pumpWidget(CocktailOfDayApp(AsyncCocktailRepository(), _dbRepository, _favorites));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
