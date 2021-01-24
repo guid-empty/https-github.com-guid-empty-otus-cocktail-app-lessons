@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d16656bf-af21-46c0-b1e4-c1f2b921d53e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/lesson_15/lesson/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/lesson_15/lesson/android/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lesson_15/lesson/android/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/lesson_15/lesson/android/gradle.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lesson_15/lesson/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lesson_15/lesson/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lesson_15/lesson/lib/persistence/file/file_repository.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lesson_15/lesson/lib/persistence/file/file_repository.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lesson_15/lesson/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/lesson_15/lesson/pubspec.yaml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="safaryanova_elina_homework_20" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1kW4IGsEjGxk0A8PcXc9Ko4TZO7" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lesson_22" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d16656bf-af21-46c0-b1e4-c1f2b921d53e" name="Default Changelist" comment="" />
+      <created>1605802931957</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1605802931957</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="167" y="125" width="1653" height="855" key="AVDManager" timestamp="1606665723144">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="167" y="125" width="1653" height="855" key="AVDManager/67.27.1853.1053@67.27.1853.1053" timestamp="1606665723144" />
+    <state x="776" y="310" width="424" height="484" key="FileChooserDialogImpl" timestamp="1610303739360">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="776" y="310" width="424" height="484" key="FileChooserDialogImpl/67.27.1853.1053@67.27.1853.1053" timestamp="1610303739360" />
+  </component>
+</project>
