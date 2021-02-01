@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 
 import 'cocktail_category.dart';
@@ -93,6 +95,7 @@ class Cocktail {
   final Iterable<IngredientDefinition> ingredients;
   final String drinkThumbUrl;
   final bool isFavourite;
+  final int rating = Random().nextInt(5) + 1;
 
   Cocktail({
     @required this.id,

@@ -1,6 +1,2 @@
-# homework
-
-Сделать верстку экрана "Карточка коктейля" по модели Cocktail cocktail в файле CocktailDetailPage.dart
-Ссылка на макет https://www.figma.com/file/d2JJUBFu7Dg0HOV30XG7Z4/OTUS-FLUTTER.-%D0%A3%D1%80%D0%BE%D0%BA-3-%D0%94%D0%97?node-id=20%3A590
-
-
+![Screenshot_1602507578](https://user-images.githubusercontent.com/5141809/95750118-57605400-0ca5-11eb-83d4-e83f32c1efeb.png)
+![Screenshot_1602507589](https://user-images.githubusercontent.com/5141809/95750140-5fb88f00-0ca5-11eb-89d1-859edeb37c5f.png)
