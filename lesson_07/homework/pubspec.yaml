@@ -3,18 +3,22 @@ description: Dart Async lesson
 version: 0.0.1
 
 environment:
-  sdk: ">=2.9.0 <3.0.0"
+  sdk: ">=2.7.0 <3.0.0"
   flutter: ">=1.17.0 <2.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
   json_annotation: ^3.0.1
+  http: ^0.12.2
+  cupertino_icons: ^0.1.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   pedantic: ^1.9.0
-  http: ^0.12.2
   build_runner: ^1.10.1
   json_serializable: ^3.4.1
+
+flutter:
+  uses-material-design: true
