@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/lesson_01/cocktail_app_models/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_01/cocktail_app_models/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_01/cocktail_app_models_consumer/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_01/cocktail_app_models_consumer/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_02/ex01_hello_world/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_02/ex01_hello_world/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_03/homework/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_03/homework/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_03/lesson/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_03/lesson/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_04/cocktail_db_http_using/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_04/cocktail_db_http_using/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_04/cocktail_db_http_using/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_04/examples/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_04/examples/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_05/lesson_05/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lesson_05/lesson_05/build" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Dart SDK" level="project" />
+    <orderEntry type="library" name="Dart Packages" level="project" />
+  </component>
+</module>
