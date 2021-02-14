@@ -20,13 +20,20 @@ class AsyncCocktailRepository {
     'x-rapidapi-key': _apiKey,
   };
 
-  Future<Cocktail> fetchCocktailDetails(String id) async {
+  http.Client client;
+
+  AsyncCocktailRepository(http.Client client) {
+    this.client = client;
+  }
+
+  Future<Cocktail> fetchCocktailDetails(
+    String id,
+  ) async {
     Cocktail result;
 
     final url = 'https://the-cocktail-db.p.rapidapi.com/lookup.php?i=$id';
-    var response = await http.get(url, headers: _headers);
-
-    if (response.statusCode == 200 && response.body != '{"drinks":null}') {
+    var response = await client.get(url, headers: _headers);
+    if (response.statusCode == 200) {
       final jsonResponse = convert.jsonDecode(response.body);
       var drinks = jsonResponse['drinks'] as Iterable<dynamic>;
 
@@ -187,7 +194,6 @@ class AsyncCocktailRepository {
       glassType: glass,
       instruction: dto.strInstructions,
       isFavourite: false,
-      /*  TODO: is Favorite field fetching  */
       name: dto.strDrink,
       ingredients: ingredients,
       drinkThumbUrl: dto.strDrinkThumb,

@@ -3,9 +3,9 @@ import 'package:cocktail_app/ui/pages/random_cocktail_page.dart';
 import 'package:cocktail_app/ui/style/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_driver/driver_extension.dart';
+import 'package:http/http.dart' as http;
 
 void main() {
-
   ///
   /// Это то, что отличает instrumented версию от рабочей
   ///
@@ -25,7 +25,7 @@ void main() {
   runApp(CocktailOfDayApp());
 }
 
-final repository = AsyncCocktailRepository();
+final repository = AsyncCocktailRepository(http.Client());
 
 class CocktailOfDayApp extends StatelessWidget {
   static const String defaultRoute = '/home';
@@ -38,7 +38,8 @@ class CocktailOfDayApp extends StatelessWidget {
       themeMode: ThemeMode.dark,
       initialRoute: CocktailOfDayApp.defaultRoute,
       routes: {
-        CocktailOfDayApp.defaultRoute: (context) => RandomCocktailPageWidget(repository),
+        CocktailOfDayApp.defaultRoute: (context) =>
+            RandomCocktailPageWidget(repository),
       },
     );
   }
