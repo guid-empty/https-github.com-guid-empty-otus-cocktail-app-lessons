@@ -9,7 +9,8 @@ import 'package:lesson/ui/root_page.dart';
 
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MaterialApp(
-    home: RootPage(SQLiteRepository()..setUp()),
+    home: RootPage(FileRepository()..setUp()),
   ));
 }
