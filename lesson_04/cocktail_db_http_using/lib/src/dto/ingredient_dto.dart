@@ -1,3 +1,5 @@
+import 'package:json_annotation/json_annotation.dart';
+part 'ingredient_dto.g.dart';
 ///
 /// Ingredient Model Definition based on response from
 /// curl https://the-cocktail-db.p.rapidapi.com/lookup.php\?iid\=552
@@ -19,14 +21,20 @@
 ///
 ///
 
-class Ingredient {
+@JsonSerializable()
+class IngredientDto {
+  @JsonKey(name: 'idIngredient')
   final String id;
+  @JsonKey(name: 'strIngredient')
   final String name;
+  @JsonKey(name: 'strDescription')
   final String description;
+  @JsonKey(name: 'strType')
   final String ingredientType;
-  final bool isAlcoholic;
+  @JsonKey(name: 'strAlcohol')
+  final String isAlcoholic;
 
-  Ingredient({
+  IngredientDto({
     this.id,
     this.name,
     this.description,
@@ -34,12 +42,5 @@ class Ingredient {
     this.isAlcoholic,
   });
 
-  factory Ingredient.fromJson(Map<String, dynamic> json) {
-    return Ingredient(
-        id: json['idIngredient'] as String,
-        name: json['strIngredient'] as String,
-        description: json['strDescription'] as String,
-        ingredientType: json['strType'] as String,
-        isAlcoholic: json['strAlcohol'] as String == 'Yes');
-  }
+  factory IngredientDto.fromJson(Map<String, dynamic> json) => _$IngredientDtoFromJson(json);
 }
