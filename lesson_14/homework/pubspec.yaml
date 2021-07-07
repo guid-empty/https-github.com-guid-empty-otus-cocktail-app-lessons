@@ -24,6 +24,7 @@ dev_dependencies:
   json_serializable: ^3.4.1
 
 flutter:
-
+  assets:
+    - assets/images/shaker.png
   uses-material-design: true
 
