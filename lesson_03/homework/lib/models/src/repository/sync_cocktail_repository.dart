@@ -27,8 +27,7 @@ class SyncCocktailRepository {
         IngredientDefinition('Лед', '½ стакана'),
         IngredientDefinition('Мякоть арбуза', '120 г'),
       ],
-      drinkThumbUrl:
-          'https://www.macaobar.gr/images/cocktails/beetleFuzz.jpg',
+      drinkThumbUrl: 'https://www.macaobar.gr/images/cocktails/beetleFuzz.jpg',
     );
   }
 
