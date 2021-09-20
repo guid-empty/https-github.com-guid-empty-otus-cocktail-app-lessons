@@ -1,5 +1,6 @@
 import 'package:cocktail_app/core/models.dart';
 import 'package:cocktail_app/ui/pages/cocktail_details_loader_page.dart';
+import 'package:cocktail_app/ui/pages/details/favorite_button.dart';
 import 'package:cocktail_app/ui/style/custom_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -53,7 +54,7 @@ class CocktailGridItem extends StatelessWidget {
                       backgroundColor: CustomColors.black,
                       label: Text(selectedCategory.name, style: Theme.of(context).textTheme.caption),
                     ),
-                    _getIsFavoriteIcon(cocktailDefinition.isFavourite),
+                    FavoriteButton(cocktailDefinition)
                   ]),
                 ],
               ),
@@ -62,19 +63,5 @@ class CocktailGridItem extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  Widget _getIsFavoriteIcon(bool isFavourite) {
-    if (isFavourite) {
-      return IconButton(
-        icon: Icon(Icons.favorite, color: Colors.white),
-        onPressed: () {},
-      );
-    } else {
-      return IconButton(
-        icon: Icon(Icons.favorite_border, color: Colors.white),
-        onPressed: () {},
-      );
-    }
   }
 }

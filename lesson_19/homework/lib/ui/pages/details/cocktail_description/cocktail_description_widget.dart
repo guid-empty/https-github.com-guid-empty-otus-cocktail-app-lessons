@@ -1,3 +1,4 @@
+import 'package:cocktail_app/core/models.dart';
 import 'package:cocktail_app/core/src/model/cocktail.dart';
 import 'package:cocktail_app/ui/style/custom_colors.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,6 +24,12 @@ class CocktailDescriptionWidget extends StatelessWidget {
             CocktailTitle(
               cocktailTitle: cocktail.name,
               isFavorite: cocktail.isFavourite,
+              definition: CocktailDefinition(
+                id: cocktail.id,
+                name: cocktail.name,
+                drinkThumbUrl: cocktail.drinkThumbUrl,
+                isFavourite: cocktail.isFavourite
+              ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 10.0),

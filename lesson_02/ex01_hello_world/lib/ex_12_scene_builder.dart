@@ -5,7 +5,12 @@ import 'package:vector_math/vector_math_64.dart';
 
 void main() {
   window.onBeginFrame = beginFrame;
+  window.onPointerDataPacket = pointerCallback;
   window.scheduleFrame();
+}
+
+void pointerCallback(PointerDataPacket packet) {
+  print(packet);
 }
 
 ///

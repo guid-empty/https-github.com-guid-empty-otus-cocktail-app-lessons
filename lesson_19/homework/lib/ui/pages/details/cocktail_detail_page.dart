@@ -1,4 +1,5 @@
 import 'package:cocktail_app/core/src/model/cocktail.dart';
+import 'package:cocktail_app/helpers/share_helper.dart';
 import 'package:cocktail_app/ui/pages/details/cocktail_description/cocktail_description_widget.dart';
 import 'package:cocktail_app/ui/pages/details/cocktail_ingredients/ingredients_widget.dart';
 import 'package:cocktail_app/ui/pages/details/cocktail_instruction/cocktail_instruction.dart';
@@ -16,7 +17,7 @@ class CocktailDetailPage extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          CocktailPreview(imageUrl: cocktail.drinkThumbUrl),
+          CocktailPreview(imageUrl: cocktail.drinkThumbUrl, description: createShreTextFromCocktail(cocktail)),
           CocktailDescriptionWidget(cocktail: cocktail),
           CocktailIngredients(cocktailIngredients: cocktail.ingredients),
           CocktailInstruction(cocktailInstruction: cocktail.instruction),
