@@ -48,5 +48,12 @@ void main() {
       final actualResult = await asyncRepository.getRandomCocktail();
       expect(actualResult, isNotNull);
     });
+
+    test(
+        'lookupIngredientById method should return available ingredient using real api',
+        () async {
+      final actualResult = await asyncRepository.lookupIngredientById('552');
+      expect(actualResult, isNotNull);
+    });
   });
 }
