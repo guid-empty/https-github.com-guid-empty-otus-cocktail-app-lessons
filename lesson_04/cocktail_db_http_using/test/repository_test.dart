@@ -1,5 +1,6 @@
 @TestOn('vm')
 import 'package:cocktaildbhttpusing/src/model/cocktail_type.dart';
+import 'package:cocktaildbhttpusing/src/model/ingredient.dart';
 import 'package:cocktaildbhttpusing/src/repository/async_cocktail_repository.dart';
 import 'package:cocktaildbhttpusing/src/repository/sync_cocktail_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -11,6 +12,10 @@ void main() {
   setUp(() {
     syncRepository = SyncCocktailRepository();
     asyncRepository = AsyncCocktailRepository();
+  });
+
+  tearDown(() {
+    asyncRepository.close();
   });
 
   group('Coctail repository', () {
@@ -40,6 +45,23 @@ void main() {
     test('fetchCocktailDetails method should return all full cocktail details using real api and coctail id', () async {
       final actualResult = await asyncRepository.fetchCocktailDetails('15300');
       expect(actualResult, isNotNull);
+    });
+
+    test('lookupIngredientById returns ingredient', () async {
+      // Arrange
+      final expectedIngredient = Ingredient(
+        id: '552',
+        name: 'Elderflower cordial',
+        description: 'Elderflower cordial is a soft drink made largely from a refined sugar and water solution and uses the flowers of the European elderberry. Historically the cordial has been popular in North Western Europe where it has a strong Victorian heritage.',
+        ingredientType: 'Cordial',
+        isAlcoholic: false
+      );
+
+      // Act
+      final actualResult = await asyncRepository.lookupIngredientById('552');
+
+      // Assert
+      expect(actualResult, equals(expectedIngredient));
     });
 
     test(
